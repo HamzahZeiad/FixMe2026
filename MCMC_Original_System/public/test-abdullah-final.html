@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah@Agency Login Test - FINAL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .test-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Abdullah@Agency Login Test - FINAL</h1>
+
+        <div class="test-info">
+            <strong>📋 Test Details:</strong><br>
+            <strong>Username:</strong> abdullah@agency<br>
+            <strong>Password:</strong> 12345678<br>
+            <strong>Expected Result:</strong> Login success → Phone setup redirect
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username/Email:</label>
+                <input type="text" id="username" name="username" value="abdullah@agency" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" value="12345678" required>
+            </div>
+
+            <button type="submit">🚀 Test Login</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.innerHTML = '⏳ Testing login...';
+
+            try {
+                const response = await fetch('/test-agency-login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    let html = '<strong>✅ LOGIN SUCCESSFUL!</strong><br><br>';
+                    html += '<strong>📝 Response:</strong><br>';
+                    html += `Message: ${data.message}<br><br>`;
+
+                    if (data.agency) {
+                        html += '<strong>👤 Agency Details:</strong><br>';
+                        html += `ID: ${data.agency.AgencyID}<br>`;
+                        html += `Name: ${data.agency.AgencyName}<br>`;
+                        html += `Username: ${data.agency.AgencyUserName}<br>`;
+                        html += `Phone: ${data.agency.AgencyPhoneNum || 'NULL - Setup Required'}<br><br>`;
+                    }
+
+                    if (data.message.includes('Phone setup required')) {
+                        html += '<strong>🎯 EXPECTED BEHAVIOR:</strong><br>';
+                        html += '📱 Should redirect to phone number setup page<br>';
+                        html += '✅ This is the correct flow for abdullah@agency!';
+                    }
+
+                    html += '<br><br><strong>🔧 Full Response:</strong><br>';
+                    html += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.className = 'result error';
+                    let html = '<strong>❌ LOGIN FAILED</strong><br><br>';
+                    html += `Message: ${data.message}<br><br>`;
+
+                    if (data.debug) {
+                        html += '<strong>🔍 Debug Info:</strong><br>';
+                        html += '<pre>' + JSON.stringify(data.debug, null, 2) + '</pre>';
+                    }
+
+                    html += '<br><strong>🔧 Full Response:</strong><br>';
+                    html += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+
+                    resultDiv.innerHTML = html;
+                }
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ REQUEST FAILED</strong><br><br>Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
