@@ -24,8 +24,10 @@ class InquiryController extends Controller
         $request->validate([
             'subject' => 'required|string|max:255',
             'description' => 'required|string|max:2000',
-            // 'category' => 'required|string',
-            'priority' => 'required|in:low,medium',
+            // BUG-M2-01 Category field commented out. (Fixed)
+            'category' => 'required|string',
+            // BUG-M2-02 In rule modified --- high not available in allowed values (dropdown)
+            'priority' => 'required|in:low,medium,high',
             'contact_preference' => 'required|in:email,phone,sms',
         ]);
 

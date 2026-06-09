@@ -89,7 +89,8 @@ class AdminController extends Controller
         }
 
         $inquiries = $query
-            ->orderBy('created_at', 'asc')
+        // BUG-M2-003 Display inquiries in descending order based on created date (Fixed)
+            ->orderBy('created_at', 'desc')
             ->paginate(15);
         $agencies = Agency::where('status', 'active')->get();
 

@@ -363,6 +363,20 @@
                             <input id="source" name="InquirySource" type="text" placeholder="Enter news source"
                                 class="form-input" required value="{{ old('InquirySource') }}" />
                         </div>
+                        <!-- BUG-M2-000 FIX: Category field added back to form -->
+                        <div class="form-group">
+                            <label class="form-label" for="category">
+                                Category <span class="required">*</span>
+                            </label>
+                            <select id="category" name="category" class="form-input" required>
+                                <option value="">Select a category</option>
+                                <option value="Misinformation" {{ old('category') == 'Misinformation' ? 'selected' : '' }}>Misinformation</option>
+                                <option value="Scam" {{ old('category') == 'Scam' ? 'selected' : '' }}>Scam</option>
+                                <option value="Hate Speech" {{ old('category') == 'Hate Speech' ? 'selected' : '' }}>Hate Speech</option>
+                                <option value="Cyberbullying" {{ old('category') == 'Cyberbullying' ? 'selected' : '' }}>Cyberbullying</option>
+                                <option value="Other" {{ old('category') == 'Other' ? 'selected' : '' }}>Other</option>
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label class="form-label" for="description">
@@ -372,6 +386,7 @@
                                 class="form-textarea" required>{{ old('InquiryDescription') }}</textarea>
                         </div>
                     </div>
+                    <!-- Right column only has Supporting Links + Supporting Documents -->
 
                     <!-- Right Column -->
                     <div class="space-y-6">
@@ -382,6 +397,32 @@
                             <input id="links" name="VerificationDescription" type="text"
                                 placeholder="Enter supporting links" class="form-input"
                                 value="{{ old('VerificationDescription') }}" />
+                        </div>
+
+                        <!-- BUG-M2-000 FIX: Priority field added back to form -->
+                        <div class="form-group">
+                            <label class="form-label" for="priority">
+                                Priority <span class="required">*</span>
+                            </label>
+                            <select id="priority" name="priority" class="form-input" required>
+                                <option value="">Select priority</option>
+                                <option value="low" {{ old('priority') == 'low' ? 'selected' : '' }}>Low</option>
+                                <option value="medium" {{ old('priority') == 'medium' ? 'selected' : '' }}>Medium</option>
+                                <option value="high" {{ old('priority') == 'high' ? 'selected' : '' }}>High</option>
+                            </select>
+                        </div>
+
+                        <!-- BUG-M2-000 FIX: Contact Preference field added back to form -->
+                        <div class="form-group">
+                            <label class="form-label" for="contact_preference">
+                                Contact Preference <span class="required">*</span>
+                            </label>
+                            <select id="contact_preference" name="contact_preference" class="form-input" required>
+                                <option value="">Select contact preference</option>
+                                <option value="email" {{ old('contact_preference') == 'email' ? 'selected' : '' }}>Email</option>
+                                <option value="phone" {{ old('contact_preference') == 'phone' ? 'selected' : '' }}>Phone</option>
+                                <option value="sms" {{ old('contact_preference') == 'sms' ? 'selected' : '' }}>SMS</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
