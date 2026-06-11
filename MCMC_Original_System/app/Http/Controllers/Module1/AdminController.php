@@ -252,7 +252,10 @@ class AdminController extends BaseController
      */
     public function showAssignInquiry()
     {
-        $inquiries = \App\Models\Inquiry::with(['agency', 'user'])->get();
+        // BUG-M2-003 FIX: Added orderBy to display newest inquiries first
+        $inquiries = \App\Models\Inquiry::with(['agency', 'user'])
+            ->orderBy('InquirySendDate', 'desc')
+            ->get();
         $agencies = Module1Agency::all();
         return view('admin.assignInquiry', compact('inquiries', 'agencies'));
     }
