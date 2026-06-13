@@ -1,0 +1,1988 @@
+---PAGE 1---
+ 
+                                                                                 1                                   (SRS AH 2024 Version V.1)  
+ 
+ 
+ SOFTWARE REQUIREMENT SPECIFICATION  
+(SRS) DOCUMENT  
+PRESENTED BY: 
+AuthenticityHub 
+PRESENTED TO:   
+Malaysian 
+Communications and 
+Multimedia Commission 
+(MCMC) 
+DATE:  
+22/01/2025 
+  
+TEAM MEMBERS  
+  
+Chief Executive  
+Officer  
+ Qamhan Khaled 
+Mohammed Abdo 
+ 
+CB23009 
+Chief Business  
+Analyst  
+Banwair Rian 
+Khaled Mohammed 
+       
+CB23006 
+Chief   
+Developer  
+Banabila Salman 
+Mohammed 
+      
+CB23142 
+Software Quality  
+Assurance  
+AL-QARMWSHI 
+ABDULLAH FAEZ 
+ABDULLAH       
+CB23005 
+  
+  
+Submitted to the Software Requirement Workshop (BCS2233) 
+Bachelor of Computer Science (Software Engineering) with Honours 
+Faculty of Computing, Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA) 
+
+---PAGE 2---
+ 
+ 
+                                                                                2                                        (SRS AH 2024 Version V.1)  
+ 
+ 
+SOFTWARE REQUIREMENT SPECIFICATION (SRS) FACULTY OF COMPUTING  
+DOCUMENT APPROVAL  
+  
+Name  
+Date  
+  
+Authenticated by:  
+  
+_______________________  
+  
+Project Leader  
+  
+ 
+ 
+ 
+ 
+Qamhan Khaled Mohammed Abdo 
+CB23009 
+  
+ 
+ 
+ 
+22/01/2025 
+  
+Approved by:  
+  
+_______________________  
+                 
+Project Manager  
+  
+  
+ 
+ 
+ 
+Ts. Azma Abdullah 
+  
+ 
+ 
+ 
+  
+Approved by:  
+  
+________________  
+                 
+Client  
+  
+  
+ 
+ 
+Malaysian Communications and 
+Multimedia Commission  
+(MCMC) 
+  
+ 
+ 
+ 
+ 
+  
+  Software:  1-Microsoft Word, 2- draw.io, 3 – Figma. 
+ 
+Archiving Place : Google Drive 
+ 
+Available :  4 Copies  
+(https://drive.google.com/drive/folders/1x5OrWIyBLoO-
+aSWNRC8bgQ80aCc7tQk5?usp=sharing )
+
+---PAGE 3---
+  
+                                                              3                 (SRS AH 2024 Version V.1)  
+ 
+ 
+TABLE OF CONTENT: 
+ 
+LIST OF TABLES .......................................................................................................... 5 
+LIST OF FIGURES ........................................................................................................ 6 
+LIST OF ABBREVIATIONS ......................................................................................... 8 
+1. 
+INTRODUCTION .............................................................................................. 8 
+1.1 PURPOSE ................................................................................................................... 8 
+1.2 SYSTEM IDENTIFICATION .................................................................................... 8 
+1.3 SYSTEM OVERVIEW ............................................................................................ 10 
+1.3 
+REFERENCES ................................................................................................... 12 
+2. 
+PRODUCT DESCRIPTION............................................................................ 13 
+2.1 PRODUCT PERSPECTIVE ..................................................................................... 13 
+2.2 PRODUCT FUNCTION .......................................................................................... 14 
+2.3 USER CHARACTERISTICS .................................................................................. 15 
+3. 
+SPECIFIC REQUIREMENTS (SOFTWARE PRODUCT FEATURES) ... 16 
+3.1 Manage Registration ................................................................................................. 16 
+3.1.1 Manage Registration Description .............................................................. 17 
+3.1.2 Manage rergistration Sequence Diagram .................................................. 18 
+3.1.3 Manage rergistration User Interface .......................................................... 21 
+3.2 Manage Log In ......................................................................................................... 25 
+3.2.1  Manage Log In Use Case Description ...................................................... 26 
+3.2.2 Manage Log In Sequence Diagram ........................................................... 27 
+3.2.3Manage Log In User Interface .................................................................... 30 
+
+---PAGE 4---
+ 
+                                                                              4                                  (SRS AH 2024 Version V.1)  
+ 
+ 
+3.3 Manage user profile .................................................................................................. 44 
+3.3.1 Manage user profile Description ............................................................... 45 
+3.3.2 Manage user profile Sequence Diagram .................................................... 46 
+3.3.3 Manage user profile User Interface ........................................................... 48 
+3.4 Manage Reports ........................................................................................................ 52 
+3.4.1 Manage Reports Description ..................................................................... 52 
+3.4.2 Manage Report Sequence Diagram ........................................................... 54 
+3.4.3 Manage Report User Interface ................................................................... 55 
+4. 
+EXTERNAL INTERFACE REQUIREMENTS ............................................ 57 
+4.1 USER INTERFACES ............................................................................................... 57 
+4.2 HARDWARE INTERFACES ................................................................................... 68 
+4.3 
+SOFTWARE INTERFACES .............................................................................. 69 
+5. 
+REQUIREMENT TRACEBILITY ................................................................ 70 
+6. 
+ACRONYMS AND ABBREVIATION ........................................................... 71 
+ 
+  
+  
+ 
+
+---PAGE 5---
+  
+                                                              5                 (SRS AH 2024 Version V.1)  
+ 
+ 
+LIST OF TABLES  
+Table 3.1 ...................................................................................................................................... 17 
+Table 3.2 ...................................................................................................................................... 24 
+Table 3.3 ...................................................................................................................................... 26 
+Table 3.4 ...................................................................................................................................... 42 
+Table 3.5 ...................................................................................................................................... 45 
+Table 3.6 ...................................................................................................................................... 50 
+Table 3.7 ...................................................................................................................................... 52 
+Table 3.8 ...................................................................................................................................... 56 
+Table 5.1 ...................................................................................................................................... 70 
+Table 6.1 ...................................................................................................................................... 71 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 6---
+ 
+                                                                              6                                  (SRS AH 2024 Version V.1)  
+ 
+ 
+LIST OF FIGURES  
+Figure 1.1 .................................................................................................................................... 16 
+Figure 1.2 .................................................................................................................................... 18 
+Figure 1.3 .................................................................................................................................... 18 
+Figure 1.2 .................................................................................................................................... 19 
+Figure 1.3 .................................................................................................................................... 20 
+Figure 1.4 .................................................................................................................................... 21 
+Figure 1.5 .................................................................................................................................... 21 
+Figure 1.6 .................................................................................................................................... 22 
+Figure 1.7 .................................................................................................................................... 22 
+Figure 1.8 .................................................................................................................................... 23 
+Figure 2.1 .................................................................................................................................... 25 
+Figure 2.2 .................................................................................................................................... 28 
+Figure 2.3 .................................................................................................................................... 28 
+Figure 2.4 .................................................................................................................................... 29 
+Figure 2.5 .................................................................................................................................... 30 
+Figure 2.6 .................................................................................................................................... 31 
+Figure 2.7 .................................................................................................................................... 32 
+Figure 2.8 .................................................................................................................................... 33 
+Figure 2.9 .................................................................................................................................... 33 
+Figure 2.10 .................................................................................................................................. 34 
+Figure 2.11 .................................................................................................................................. 34 
+Figure 2.12 .................................................................................................................................. 35 
+Figure 2.13 .................................................................................................................................. 35 
+Figure 2.14 .................................................................................................................................. 36 
+Figure 2.15 .................................................................................................................................. 37 
+Figure 2.16 .................................................................................................................................. 38 
+Figure 2.17 .................................................................................................................................. 39 
+Figure 2.18 .................................................................................................................................. 40 
+Figure 2.19 .................................................................................................................................. 41 
+Figure 3.1 .................................................................................................................................... 44 
+Figure 3.2 .................................................................................................................................... 46 
+Figure 3.3 .................................................................................................................................... 47 
+Figure 3.4 .................................................................................................................................... 47 
+Figure 3.5 .................................................................................................................................... 48 
+Figure 3.6 .................................................................................................................................... 48 
+Figure 3.7 .................................................................................................................................... 49 
+Figure 3.8 .................................................................................................................................... 49 
+Figure 3.9 .................................................................................................................................... 50 
+Figure 3.9 .................................................................................................................................... 52 
+Figure 3.10 .................................................................................................................................. 54 
+Figure 3.11 .................................................................................................................................. 55 
+Figure 3.12 .................................................................................................................................. 55 
+
+---PAGE 7---
+  
+                                                              7                 (SRS AH 2024 Version V.1)  
+ 
+ 
+Figure 4.1..................................................................................................................................... 57 
+Figure 4.2..................................................................................................................................... 58 
+Figure 4.3..................................................................................................................................... 59 
+Figure 4.4..................................................................................................................................... 60 
+Figure 4.5..................................................................................................................................... 61 
+Figure 4.6..................................................................................................................................... 62 
+Figure 4.7..................................................................................................................................... 63 
+Figure 4.8..................................................................................................................................... 64 
+Figure 4.9..................................................................................................................................... 65 
+Figure 4.10................................................................................................................................... 66 
+Figure 4.11................................................................................................................................... 67 
+ 
+ 
+ 
+
+---PAGE 8---
+  8  
+  (SRS AH 2024 Version V.1) 
+LIST OF ABBREVIATIONS 
+SRS ............................................................................................................................................... 71
+AH ................................................................................................................................................ 71
+REQ .............................................................................................................................................. 71
+UC ................................................................................................................................................ 71
+MCMC ......................................................................................................................................... 71
+UI ................................................................................................................................................. 71
+
+---PAGE 9---
+  
+                                                                         8                                        (SRS AH 2024 Version V.1) 
+ 
+1. INTRODUCTION   
+1.1 PURPOSE  
+The AuthenticityHub system is designed to help the Malaysian Communications and Multimedia 
+Commission (MCMC) improve how they manage complaints and verify news. Its main goal is 
+to simplify and streamline the process for handling public inquiries. By accurately categorizing 
+complaints and directing them to the right authorities—like JPJ, KKM, and other agencies—the 
+system ensures faster resolutions and a more transparent workflow. 
+With a centralized platform, the system cuts down on delays, boosts efficiency, and creates a 
+smoother experience for everyone involved. Close collaboration between the development team 
+and MCMC ensures the platform meets real operational needs while supporting MCMC’s mission 
+to maintain public trust and combat misinformation. Developers work hand-in-hand with MCMC 
+to identify challenges, build effective solutions, and refine the system based on feedback, 
+fostering a reliable, user-friendly tool that keeps improving over time. 
+ 
+1.2 SYSTEM IDENTIFICATION  
+ 
+The system defined in this SRS document is identified as:  
+ 
+System Title 
+AuthenticityHub 
+System abbreviation 
+AH 
+System ID 
+AH-2024 
+--------------------------------------------------------------- 
+ 
+AH =  AuthenticityHub 
+ 
+2024 = System Developed Year 
+ 
+Version 
+1.0 
+Release Number 
+1 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 10---
+  
+                                                            9                            (SRS AH 2024 Version V.1) 
+ 
+This SRS document is identified as: 
+ 
+Document ID 
+MCMC-SRS-AH-2024 
+---------------------------------------------------------------- 
+MCMC = Malaysian Communications and Multimedia 
+Commission 
+ 
+SRS = Software Requirement Specification 
+ 
+AH = AuthenticityHub 
+ 
+2024 = Year Document Created  
+ 
+Version 
+ 1.0 
+ 
+This SRS Use case is identified as: 
+ 
+Use case ID  
+SRS-AH-UC100 
+---------------------------------------------------------------- 
+ 
+SRS = Software Requirement Specification 
+ 
+AH = AuthenticityHub 
+ 
+UC = Use Case 
+ 
+100 = Number of the use case in this system 
+ 
+ 
+ 
+This SRS document is identified as: 
+Requirement ID 
+SRS-AH-REQ101 
+---------------------------------------------------------------- 
+ 
+SRS = Software Requirement Specification 
+ 
+AH = AuthenticityHub 
+ 
+REQ = Requirement 
+ 
+ 
+
+---PAGE 11---
+  
+                                                                         10                                        (SRS AH 2024 Version V.1) 
+ 
+101 = from 101 to 199 it is included on first process on 
+Use Case which is (UC100) Number of the 
+requirement in this system. 
+ 
+ 
+  
+1.3 SYSTEM OVERVIEW  
+Manage Profile Management:  
+The Comprehensive Profile Data for All Users module is a critical part of the system, 
+designed to manage all user-related information securely and efficiently. This module 
+ensures that the Public user can create, access, and maintain their personalized profiles,  
+And for Administrator and agency can maintain and access to there info. For 
+Administrator he can search for Public User and agency Profiles. The registration process 
+allows public users to create accounts by providing essential information such as their 
+name, email, contact details, and password. This data is validated and securely stored in 
+the system’s database, ensuring correct and duplicate-free records. And there is a Super 
+Admin who can add new Administrators on (MCMC) if any. The module sets up the 
+basics for how public user interact with the system by offering features such as Public 
+User to registration, for Administrator, agency and Public user can login and profile 
+management.  
+(Person In Charge: Qamhan Khaled CB23009) 
+ 
+ 
+Capability to Submit Forms for the Verification of News Validity: 
+One essential part of the AuthenticityHub System is the Capability to Submit Forms for 
+the Verification of News Validity module, which enables the general public to submit 
+inquiries on the veracity of news. This module guarantees an organized and easy-to-use 
+procedure for the general public to submit forms with necessary information, including 
+the news's source, links, and supporting documentation. 
+ 
+Administrators are essential in checking the forms for accuracy and completeness when 
+they are turned in. Agencies can preview the queries assigned to them, ensuring that 
+they have all of the information they need to assess the news's authenticity. However, 
+they are only able to examine the forms that have been filed; they are unable to edit or 
+assign new tasks. 
+
+---PAGE 12---
+  
+                                                            11                            (SRS AH 2024 Version V.1) 
+ 
+This module establishes the foundation for combating misinformation by providing a 
+transparent and efficient process for verifying news authenticity, fostering trust and 
+confidence in the system. 
+ (Person In Charge: Al-qarmwshi Abdullah) 
+ 
+The classification of complaint forms forwarded to appropriate authorities’ 
+module: 
+For Public Users: Public users benefit from a system that efficiently organizes and 
+directs their complaints. They can easily see the status of their requests, providing 
+much-needed transparency and building trust in the process.   
+For Agencies:  Agencies like JPJ, KKM, and others receive pre-categorized and relevant 
+complaints, reducing the inefficiency of manual triage. This allows them to focus on 
+resolving cases faster and more effectively. Each complaint comes with detailed 
+information, enabling agencies to act quickly and accurately, enhancing their 
+productivity and operational success.  
+For Administrators (MCMC): Administrators have centralized oversight of the entire 
+complaint handling process. They can track progress, review classifications, and ensure 
+timely escalation to the correct agencies. Automation reduces errors, while audit trials 
+maintain accountability and transparency. Additionally, through data analysis, 
+administrators can detect recurring issues and improve workflow, enhancing service 
+quality and building greater public confidence in MCMC efforts.  
+(Person In Charge: Banabila Salman)  
+ 
+Monitoring Progress Management:  
+This module is important because it contributes to improving the AuthenticityHub system 
+performance effectively. After submitting the request, the public user can see the status 
+of his inquiry through a simple and direct interface. If changes occur to the status of the 
+Inquiry, the inquiry status automatically changes. Also, public users can see details of his 
+inquiry. 
+The module allows administrators (MCMC) to view the status of all inquiries, track their 
+progress, and see the details of the inquiry. Agencies have the ability to update the status 
+of the inquiries they handle and write a description. 
+ (Person In Charge: BANWAIR RIAN (CB23006)). 
+ 
+ 
+
+---PAGE 13---
+  
+                                                                         12                                        (SRS AH 2024 Version V.1) 
+ 
+Manage Report:  
+The AuthenticityHub system, developed with MCMC, includes a powerful Report 
+Generation module designed to turn data into actionable insights. This module tracks 
+trends in submissions, fake news patterns, and agency performance, offering key metrics 
+like resolution times, verification rates, and inquiry volumes. Administrators can create 
+detailed reports on user activity, inquiry outcomes, and agency efficiency, allowing for 
+smarter, data-driven improvements to the system. By categorizing and analyzing 
+verification results, these reports support better decision-making, streamline processes, 
+and enhance efforts to combat misinformation. Like MCMC’s initiative Sebenarnya.my, 
+which fights fake news through verification and agency collaboration (Police, JPJ, 
+KKM), AuthenticityHub’s reports play a crucial role in shaping targeted strategies and 
+raising public awareness. Together, these tools ensure a stronger and ongoing fight 
+against misinformation. 
+ 
+ 
+ 
+  
+1.3 
+REFERENCES  
+ 
+1- Ts. Azma Abdullah (2024, December 13). Industry talk: A stakeholder’s view on   
+Malaysian Communications and Multimedia Commission'S requirements                     
+[Lecture notes]. Universiti Malaysia Pahang Al-Sultan  Abdullah. 
+ 
+2- Malaysian Communications and Multimedia Commission (MCMC). (n.d.). 
+Reports. MCMC. Retrieved December 22, 2024, from 
+https://mcmc.gov.my/en/resources/reports 
+ 
+ 
+3- Userpilot. (n.d.). User profile: The key to better product experiences. Userpilot. 
+Retrieved December 22, 2024, from https://userpilot.com/blog/user-profile/ 
+ 
+4- Universiti Malaysia Pahang Al-Sultan Abdullah. (2024). BCS2233-2024/2025-I 
+– Appendix 1 - Request for proposal (RFP). 
+
+---PAGE 14---
+  
+                                                            13                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+5- Kumari, R. (2020, November 27). How do we check for the validity of the news 
+we read and hear via television, radio, and social media? Quora. Retrieved 
+December 22, 2024, from https://www.quora.com/How-do-we-check-for-the-
+validity-of-the-news-we-read-and-hear-via-television-radio-and-social-media 
+  
+6- GeeksforGeeks. (2024, December 22). What is monitoring and control in project 
+management? 
+GeeksforGeeks. 
+Retrieved 
+December 
+22, 
+2024, 
+from 
+https://www.geeksforgeeks.org/what-is-monitoring-and-control-in-project-
+management/#what-is-monitoring-phase-in-project-management 
+ 
+ 
+7- Lane, G. K. (2023c, January 17). How to write an SRS Document (Software Requirements 
+Specification Document). Perforce Software. 
+ 
+https://www.perforce.com/blog/alm/how-write-software-requirements-specification-srs-
+document  
+ 
+  
+2. PRODUCT DESCRIPTION  
+2.1 PRODUCT PERSPECTIVE  
+ 
+
+---PAGE 15---
+  
+                                                                         14                                        (SRS AH 2024 Version V.1) 
+ 
+2.2 PRODUCT FUNCTION  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 16---
+  
+                                                            15                            (SRS AH 2024 Version V.1) 
+ 
+2.3 USER CHARACTERISTICS  
+The AuthenticityHub System (AH) has three main types of users, each with distinct 
+educational levels, experiences, and technical expertise:  
+User 
+Educational Level 
+Experience 
+Technical Expertise 
+Public user 
+- People from all walks of 
+life, with varying levels of 
+education ranging from no 
+formal education to 
+university graduates. 
+- Comfortable with basic 
+internet activities like 
+browsing websites and 
+submitting online forms. 
+- Familiar with filling out 
+forms and uploading 
+documents. 
+- Minimal technical 
+know-how. 
+- Confident using 
+websites and simple 
+mobile apps. 
+- Can easily submit 
+forms and check 
+updates. 
+Administrators 
+(MCMC) 
+-Educated professionals, 
+typically holding a 
+diploma or degree. 
+-Often with intermediate to 
+advanced education. 
+-Skilled in managing 
+online systems and 
+responding to user 
+inquiries. 
+- Experienced in 
+monitoring progress, 
+organizing tasks, and 
+generating reports. 
+- Intermediate to 
+advanced tech-
+savviness. 
+- Familiar with tools 
+like dashboards and 
+databases. 
+- Able to categorize 
+data and create 
+detailed reports. 
+Agency  
+- Professionals with 
+specialized domain 
+relevant to their fields, 
+such as IT, law, or 
+healthcare. 
+ 
+ 
+- Experienced in verifying 
+information, addressing 
+complaints, and working 
+with others to check facts. 
+- Often involved in tasks that 
+require coordination with 
+multiple stakeholders. 
+- Proficient in tools for 
+information validation 
+and reporting. 
+- Skilled at working with 
+system features and 
+integrating external tools 
+or APIs. 
+ 
+ 
+
+---PAGE 17---
+  
+                                                                         16                                        (SRS AH 2024 Version V.1) 
+ 
+  
+3. SPECIFIC REQUIREMENTS (SOFTWARE PRODUCT FEATURES)  
+3.1 Manage Registration  
+ 
+ 
+ 
+  
+Figure 1.1 Use Case Manage rergistration  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 18---
+  
+                                                            17                            (SRS AH 2024 Version V.1) 
+ 
+3.1.1 Manage Registration Description   
+Table 3.1 Use Case Description for Manage Rergistration 
+Use Case ID  
+ SRS-AH-UC100 
+Brief Description 
+This case enables the Public User to create an account in the system by 
+inputting and verifying their information. 
+Actor 
+Public User, Super Administrator. 
+Pre-Conditions 
+The public user must give the required information. 
+Basic Flow 
+User (Public User) 
+1. The public user will enter the landing page to choose between 
+signing up or logging in. 
+2. The Public User click sign up. 
+3. The Public User navigates to the sign up page. 
+4. The user fills in the required fields: 
+  - Public User: Name, email, contact details, and password 
+5. The Public User will click ≪Sign Up≫ button. 
+6. The system validates the entered information. 
+  - A1: Handle Validation Errors [SRS-AH-REQ101]: If the data is 
+invalid (e.g., missing or duplicated information), the flow moves to the 
+alternative flow. 
+7. If the data is valid, the system securely stores the information in the 
+database. 
+8. The system redirects the user to the log in page with success 
+notification. 
+9. Use case ends. 
+ 
+User (Administrator)  
+1. The Admin will enter the landing page to choose between signing 
+up or logging in. 
+2. Admin click the registration page. 
+3. The Admin navigates to the sign up page. 
+4. Admin will register the new admins or agency info. 
+5. Admin click ≪Sign Up≫ button. 
+6. System validates the provided information.  
+7. The system redirects the Super Admin to the log in page with 
+success notification. 
+8. Use case end. 
+Alternative Flow 
+A1: Handle Validation Errors [SRS-AH-REQ101]: 
+1. The user submits the registration form with missing or duplicated 
+information. 
+2. The system detects the issue and returns an error message to the 
+Registration Interface (e.g., "Missing required field" or "Duplicate 
+email detected"). 
+3. The user is returned to the Registration Interface to correct the data. 
+4. The use case returns to Step 2 of the Basic Flow. 
+
+---PAGE 19---
+  
+                                                                         18                                        (SRS AH 2024 Version V.1) 
+ 
+Exception Flow 
+Not applicable. 
+Post-Conditions 
+The database creates and safely saves the public user's account. A 
+confirmation email including login information is sent to the user. 
+ 
+Rules 
+The Public User must be older than 15 years old. 
+Constraints 
+Not applicable. 
+ 
+3.1.2 Manage rergistration Sequence Diagram   
+  
+   
+Figure 1.2 Basic Flow for Manage rergistration 
+ 
+ 
+Figure 1.3 Alternative Flow for Manage rergistration 
+
+---PAGE 20---
+  
+                                                            19                            (SRS AH 2024 Version V.1) 
+ 
+  
+ 
+Not applicable. 
+  
+Figure -- Exception Flow for Manage rergistration 
+   
+ 
+Figure 1.2 AuthenticityHub Landing Page for Public User 
+
+---PAGE 21---
+  
+                                                                         20                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 1.3 AuthenticityHub Landing Page for Administrator 
+ 
+
+---PAGE 22---
+  
+                                                            21                            (SRS AH 2024 Version V.1) 
+ 
+3.1.3 Manage rergistration User Interface  
+    
+  
+Figure 1.4 Manage rergistration for Public User 
+ 
+   
+Figure 1.5 Manage rergistration for Adminstrator 
+
+---PAGE 23---
+  
+                                                                         22                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 1.6 Manage rergistration By Public User  
+   
+Figure 1.7 Manage rergistration -Error- By Public User  
+ 
+
+---PAGE 24---
+  
+                                                            23                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 1.8 Manage rergistration By Administrator  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 25---
+  
+                                                                         24                                        (SRS AH 2024 Version V.1) 
+ 
+Table 3.2 Manage rergistration - User Interface Description  
+Manage rergistration 
+Description  
+Figure 1.2 
+AuthenticityHub 
+Landing Page for 
+Public User  
+This landing page lets the public user choose either sign 
+up or sign in on the system. 
+ 
+Figure 1.3 
+AuthenticityHub 
+Landing Page for 
+Administrator 
+ 
+This landing page lets the Administrator choose either 
+Register New Agency or Administrator or sign in on the 
+system. 
+ 
+Figure 1.4 
+Manage rergistration for 
+Public User  
+Enters details such as full name, email address, password.  
+And then click sign up to create an account. 
+ 
+ 
+Figure 1.5 
+Manage rergistration for 
+Administrator  
+ 
+• 
+Enter the email and password that provided before 
+for add new Adminstrator or Agency.  
+• 
+Gains access to the admin dashboard after successful 
+Registration.  
+ 
+            Figure 1.6 
+Manage rergistration for 
+Public User 
+ 
+ Receives confirmation successful registration messages. 
+Figure 1.7 
+Manage rergistration for 
+Public User -Error- 
+ 
+Receives Unsuccessfully registration messages. 
+Figure 1.8 
+Manage rergistration for 
+Adminstrator 
+ 
+Receives confirmation successful registration messages. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 26---
+  
+                                                            25                            (SRS AH 2024 Version V.1) 
+ 
+3.2 Manage Log In  
+ 
+ 
+ 
+Figure 2.1 Use Case Manage Log In 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 27---
+  
+                                                                         26                                        (SRS AH 2024 Version V.1) 
+ 
+3.2.1  Manage Log In Use Case Description   
+Table 3.3 Use Case Description for Manage Log In 
+Use Case ID  
+ SRS-AH-UC200 
+Brief Description   This case allows public users, administrators, and agencies to 
+safely login into the system. 
+Actor  
+Public users, Administrators and Agencies. 
+Pre-Conditions  
+ Users need to have valid login info. 
+Basic Flow  
+User (Administrators and Agencies)  
+1. users will receive their info through email password and username.  
+Then click the link that will go direct to the update password.  
+2. Users will go to the log in page. 
+3. Users will inter there email and password. 
+4. Users will click ≪log in≫ button. 
+5. The system displays a success message. 
+6. Use case ends. 
+ 
+User (Public Users, Administrators, and Agencies): 
+1. The use case begins when the user goes to the login page. 
+2. Users enter their email and password. 
+  - A1: Handle Incorrect Credentials [SRS-AH-REQ201]: If the   
+credentials are incorrect, the flow moves to the alternative flow. 
+3. Users will have the option to reset their password: 
+  - A2: Reset Password [SRS-AH-REQ202]: Users may reset their 
+password if needed. 
+4. Users click the <<Login>> button. 
+5. The system displays a success message. 
+6. Use case ends. 
+ 
+Alternative Flow     A1: Handle Incorrect Credentials [SRS-AH-REQ201]: 
+1. Users enter their email and password. 
+2. Users click the <<Login>> button. 
+3. The system checks the email and password. 
+4. The system returns an error message (e.g., "Incorrect email or 
+password"). 
+5. The use case returns to Step 2 of the Basic Flow. 
+ 
+A2: Reset Password [SRS-AH-REQ202]: 
+1. Users click the <<Reset Password>> button. 
+  2. User goes to Reset Password Process. 
+3. Users enter their email address. 
+  4. The User click ≪Send Link≫ button . 
+5. User will receive link to reset there password 
+
+---PAGE 28---
+  
+                                                            27                            (SRS AH 2024 Version V.1) 
+ 
+6. The use case returns to Step 1 of the Basic Flow to attempt login 
+again. 
+Exception Flow  
+Not applicable. 
+ 
+Post-Conditions  
+ The dashboard is displayed after the users (public users, 
+administrators, and agencies) successfully logs in.  
+Rules  
+ Not applicable. 
+Constraints  
+ Not applicable. 
+ 
+3.2.2 Manage Log In Sequence Diagram   
+  
+  
+
+---PAGE 29---
+  
+                                                                         28                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 2.2 Basic Flow for Manage Log In 
+ 
+ 
+   
+ 
+ 
+Figure 2.3 Alternative Flow for Manage Log In 
+ 
+ 
+
+---PAGE 30---
+  
+                                                            29                            (SRS AH 2024 Version V.1) 
+ 
+   
+ 
+ 
+Figure 2.4 Alternative Flow for Manage Log In 
+ 
+ 
+ 
+Not applicable. 
+  
+Figure -- Exception Flow for Manage Log In 
+  
+
+---PAGE 31---
+  
+                                                                         30                                        (SRS AH 2024 Version V.1) 
+ 
+3.2.3Manage Log In User Interface  
+   
+ 
+Figure 2.5 Manage Log In By Public User 
+ 
+
+---PAGE 32---
+  
+                                                            31                            (SRS AH 2024 Version V.1) 
+ 
+ 
+   
+Figure 2.6 Manage Log In -Email Verification- By Administrator. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 33---
+  
+                                                                         32                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+   
+ 
+ 
+ 
+Figure 2.7 Manage Log In -Email verification- By Agency . 
+
+---PAGE 34---
+  
+                                                            33                            (SRS AH 2024 Version V.1) 
+ 
+  
+Figure 2.8 Manage Log In By Public User 
+ 
+  
+Figure 2.9 Manage Log In By Administrator 
+
+---PAGE 35---
+  
+                                                                         34                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 2.10 Manage Log In By Agency 
+  
+Figure 2.11 Manage Log In -Error- By Public User 
+ 
+
+---PAGE 36---
+  
+                                                            35                            (SRS AH 2024 Version V.1) 
+ 
+   
+Figure 2.12 Manage Log In  -Error- By Administrator 
+ 
+Figure 2.13 Manage Log In -Error- By Agency 
+
+---PAGE 37---
+  
+                                                                         36                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+Figure 2.14 Manage Log In -Reset Password- By Public User 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 38---
+  
+                                                            37                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+ 
+Figure 2.15 Manage Log In -Reset Password- By Public User 
+ 
+
+---PAGE 39---
+  
+                                                                         38                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 2.16 Manage Log In -Reset Password- By Administrator 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 40---
+  
+                                                            39                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+Figure 2.17 Manage Log In -Reset Password- By Administrator 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 41---
+  
+                                                                         40                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+  
+Figure 2.18  Manage Log In -Reset Password- By Agency 
+ 
+
+---PAGE 42---
+  
+                                                            41                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+  
+Figure 2.19  Manage Log In -Reset Password- By Agency 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 43---
+  
+                                                                         42                                        (SRS AH 2024 Version V.1) 
+ 
+Table 3.4 Manage Log In - User Interface Description  
+Manage Log In  
+Description  
+          Figure 2.5 
+Manage Login By 
+Public User 
+This interface enables Public User to securely log into the 
+system by providing their email and password. It includes 
+features like "Forgot Password" and Remember Me for 
+ease of use. 
+Figure 2.6 
+Manage Login -Email 
+Verification- By 
+Administrator 
+ This interface enables Administrator to securely log into 
+the system after recieve email account activation,then by 
+providing their email and password. They can access to 
+log in page. 
+ 
+Figure 2.7 
+Manage Login -Email 
+Verification- By 
+Agency  
+This interface enables Agency to securely log into the 
+system after recieve email account activation, then by 
+providing their email and password. They can access to 
+log in page. 
+Figure 2.8 
+Manage Log In  -Error- 
+By Public User 
+ 
+ 
+ 
+  
+Receives confirmation successful Log In messages. 
+Figure 2.9 
+Manage Log In  -Error- 
+By Administrator 
+ 
+ 
+  
+Receives confirmation successful Log In messages. 
+Figure 2.10 
+Manage Log In -Error- 
+By Agency 
+ 
+ 
+ 
+Receives confirmation successful Log In messages. 
+Figure 2.11 
+Manage Log In  -Error- 
+By Public User 
+ 
+ 
+ 
+Receives Unsuccessfully Log In messages. 
+Figure 2.12 
+Manage Log In  -Error- 
+By Administrator 
+ 
+ 
+Receives Unsuccessfully Log In messages. 
+ 
+ 
+Figure 2.13 
+Manage Log In -Error- 
+By Agency 
+ 
+Receives Unsuccessfully Log In messages. 
+
+---PAGE 44---
+  
+                                                            43                            (SRS AH 2024 Version V.1) 
+ 
+Figure 2.14 
+Manage Log In -Reset 
+Password- By Public 
+User 
+The system will provide way to reset the Public user 
+password by provide his (E-mail, last password) and then 
+he can provide the new password, click reset password  
+and then reset will be completed. 
+Figure 2.15 
+Manage Log In -Reset 
+Password- By Public 
+User 
+The Reset Password interface allows Public Users to 
+securely recover their accounts by entering their 
+registered email address, prompting the system to send an 
+email with a temporary password, an activation link, and 
+instructions for resetting their password. 
+Figure 2.16 
+Manage Log In -Reset 
+Password- By 
+Administrator 
+The system will provide way to reset the Administrator 
+password by provide his (E-mail, last password) and then 
+he can provide the new password, click reset password  
+and then and reset will be completed. 
+ 
+Figure 2.17 
+Manage Log In -Reset 
+Password- By 
+Administrator 
+The Reset Password interface allows administrators to 
+securely recover their accounts by entering their 
+registered email address, triggering the system to send an 
+email with a temporary password, activation link, and 
+step-by-step instructions for resetting their password. 
+Figure 2.18 
+Manage Log In -Reset 
+Password- By Agency 
+ 
+The system will provide way to reset the Agency 
+password by provide his (E-mail, last password) and then 
+he can provide the new password, click reset password  
+and then reset will be completed. 
+Figure 2.19 
+Manage Log In -Reset 
+Password- By Agency 
+ 
+The Reset Password interface enables Agencies to 
+securely recover their accounts by submitting their 
+registered email address, after which the system sends an 
+email containing a temporary password, an activation 
+link, and step-by-step guidance for resetting their 
+password. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 45---
+  
+                                                                         44                                        (SRS AH 2024 Version V.1) 
+ 
+3.3 Manage user profile 
+  
+ 
+ 
+Figure 3.1 Use Case Manage user profile  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 46---
+  
+                                                            45                            (SRS AH 2024 Version V.1) 
+ 
+3.3.1 Manage user profile Description   
+Table 3.5 Use Case Description for Manage user profile 
+Use Case ID  
+ SRS-AH-UC300 
+Brief Description   In this case, their profile can be viewed, edited, and deleted by 
+Agencies, Administrators, and Public Users.  
+Administrators have the ability to look up the profiles of other 
+actors. 
+Actor  
+Public users, Administrators and Agencies. 
+Pre-Conditions  
+Every user needs to be signed in to the system. 
+Basic Flow  
+User (Public Users and Agencies): 
+1. The use case starts when users go to the profile menu. 
+2. Users can perform the following actions: 
+  - Add information to their profiles. 
+    - By clicking on their optional information, like (Secondary 
+Address, Job Title) and filling it out, they can click on 
+<<Update Profile>> button. 
+  - Edit their profiles by modifying existing fields. 
+     - By clicking on their mandatory information, like (Full 
+Name, email) and modifying it, they can click on <<Update 
+Profile>> button. 
+3. E1: Logout from System [SRS-AH-REQ301]: The system 
+redirects the user to the login 
+4. Use case ends. 
+ 
+User (Administrators): 
+1. The use case starts when Administrators go to the profile menu. 
+2. Administrators can perform the following actions: 
+    - Add information to their profiles. 
+      - By clicking on their optional information, like (LinkedIn, 
+Alterative Email) and filling it out, they can click on 
+<<Update Profile>> button. 
+  - Edit their profiles by modifying existing fields. 
+     - By clicking on their mandatory information, like (Full 
+Name, email) and modifying it, they can click on <<Update 
+Profile>> button. 
+   - Search for user. 
+      - By filling out UserName and clicking <<Search For User>> 
+button The user profile will be showing or will not be found. 
+        - A1: UserName not found [SRS-AH-REQ301]: 
+3. E1: Logout from System [SRS-AH-REQ302]: The system 
+redirects the user to the login 
+4. Use case ends. 
+ 
+ 
+
+---PAGE 47---
+  
+                                                                         46                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Alternative Flow  
+A1: UserName not found [SRS-AH-REQ301]: 
+1. After admin click search for user 
+2. There will be error massage that shown UserName not found 
+3. Admin can click <<Search Again>> button. 
+4. The use case returns to Step 2 of the Basic Flow. 
+Exception Flow  
+E1: Logout from System [SRS-AH-REQ302]:  
+1. User click logout symbole. 
+2. The user will be redirected to Log in page. 
+Post-Conditions  
+Search, add, update, and remove operations can only be carried 
+out by authorized users. 
+Rules  
+ Not applicable. 
+Constraints  
+Not applicable. 
+ 
+3.3.2 Manage user profile Sequence Diagram   
+ 
+ 
+  
+Figure 3.2 Basic Flow for Manage user profile 
+
+---PAGE 48---
+  
+                                                            47                            (SRS AH 2024 Version V.1) 
+ 
+  
+  
+Figure 3.3 Alternative Flow for Manage rergistration 
+  
+ 
+ 
+Figure 3.4 Exception Flow for Manage user profile 
+ 
+ 
+ 
+ 
+
+---PAGE 49---
+  
+                                                                         48                                        (SRS AH 2024 Version V.1) 
+ 
+3.3.3 Manage user profile User Interface  
+  
+Figure 3.5 Manage user profile For Public User  
+  
+  
+Figure 3.6  Manage User Profile For Adminstrator 
+ 
+ 
+
+---PAGE 50---
+  
+                                                            49                            (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 3.7 Manage User Profile For Agency 
+ 
+  
+Figure 3.8 Manage User Profile For Administrator 
+ 
+ 
+
+---PAGE 51---
+  
+                                                                         50                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 3.9 Manage User Profile -Error- For Administrator 
+  
+ 
+ 
+ 
+  
+Table 3.6 Manage user profile - User Interface Description  
+Manage user profile 
+Description  
+Figure 3.5 
+Manage user profile for 
+Public User And Agency   
+1- Views their profile information (e.g., name, email, and 
+contact details).  
+2- Updates fields like the contact number or changes their 
+password securely. 
+1- Deletes their account if needed. 
+2- Add to there accoint info   
+Figure 3.6 
+Manage user profile for 
+Administrator   
+1- Views their profile information (e.g., name, email, and 
+contact details).  
+2- Updates fields like the contact number or changes their 
+password securely. 
+ 3- Deletes their account if needed. 
+ 4- Add to there accoint info   
+Figure 3.7 
+Manage user profile for 
+Agency   
+1- Views their profile information (e.g., name, email, and 
+contact details). 
+2- Updates fields like the contact number. 
+3-Deletes their account if needed. 
+4- Add to there accoint info   
+
+---PAGE 52---
+  
+                                                            51                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+Figure 3.8 
+Manage User Profile 
+For Administrator 
+ 
+ 
+1-Administrator have option to see all users data.  
+2- Updates or deletes public user accounts if necessary to 
+maintain system integrity. 
+3- Reviews actions related to user account creation and 
+modifications. 
+4- Views their profile information (e.g., name, email, and 
+contact details).  
+5- Updates fields like the contact number or changes their 
+password securely. 
+ 
+Figure 3.9  
+Manage User Profile -
+Error- For Administrator 
+ 
+Receive masage said  Not found UserName, and admin can 
+search again for UserName by clicking on ≪Search Again≫ 
+button. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 53---
+  
+                                                                         52                                        (SRS AH 2024 Version V.1) 
+ 
+3.4 Manage Reports 
+ 
+ 
+  
+Figure 3.9 Manage Reports 
+ 
+ 
+ 
+3.4.1 Manage Reports Description   
+Table 3.7 Use Case Description for Use Case Name  
+Use Case ID  
+SRS-AH-UC700 
+Brief Description   This use case allows the administrator to generate a report 
+displaying the total number of new users (Public use or Agency)  
+on the system within a specified timeframe. 
+Actor  
+ Administrator 
+Pre-Conditions  
+- The administrator must be logged into the system. 
+- The system must have recorded user data. 
+Basic Flow  
+1. The administrator Choose "Reports" section . 
+2. The system displays report options. 
+3. The administrator click the ≪NEW USERS REPORT≫ 
+button. 
+5. The administrator will select the Date Range that he wanted 
+for the  report. 
+
+---PAGE 54---
+  
+                                                            53                            (SRS AH 2024 Version V.1) 
+ 
+6. The system retrieves users data for the specified timeframe. 
+7. The system generates a report displaying the total number of 
+new users registered. 
+8. The Admin can click eather Export or Print Option. 
+9. The system will display to admin eather exported or printed 
+report. 
+10. Use case ends. 
+Alternative Flow   Not applicable. 
+Exception Flow  
+ Not applicable. 
+Post-Conditions  
+The report is successfully generated and available for review or 
+download by the administrator. 
+Rules  
+ The report must be accurate and comply with data privacy policies. 
+Constraints  
+ Not applicable. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 55---
+  
+                                                                         54                                        (SRS AH 2024 Version V.1) 
+ 
+3.4.2 Manage Report Sequence Diagram   
+  
+ 
+ 
+Figure 3.10 Basic Flow for Manage Report 
+  
+   
+Not applicable. 
+Figure -- Alternative Flow for Manage Report 
+  
+Not applicable. 
+  
+Figure -- Exception Flow for Use Manage Report 
+
+---PAGE 56---
+  
+                                                            55                            (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 3.11 Manage Report for Administrator (Main Page For Reports)  
+3.4.3 Manage Report User Interface  
+ 
+ 
+Figure 3.12 Manage Report for Administrator 
+ 
+ 
+ 
+
+---PAGE 57---
+  
+                                                                         56                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Table 3.8 Manage Report - User Interface Description  
+User Interface Name  
+Description  
+Figure 3.11 
+ Manage Report for 
+Administrator (Main 
+Page For Reports)  
+ 
+When the administrator clicks the report, he will have 
+more than one option for the report, so he will choose for 
+my module ≪NEW USERS REPORT≫. 
+ 
+Figure 3.12 
+ Basic Manage Report 
+Interface 
+ Allows administrators to generate, view and make activity 
+reports and allow for Administrator to select time period, 
+for new user registrations. 
+  
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 58---
+  
+                                                            57                            (SRS AH 2024 Version V.1) 
+ 
+4. EXTERNAL INTERFACE REQUIREMENTS   
+4.1 USER INTERFACES    
+      
+  
+Figure 4.1  Dialog Diagram for AuthenticityHub  
+ 
+
+---PAGE 59---
+  
+                                                                         58                                        (SRS AH 2024 Version V.1) 
+ 
+Figure 4.2  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+       
+ 
+   
+
+---PAGE 60---
+  
+                                                            59                            (SRS AH 2024 Version V.1) 
+ 
+Figure 4.3 Dialog Diagram for AuthenticityHub 
+        
+   
+
+---PAGE 61---
+  
+                                                                         60                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.4  Dialog Diagram for AuthenticityHub 
+
+---PAGE 62---
+  
+                                                            61                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.5  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 63---
+  
+                                                                         62                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+ 
+Figure 4.6  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+
+---PAGE 64---
+  
+                                                            63                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 4.7  Dialog Diagram for AuthenticityHub 
+
+---PAGE 65---
+  
+                                                                         64                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.8  Dialog Diagram for AuthenticityHub 
+
+---PAGE 66---
+  
+                                                            65                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.9  Dialog Diagram for AuthenticityHub 
+ 
+
+---PAGE 67---
+  
+                                                                         66                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.10  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 68---
+  
+                                                            67                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+ 
+ 
+Figure 4.11  All Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 69---
+  
+                                                                         68                                        (SRS AH 2024 Version V.1) 
+ 
+4.2 HARDWARE INTERFACES  
+ 
+Not applicable. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 70---
+  
+                                                            69                            (SRS AH 2024 Version V.1) 
+ 
+ 
+4.3 SOFTWARE INTERFACES  
+ 
+Not applicable. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 71---
+  
+                                                                         70                                        (SRS AH 2024 Version V.1) 
+ 
+5. REQUIREMENT TRACEBILITY  
+Table 5.1 Requirement Tracebility for AuthinticityHub  
+Requirement ID  
+Description  
+Interface ID  
+[SRS-AH-REQ101] 
+The system validates user-submitted data to ensure 
+completeness, 
+correct 
+format 
+(e.g., 
+email, 
+password), and uniqueness (e.g., email or 
+username). If validation fails, it returns specific 
+error messages, allowing users to correct and 
+resubmit. Upon success, the system proceeds with 
+the requested action. 
+Refer Figure 1.7 
+[SRS-AH-REQ201] 
+The system must validate user login credentials, 
+including email and password, against stored 
+records. If credentials are incorrect, it returns an 
+error message (e.g., "Invalid email or password") 
+without revealing sensitive details. Users can retry 
+login or opt to reset their password. 
+Refer Figure (2.11, 2.12, 
+2.13) 
+[SRS-AH-REQ202] 
+The system must allow users to reset their 
+password by entering their registered email. 
+Upon validation, it sends a secure password 
+reset link or code to the user's email, enabling 
+them to create a new password and regain 
+access to their account. 
+Refer Figure (3.14, 3.15, 
+3.16) 
+  
+[SRS-AH-REQ301] 
+The system will check for the UserName 
+profile if it exists or not, so if it does not exist, 
+the error message will appear that says 
+UserName not found, and the admin can search 
+again by clicking the <<Search Again>> 
+button.  
+ 
+ 
+ 
+Refer Figure (3.8, 3.9) 
+[SRS-AH-REQ302] 
+The system must automatically log out users 
+under specific conditions, such as session 
+expiration, security policy violations, or 
+manual logout actions. Upon logout, the 
+system redirects users to the login page and 
+displays an appropriate notification (e.g., 
+"Your session has expired. Please log in 
+again."). This ensures security and prevents 
+unauthorized access. 
+ 
+ 
+Refer Figure (3.4, 3.5, 
+3.6, 3.7, 3.8) 
+ 
+
+---PAGE 72---
+ 
+71 
+ 
+ 
+6. ACRONYMS AND ABBREVIATION  
+Table 6.1 for ACRONYMS AND ABBREVIATION 
+Acronyms and Abbreviation 
+Meaning 
+ 
+SRS 
+Software Requirement Specification. 
+ 
+AH 
+AuthenticityHub. 
+ 
+ 
+REQ 
+ 
+Requirement. 
+ 
+ 
+ 
+UC 
+Use Case. 
+ 
+MCMC 
+Malaysian Communications and Multimedia 
+Commission. 
+ 
+UI 
+User Interface 
+ 
+ 
+

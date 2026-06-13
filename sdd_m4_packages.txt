@@ -1,0 +1,280 @@
+﻿3.2.4. Module 4: Inquiry Progress Tracking 
+ 
+ 
+ 
+Figure 3.2.4 Component Module 4 Inquiry Progress Tracking 
+3.2.4.1 View Package  
+ 
+Class Name 
+Description 
+LandingPage 
+Entry point for users (public, admin, agency) into the inquiry 
+system. 
+ViewInquiryStatusPage 
+Allows public users to check the progress of their submitted 
+inquiries. 
+InquiryDashboardPage 
+Displays a summary of inquiries submitted by the user. 
+FilterInquiryPage 
+Enables filtering and sorting of inquiry data. 
+MonitorAgencyProgressPage 
+Allows admins to track the progress of agency-handled 
+inquiries
+ViewNotesPage 
+Lets admins view notes attached to specific inquiries. 
+
+---PAGE 24---
+ 
+ 
+19 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+GenerateAgencyReportPage 
+Enables admins to compile agency-specific performance 
+reports. 
+ReportDashboardPage 
+Overview of all system reports for admin use. 
+ExportReportPage 
+Lets admins export reports for external use or archiving. 
+ViewAssignedInquiriesPage 
+Allows agency staff to see their assigned inquiries. 
+UpdateInquiryStatusPage 
+Enables agencies to update inquiry progress and resolution. 
+AddDetailsPage 
+Lets agencies provide additional info on an inquiry. 
+RequestClarificationPage 
+Used by agencies to ask for further details from the inquirer. 
+InquiryCommunicationLogPage Displays communication exchanges related to the inquiry. 
+ 
+ 
+3.2.4.1 Controller Package  
+ 
+Class Name 
+Description 
+StatusesController 
+Manages inquiry status updates and related logic. 
+ReportController 
+Handles report generation, dashboard data, and export functionality. 
+AssignedInquiryController Controls agency interactions with assigned inquiries. 
+ 
+    3.2.4.1 Model Package  
+        
+Class Name 
+Description 
+Inquiry 
+Represents inquiry records with details like status, notes, and timestamps. 
+Administrator 
+Represents admin users with permissions for monitoring and reporting. 
+Agency 
+Stores data about agencies handling inquiries, such as name and contact info. 
+PublicUser 
+Represents regular users who submit inquiries and track their status. 
+
+---PAGE 25---
+ 
+20 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+   3.3 Package Relationship 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 3.3 Model-View-Controller (MVC) Package Relationship for AuthenticityHub System 
+(https://drive.google.com/file/d/1LtfHdCvSyjPQpEcim_KqDon8IRKOlk78/view?usp=sharing) 
+ 
+ 
+
+---PAGE 26---
+ 
+21 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4. 
+DETAIL DESIGN 
+4.1 Module 1: Manage User [SDD-REQ-100] 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 27---
+ 
+ 
+22 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.1 PublicUsers [SDD-REQ-101] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents public user entities in the system 
+and manages user-related data, authentication, and profile 
+information. 
+ 
+ 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+UserID 
+integer 
+UserName 
+string 
+UserEmail 
+string 
+UserPassword 
+string 
+UserPhoneNum 
+string 
+UserProfilePicture 
+string 
+created_at 
+timestamp 
+updated_at 
+timestamp 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+updateProfile(array $data) 
+To update user profile information 
+updatePassword($newPass
+word) 
+To update user password 
+validateCurrentPassword($
+currentPassword) 
+To validate current password 
+getAuthPassword() 
+To get password for authentication 
+getEmailForPasswordReset
+() 
+To get email for password reset 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Algorithm 
+1. For Profile Update (updateProfile method): 
+a. Validate updated information format and requirements 
+b. Check for duplicate email conflicts in public_users table 
+c. Begin database transaction 
+d. Update user record with new information 
+e. Commit transaction and return success status 
+2. For Password Update (updatePassword method): 
+a. Hash new password using bcrypt encryption 
+b. Update password field in database 
+c. Save updated record 
+d. Return success confirmation 
+3. For Password Validation (validateCurrentPassword method): 
+a. Retrieve current password hash from database 
+b. Compare provided password with stored hash 
+c. Return boolean validation result 
+ 
+
+---PAGE 28---
+ 
+ 
+23 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.2 Agency [SDD-REQ-102] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents agency entities in the system and 
+manages agency-related data and information. 
+ 
+ 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+integer 
+AgencyName 
+string 
+AgencyUserName 
+string 
+AgencyEmail 
+string 
+AgencyPhoneNum 
+string 
+AgencyPassword 
+string 
+AgencyProfilePicture 
+string 
+first_login 
+boolean 
+password_changed_at 
+timestamp 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+updateProfile(array $data) 
+To update agency profile information 
+updatePassword($newPassword) 
+To update agency password 
+validateCurrentPassword($curre
+ntPassword) 
+To validate current password 
+checkPassword($password) 
+To check password for login 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Algorithm 
+1. For Profile Update (updateProfile method): 
+a. Validate updated infor

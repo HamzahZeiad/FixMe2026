@@ -1,0 +1,6059 @@
+---PAGE 1---
+ 
+i 
+ 
+                                                                                                                                   
+APPENDIX 2:  
+ 
+ 
+SOFTWARE DESIGN DOCUMENT (SDD) 
+PRESENTED BY: 
+AuthenticityHub 
+PRESENTED TO: 
+PM. TS. DR. Rohani Binti 
+Abu Bakar 
+DATE: 
+15/06/2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TEAM MEMBERS  
+   
+Chief Executive  
+Officer  
+ Qamhan Khaled 
+Mohammed Abdo 
+ 
+CB23009 
+Chief Business  
+Analyst  
+Abdullah Mueataz Adel 
+Ahmed 
+       
+CB23001 
+Chief   
+Developer  
+Banabila Salman 
+Mohammed 
+      
+CB23142 
+Software Quality  
+Assurance  
+AL-QARMWSHI 
+ABDULLAH FAEZ 
+ABDULLAH      
+CB23005 
+ 
+ 
+Submitted to the Software Design Workshop (BCS2343). 
+ 
+Bachelor of Computer Science (Software Engineering) with Honours. 
+ 
+Faculty of Computing, Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA).
+
+---PAGE 2---
+ 
+ 
+                                                                                                                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+DOCUMENT APPROVAL 
+ 
+ 
+Name 
+Date 
+Authenticated by: 
+Project Leader 
+Qamhan Khaled Mohammed Abdo 
+Approved by: 
+ 
+ 
+ 
+ 
+ 
+Project Manager 
+Abdullah Mueataz Adel Ahmed 
+Approved by: 
+Client 
+PM. TS. DR. Rohani Binti Abu Bakar 
+ 
+ 
+Software                    : Adobe Acrobat DC, Microsoft Word 
+Archiving Place        : Group 9_SDD.docx 
+Copies Available      : AuthenticityHub System 2025 Version 1 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 3---
+ 
+ 
+                                                                                                                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+TABLE OF CONTENT 
+ 
+  
+ 
+1. INTRODUCTION ............................................................................................................................................ 1 
+1.1      Purpose................................................................................................................................................... 1 
+1.2      System Identification ............................................................................................................................. 1 
+1.3      System Overview ................................................................................................................................... 2 
+1.4       References ............................................................................................................................................. 4 
+2. DATA DESIGN ................................................................................................................................................ 5 
+2.1 ENTITY RELATIONSHIP DIAGRAM (ERD) ......................................................................................... 5 
+2.2 DATA DICTIONARY ................................................................................................................................ 7 
+3. GENERAL ARCHITECTURE....................................................................................................................... 10 
+3.1 Architectural Pattern: MVC ...................................................................................................................... 10 
+3.2. Component Overview .............................................................................................................................. 10 
+3.2.1 Module 1: Manage User ..................................................................................................................... 11 
+3.2.1.1 View Package.................................................................................................................................. 12 
+3.2.1.2 Controller Package .......................................................................................................................... 12 
+3.2.1.3 Model Package ................................................................................................................................ 13 
+3.2.2 Module 2: Manage Inquiry Form Submission ................................................................................... 14 
+3.2.2.1 View Package.................................................................................................................................. 14 
+3.2.2.2 Controller Package .......................................................................................................................... 15 
+3.2.2.3 Model Package ................................................................................................................................ 15 
+3.2.3. Module 3: Inquiry Assignment ......................................................................................................... 16 
+3.2.3.1 View Package.................................................................................................................................. 16 
+3.2.3.2 Controller Package .......................................................................................................................... 17 
+3.2.3.3 Model Package ................................................................................................................................ 17 
+3.2.4. Module 4: Inquiry Progress Tracking ............................................................................................... 18 
+3.2.4.1 View Package.................................................................................................................................. 18 
+3.2.4.1 Controller Package .......................................................................................................................... 19 
+3.2.4.1 Model Package ................................................................................................................................ 19 
+3.3 Package Relationship ................................................................................................................................ 20 
+4. 
+DETAIL DESIGN ...................................................................................................................................... 21 
+4.1 Module 1: Manage User [SDD-REQ-100] ............................................................................................... 21 
+4.1.1 PublicUsers [SDD-REQ-101] ............................................................................................................ 22 
+4.1.2 Agency [SDD-REQ-102] ................................................................................................................... 23 
+4.1.3 Administrator [SDD-REQ-103] ......................................................................................................... 24 
+4.1.4 UserController [SDD-REQ-104] ....................................................................................................... 25 
+4.1.5 AdminController [SDD-REQ-105] .................................................................................................... 26 
+4.1.6 AgencyController [SDD-REQ-106]................................................................................................... 28 
+4.1.7 RegisterPage [SDD-REQ-107] .......................................................................................................... 29 
+4.1.8 ManageProfilePage (PublicUser) [SDD-REQ-108] ........................................................................... 30 
+
+---PAGE 4---
+ 
+ 
+                                                                                                                                   (SDD AH 2025 Version 1) 
+4.1.9 EditPasswordPage (PublicUser) [SDD-REQ-109] ............................................................................ 31 
+4.1.10 RegisterNewAgencyPage [SDD-REQ-110] .................................................................................... 32 
+4.1.11 ViewUsersProfilePage [SDD-REQ-111] ......................................................................................... 33 
+4.1.12 editAgencyPage [SDD-REQ-112] ................................................................................................... 34 
+4.1.13 editUserPage [SDD-REQ-113] ........................................................................................................ 35 
+4.1.14 LoginPage [SDD-REQ-114] ............................................................................................................ 36 
+4.1.15 RecoveryPasswordPage [SDD-REQ-115] ....................................................................................... 37 
+4.1.16 ManageProfilePage (Agency) [SDD-REQ-116] .............................................................................. 38 
+4.1.17 EditPasswordPage (Agency) [SDD-REQ-117] ................................................................................ 39 
+4.2 Module 2: Manage Inquiry Form Submission [SDD-REQ-200] .............................................................. 40 
+4.2 Module 3: Inquiry Assignment [SDD-REQ-300] ..................................................................................... 58 
+4.2 Module 4: Inquiry Progress Tracking [SDD-REQ-400] ........................................................................... 77 
+1. 
+REQUIREMENT TRACEABILITY .......................................................................................................... 88 
+5.1 Module 1: Manage User [SRS-REQ-100] ................................................................................................ 88 
+5.2 Module 2: Manage Inquiry Form Submission [SRS-REQ-200] ............................................................... 90 
+5.3 Module 3: Inquiry Assignment [SRS-REQ-300] ...................................................................................... 92 
+5.4 Module 4: Inquiry Progress Tracking [SRS-REQ-400] ............................................................................ 93 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LIST OF FIGURES 
+ 
+ 
+Figure 2.1 Entity Relationship Diagram (ERD)   
+5  
+Figure 3.1.1 Component Module 1: Manage Users 
+11  
+Figure 3.2.2 Component Module 2: Manage Inquiry Form Submission  
+13  
+Figure 3.2.3 Component Module 3: Inquiry Assignment 
+15  
+Figure 3.2.4 Component Module 4: Inquiry Progress Tracking 
+17  
+Figure 3.3 Package Relationship  
+19  
+ 
+ 
+ 
+ 
+
+---PAGE 5---
+ 
+ 
+                                                                                                                                   (SDD AH 2025 Version 1) 
+ 
+LIST OF ABBREVIATIONS 
+ 
+ 
+Software Design Document 
+ 
+ 
+ 
+ 
+ 
+    SDD 
+ 
+Entity Relationship Diagram 
+ 
+ 
+ 
+ 
+ 
+    ERD 
+ 
+Primary Key 
+ 
+ 
+                         
+ 
+ 
+    PK 
+ 
+ 
+Foreign Key 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    FK 
+ 
+Malaysian Communications and Multimedia Commission                             MCMC  
+  
+Model-View-Controller                                                                                    MVC  
+ 
+ 
+ 
+
+---PAGE 6---
+SOFTWARE DESIGN DOCUMENT (SDD) FACULTY OF COMPUTING 
+                                        
+1 | P a g e                                                     (SDD AH 2025 Version 1) 
+ 
+ 
+1. INTRODUCTION 
+ 
+ 
+1.1      Purpose 
+ 
+ 
+The purpose of this Software Design Document (SDD) is to provide a comprehensive design blueprint 
+for the MySebenarnya System, commissioned by the Malaysian Communications and Multimedia 
+Commission (MCMC). This document outlines the architectural structure, key components, and 
+operational workflow required to build and maintain the system. 
+ 
+This Software Design Document (SDD) serves as a foundational reference for the development of the 
+Inquiry System, a digital solution designed to streamline the management of public inquiries. The 
+document is intended for a wide audience including system developers, designers, stakeholders, 
+administrators, and testers. It provides a structured overview of the system’s architecture, component 
+interactions, and design rationale to ensure all parties involved have a clear understanding of the 
+project’s goals and implementation pathway. 
+ 
+This SDD has been prepared in alignment with best practices in software engineering and reflects the 
+collaborative efforts of the project team to build a reliable, user-friendly, and transparent inquiry 
+management platform. Each module outlined in this document plays a vital role in the seamless 
+operation of the system, from user registration to inquiry tracking and resolution. 
+ 
+By following the design outlined in this document, the team aims to ensure the system is scalable, 
+maintainable, and capable of meeting both current and future needs of the intended users and 
+administrative bodies. 
+ 
+ 
+ 
+1.2      System Identification  
+ 
+ 
+This Software Design Document (SDD) presents the system architecture and design specifications for 
+the AuthenticityHub System, an initiative by AuthenticityHub to modernize the way public inquiries 
+are managed. The system empowers users to create and manage their accounts, submit official inquiry 
+forms, and ensure those inquiries are directed to the correct agencies or authorities for further action. 
+ 
+Through real-time progress tracking and structured workflows, AuthenticityHub aims to enhance 
+clarity, build trust between the public and service providers, and ensure timely responses to pressing 
+public matters. The system serves as a centralized platform focused on improving service efficiency, 
+communication flow, and public accountability. 
+ 
+System Title  
+ MySebenarnya 
+ 
+System Abbreviation  
+AH 
+ 
+Year of Development  
+ 
+2025  
+ 
+System Version  
+ 
+1.0 (V1.0)  
+ 
+System Document ID Format  
+ 
+<System abbreviation><Subsystem abbreviation><Year of 
+development><System Version>  
+ 
+System Document ID  
+ 
+SDD-AH-2025-V1.0  
+
+---PAGE 7---
+SOFTWARE DESIGN DOCUMENT (SDD) FACULTY OF COMPUTING 
+                                        
+2 | P a g e                                                     (SDD AH 2025 Version 1) 
+ 
+ 
+Subsystem Title  
+ 
+Public Inquiry Management Subsystem  
+ 
+Subsystem Abbreviation  
+ 
+PIMS    
+ 
+Subsystem Document ID  
+ 
+AH-PIMS-2025-V1.0  
+ 
+Requirement ID Format  
+ 
+<Document System Abbreviation><Requirement 
+abbreviation><Requirement number>  
+Requirement ID  
+SRS-REQ-100 
+Design ID 
+SDD-REQ-100  
+ 
+Document System Name  
+ 
+Software Design Document  
+ 
+Document System 
+Abbreviation  
+ 
+SDD  
+Package ID 
+AH-PG-100 
+Class ID 
+AH-PG-100-CL-101 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1.3      System Overview 
+ 
+ 
+ 
+1.3.1: Manage User (User Registration, Login and Profile Management): This module is the 
+gateway for users to access the AuthenticityHub platform. It allows users to create accounts, log in 
+securely, and manage personal profiles such as email, password, and contact information. The system 
+maintains authentication control and ensures that only legitimate users can submit inquiries. The public 
+user can register a new account, log in with their credentials, and update their profile details at any 
+time, establishing a secure and personalized experience for each user interacting with the system. 
+MCMC acts as the system administrator, monitoring user registration activities and handling security-
+related functions such as resetting passwords or deactivating suspicious accounts. Agencies do not 
+have direct involvement in this module, but user information may be displayed to them when handling 
+assigned inquiries. 
+ 
+ 
+1.3.2: Manage Inquiry Form Submission: This module provides a structured digital form that users 
+can use to submit inquiries, reports, or complaints. It captures detailed information related to the 
+user's issue and may include attachments like photos or documents to support their claim. The public 
+user accesses the inquiry form, fills in the required details, selects the issue category, and submits it 
+through the platform. This enables them to raise issues in an official and trackable way. MCMC 
+reviews submitted forms for completeness and relevance, verifies the accuracy of the information, 
+and decides whether the inquiry is valid and ready to be forwarded for assignment. Agencies do not 
+interact with this module directly but will receive the inquiry only after MCMC has approved and 
+assigned it. 
+ 
+ 
+ 
+
+---PAGE 8---
+SOFTWARE DESIGN DOCUMENT (SDD) FACULTY OF COMPUTING 
+                                        
+3 | P a g e                                                     (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+1.3.3: Inquiry Assignment (to Agencies): This module enables MCMC to assign submitted inquiries 
+to the appropriate agency based on the nature, category, and scope of the issue. The goal is to ensure 
+that each inquiry reaches the right party for resolution. The public user is not involved in the 
+assignment process but will be notified once their inquiry is forwarded to a relevant agency for action. 
+MCMC evaluates each verified inquiry and uses this module to assign it to the correct agency, typically 
+based on issue type, location, or the agency’s area of responsibility. The agency receives the assigned 
+inquiry along with all supporting data and is expected to acknowledge the assignment and begin 
+working on the resolution. 
+ 
+ 
+1.3.4: Inquiry Progress Tracking: This module tracks the lifecycle of each inquiry, from 
+submission to resolution. It ensures transparency by updating the status and making it visible to all 
+relevant parties, including status labels, timestamps, and action logs. The public user can log in to 
+view the status of their inquiry, check progress updates, and read any agency responses, helping 
+build trust by keeping the user informed. MCMC monitors the progress of all inquiries, ensures 
+agencies are updating statuses, and may intervene if inquiries are delayed or left unresolved. 
+Agencies use this module to update the status of each inquiry as they work on it, marking it as “In 
+Progress”, “Resolved”, or “Closed”, and may add comments or feedback for the user. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 9---
+SOFTWARE DESIGN DOCUMENT (SDD) FACULTY OF COMPUTING 
+                                        
+4 | P a g e                                                     (SDD AH 2025 Version 1) 
+ 
+1.4       References 
+ 
+ 
+1. Ts. Dr. Rohani Binti Abu Bakar 1. Appendix 1-RFP, Google Drive. Google. Available at:  
+https://drive.google.com/file/d/1eO6aJ3sqWWMCsZYdXr46pBSM01RcSsTD/view?usp=sharing  
+  
+  
+2. Ts. Dr. Rohani Binti Abu Bakar (2024). Appendix 2: SDD Template Document. Pekan, Pahang: 
+Universiti  
+Malaysia Pahang.  
+ 
+ 
+3. “MVC Design Pattern - GeeksforGeeks.” Accessed: Dec. 22, 2024. [Online]. Available:  
+https://www.geeksforgeeks.org/mvc-design-pattern/?utm_source=chatgpt.com  
+ 
+ 
+4. “Understanding the Top 10 Software Architecture Patterns: A Comprehensive Guide.”  
+Accessed: Dec. 22, 2024. [Online]. Available:  
+https://www.designgurus.io/blog/understanding-top-10-software-architecture-patterns  
+ 
+ 
+ 
+5. YouTube. “Breaking Down Many-to-Many Relationships in ER Diagrams.” Accessed: May 6, 
+2025. [Online]. Available: https://www.youtube.com/watch?v=0_xZoPGviyc  
+ 
+ 
+6. TechTarget. “System Software: Definitions and Examples in Software Projects.” Accessed: May 
+6, 2025. [Online]. Available: https://www.techtarget.com/whatis/definition/system-software  
+ 
+ 
+7.  GeeksforGeeks. “Introduction to MVC Design Pattern in Web-Based Applications.” Accessed: 
+May 6, 2025. [Online]. Available: https://www.geeksforgeeks.org/mvc-design-
+pattern/?utm_source=chatgpt.com  
+ 
+8. UML Diagrams. “Overview of UML Package Diagrams and Their Applications in Software 
+Design.” Accessed: May 6, 2025. [Online]. Available: https://www.uml-diagrams.org/package-
+diagrams-overview.html  
+ 
+ 
+ 
+9. “ER Diagram (ERD) - Definition & Overview | Lucidchart.” Accessed: Dec. 22, 2024.  
+[Online]. Available: https://www.lucidchart.com/pages/er-diagrams?form=MG0AV3  
+ 
+ 
+10. What is an Entity Relationship Diagram (ERD)?” Accessed: Dec. 22, 2024. [Online].  
+Available: https://www.datanamic.com/support/lt-dez006-what-is-an-erd.html  
+ 
+ 
+11.  Mark Ai Code. “Comprehensive Guide to the MVC Design Pattern for Web Applications.” 
+Accessed: May 6, 2025. [Online]. Available: https://markaicode.com/mvc-design-pattern-a-
+complete-guide-to-modern-software-architecture/?form=MG0AV3  
+ 
+ 
+12. Ts. Azma Abdullah (2024, December 13). Industry talk: A stakeholder’s view on   Malaysian 
+Communications and Multimedia Commission'S requirements [Lecture notes]. University Malaysia 
+Pahang Al-Sultan  Abdullah. 
+13. SRS Archiving Place: google Drive. 
+Available :  
+https://drive.google.com/drive/folders/1x5OrWIyBLoO-
+aSWNRC8bgQ80aCc7tQk5?usp=sharing 
+ 
+ 
+ 
+
+---PAGE 10---
+ 
+5 | P a g e                                                                        (SDD AH 2025 Version 1)                                           
+ 
+                                                                                        
+2. DATA DESIGN 
+2.1 ENTITY RELATIONSHIP DIAGRAM (ERD) 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 2.1 Entity Relationship Diagram (ERD) for AuthenticityHub System 
+
+---PAGE 11---
+ 
+6 | P a g e                                                                        (SDD AH 2025 Version 1)     
+ 
+                                                              
+ 
+                 
+ 
+ 
+ 
+ 
+The Entity-Relationship Diagram (ERD) illustrates a system designed to manage public inquiries and their resolution 
+through administrative assignment and agency action. This diagram includes seven main entities: Administrator, PublicUser, 
+Agency, Inquiry, AssignedInquiry, Report, and Inquiry, highlighting their relationships and attributes. 
+ 
+1. Administrator Entity: 
+This table stores information about system administrators who manage the inquiry system. It includes basic details 
+like AdminID, AdminName, AdminEmail, AdminRole, and login credentials. Administrators are responsible for 
+assigning inquiries to the right agencies and overseeing the resolution process. 
+ 
+2. PublicUser Entity: 
+This table contains information about citizens who submit inquiries to the system. It 
+includes UserID, UserName, UserEmail, UserPhoneNum, and UserProfilePicture. Public users create inquiries when 
+they have questions or complaints about communications and multimedia services. 
+ 
+3. Agency Entity: 
+This table stores details about government agencies that handle different types of inquiries. It 
+includes AgencyID, AgencyName, AgencyEmail, AgencyType, and login credentials. Each agency specializes in 
+resolving specific types of inquiries based on their expertise. 
+ 
+4. Inquiry Entity: 
+This is the main table that stores all inquiry details submitted by public users. It 
+includes InquiryID, InquiryTitle, InquiryDescription, InquiryStatus, InquiryEvidence, and links to the user who 
+submitted it. This table tracks each inquiry from submission to resolution. 
+ 
+5. AssignedInquiry Entity: 
+This table manages the assignment of inquiries to agencies by administrators. It connects AdminID, AgencyID, 
+and InquiryID with an AssignedDate and AdminNote. This ensures each inquiry is properly assigned and tracked. 
+ 
+ 
+Relationships: 
+ 
+1. Public users submit inquiries through the system 
+2. Administrators review and assign inquiries to appropriate agencies 
+3. Agencies work on resolving the assigned inquiries 
+4. The system tracks all activities and maintains records for accountability 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 12---
+ 
+ 
+ 
+7 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+2.2 DATA DICTIONARY 
+ 
+ 2.2.1 Table Name : Administrator 
+ 
+ 
+ 
+2.2.2 Table Name : PublicUser 
+ 
+ 
+ 
+ 
+ 
+Field Name 
+Description 
+Data Type 
+Constraint 
+AdminID 
+Administrator unique ID 
+BIGINT UNSIGNED 
+PK, 
+AUTO_INCREMENT, 
+NOT NULL 
+AdminName 
+Administrator full name 
+VARCHAR(255) 
+NOT NULL 
+AdminEmail 
+Email address for login 
+VARCHAR(255) 
+UNIQUE, NOT NULL 
+AdminRole 
+Role of administrator 
+VARCHAR(100) 
+NOT NULL 
+AdminPhoneNum 
+Administrator phone 
+number 
+VARCHAR(20) 
+NOT NULL 
+AdminAddress 
+Administrator address 
+VARCHAR(255) 
+NOT NULL 
+AdminUserName 
+Username for login 
+VARCHAR(100) 
+UNIQUE, NOT NULL 
+AdminPassword 
+Hashed password for login 
+VARCHAR(255) 
+NOT NULL 
+created_at 
+Record creation timestamp 
+TIMESTAMP 
+NOT NULL 
+updated_at 
+Record last update 
+timestamp 
+TIMESTAMP 
+NOT NULL 
+Field Name 
+Description 
+Data Type 
+Constraint 
+UserID 
+Public user unique ID 
+BIGINT UNSIGNED 
+PK, 
+AUTO_INCREMENT, 
+NOT NULL 
+UserName 
+User full name 
+VARCHAR(255) 
+NOT NULL 
+UserPhoneNum 
+Contact phone number 
+VARCHAR(20) 
+NULLABLE 
+UserEmail 
+Email address for login 
+VARCHAR(255) 
+UNIQUE, NOT NULL 
+UserPassword 
+Hashed password for login 
+VARCHAR(255) 
+NOT NULL 
+UserProfilePicture 
+Profile picture file path 
+VARCHAR(255) 
+NULLABLE 
+created_at 
+Record creation timestamp 
+TIMESTAMP 
+NOT NULL 
+updated_at 
+Record last update timestamp TIMESTAMP 
+NOT NULL 
+
+---PAGE 13---
+ 
+ 
+ 
+8 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+2.2.3 Table Name : Agency 
+ 
+ 
+ 
+ 
+2.2.4 Table Name : AssignedInquiry 
+ 
+ 
+ 
+ 
+ 
+Field Name 
+Description 
+Data Type 
+Constraint 
+AgencyID 
+Agency unique ID 
+BIGINT UNSIGNED 
+PK, 
+AUTO_INCREMENT, 
+NOT NULL 
+AgencyName 
+Official name of the agency VARCHAR(255) 
+NOT NULL 
+AgencyEmail 
+Agency contact email 
+VARCHAR(255) 
+NOT NULL 
+AgencyPhoneNum 
+Agency contact phone 
+number 
+VARCHAR(20) 
+NOT NULL 
+AgencyType 
+Type/category of agency 
+VARCHAR(100) 
+NOT NULL, 
+DEFAULT('Default') 
+AgencyUserName 
+Username for login 
+VARCHAR(100) 
+UNIQUE, NOT NULL 
+AgencyPassword 
+Hashed password for login 
+VARCHAR(255) 
+NOT NULL 
+first_login 
+Flag for first login password 
+change 
+TINYINT(1) 
+DEFAULT(1) 
+password_changed_a
+t 
+Timestamp when password 
+was last changed 
+TIMESTAMP 
+NULLABLE 
+AgencyProfilePicture Agency profile picture file 
+path 
+VARCHAR(255) 
+NULLABLE 
+created_at 
+Record creation timestamp 
+TIMESTAMP 
+NOT NULL 
+updated_at 
+Record last update 
+timestamp 
+TIMESTAMP 
+NOT NULL 
+Field Name 
+Description 
+Data Type 
+Constraint 
+AdminID 
+Admin who assigned inquiry BIGINT UNSIGNED 
+FK, NOT NULL 
+AgencyID 
+Agency assigned to inquiry 
+BIGINT UNSIGNED 
+FK, NOT NULL 
+InquiryID 
+Assigned inquiry ID 
+BIGINT UNSIGNED 
+FK, NOT NULL 
+AssignedDate 
+Date and time of assignment TIMESTAMP 
+NOT NULL 
+AdminNote 
+Note from admin 
+TEXT 
+NULLABLE 
+
+---PAGE 14---
+ 
+ 
+ 
+9 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+ 
+2.2.5 Table Name : Inquiry 
+Field Name 
+Description 
+Data Type 
+Constraint 
+InquiryID 
+Inquiry unique ID 
+BIGINT UNSIGNED 
+PK, 
+AUTO_INCREMENT, 
+NOT NULL 
+InquiryTitle 
+Title of the inquiry 
+VARCHAR(255) 
+NOT NULL 
+InquiryStatus 
+Current inquiry status 
+VARCHAR(100) 
+NOT NULL 
+VerificationDescripti
+on 
+Verification notes and 
+results 
+TEXT 
+NULLABLE 
+InquirySource 
+Source of the inquiry 
+VARCHAR(100) 
+NOT NULL 
+InquirySendDate 
+Date inquiry was submitted TIMESTAMP 
+NOT NULL 
+InquiryDescription 
+Full description of inquiry 
+TEXT 
+NOT NULL 
+InquiryEvidence 
+Attached media/document 
+file paths 
+TEXT 
+NULLABLE 
+AgencyID 
+Agency handling the inquiry BIGINT UNSIGNED 
+FK, NULLABLE 
+AdminID 
+Admin managing the inquiry BIGINT UNSIGNED 
+FK, NULLABLE 
+UserID 
+Public user who submitted 
+inquiry 
+BIGINT UNSIGNED 
+FK, NOT NULL 
+created_at 
+Record creation timestamp 
+TIMESTAMP 
+NOT NULL 
+updated_at 
+Record last update 
+timestamp 
+TIMESTAMP 
+NOT NULL 
+
+---PAGE 15---
+ 
+ 
+ 
+10 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+ 
+3. GENERAL ARCHITECTURE 
+ 
+3.1 Architectural Pattern: MVC 
+ 
+The system utilizes the design pattern known as Model-View-Controller (MVC). The 
+architecture of this system is composed of three distinct layers, which are as follows: 
+1. Model: Represents the application's core business logic and handles data operations, such as 
+inquiry management, user records, and agency assignments. 
+ 
+2. View: Manages the user interface, allowing users such as administrators, public users, and 
+agencies to interact with the system and view information relevant to their roles. 
+ 
+3. Controller: Acts as an intermediary between the View and Model, processing user inputs, 
+triggering data operations, and determining appropriate views to render. 
+ 
+ 
+The MVC pattern’s modular structure makes the system highly maintainable and scalable. 
+Modifications to one component such as redesigning the user interface in the View or updating 
+the database schema in the Model can be implemented with minimal impact on the other 
+components. Furthermore, this pattern is well-suited for object oriented programming, enabling 
+the use of encapsulation, inheritance, and polymorphism to streamline functionality and 
+encourage code reuse. This makes MVC an ideal architectural choice for the Public Inquiry 
+Management System, where multiple modules and user roles must operate seamlessly and 
+efficiently within a robust, well-organized framework. 
+ 
+ 
+3.2. Component Overview 
+ 
+The " AuthenticityHub" system adopts a modular architecture, segmenting its core functionality into 
+independent yet interconnected modules. Each module is designed to handle a specific part of the 
+system, ensuring streamlined operations and smooth interaction between components. The key 
+modules developed are Manage User Module, Manage Inquiry Form Submission Module, Inquiry 
+Assignment Module, and Inquiry Progress Tracking Module
+
+---PAGE 16---
+ 
+ 
+ 
+11 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+3.2.1 Module 1: Manage User  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 3.2.1 Component Module 1: Manage Use
+
+---PAGE 17---
+ 
+ 
+ 
+12 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+  
+3.2.1.1 View Package  
+ 
+Class Name 
+Description 
+RegisterPage 
+User registration form that allows new public users to create an account by 
+providing their personal information and credentials. 
+ManageProfilePage 
+(PublicUser) 
+Public User profile management interface that enables logged-in users to 
+view, update, and manage their personal profile information. 
+ 
+ManageProfilePage 
+(Agency) 
+ 
+Agency profile management interface that enables logged-in users to view, 
+update, and manage their personal profile information. 
+EditPasswordPage 
+(PublicUser) 
+Password change form that allows Public user to securely update their 
+account password by providing current and new password credentials. 
+EditPasswordPage 
+(Agency) 
+Password change form that allows Agency to securely update their account 
+password by providing current and new password credentials. 
+RegisterNewAgencyPage Admin-only form that allows administrators to register and add new agencies 
+to the system with relevant agency details. 
+ViewUsersProfilePage 
+Admin dashboard that displays profile information of all registered users and 
+agencies, providing administrators with an overview of system users. 
+editAgencyPage 
+Admin interface that allows administrators to modify and update existing 
+agency information and details in the system. 
+editUserPage 
+Admin interface that enables administrators to edit and update public user 
+account information and profile details. 
+loginPage 
+A login interface that provides authentication functionality for all user types 
+(public users, MCMC staff, and agency staff) to access the system using 
+recovaryPasswordPage 
+A password recovery interface that allows users to reset their forgotten 
+passwords by providing their email address or username for password reset 
+ 
+3.2.1.2 Controller Package  
+ 
+Class Name 
+Description 
+UserController 
+Handles user account management functionality including user registration, 
+profile management, and password updates for public users. 
+AdminController 
+Manages administrative functions such as registering new agencies, viewing 
+user and agency profiles, and editing user/agency information in the system. 
+AgencyController 
+Handles agency-specific operations and management of agency-related data 
+and functionality within the system. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 18---
+ 
+ 
+ 
+13 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+    3.2.1.3 Model Package  
+        
+Class Name 
+Description 
+PublicUsers 
+Represents individual user accounts in the system. Stores user profile 
+information, authentication credentials, and manages user account data for 
+Agency 
+Represents agency entities in the system. Stores agency information, details, 
+and manages agency-related data that can be registered and managed by 
+Administrator 
+Represents admin user accounts with elevated privileges. Manages 
+administrator authentication and stores admin-specific data for users who can 
+register agencies, view profiles, and edit user/agency information in the 
+system. 
+
+---PAGE 19---
+ 
+ 
+14 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+3.2.2 Module 2: Manage Inquiry Form Submission 
+ 
+ 
+Figure 3.2.2 Component Module 2: Manage Inquiry Form Submission 
+ 
+ 
+ 
+3.2.2.1 View Package  
+ 
+Class Name 
+Description 
+Submit Inquiry Form Page Interface for users to submit inquiries with evidence. Supports file uploads 
+and input validation. 
+List of Inquiries Page 
+Displays user-submitted inquiries and others inquiries with statuses. Includes 
+filters for tracking and reviewing submissions. 
+Inquiry Details Page 
+Shows full details and updates for an inquiry. 
+Review Inquiry Page 
+Enables admins to evaluate, flag, or assign inquiries. Displays submission 
+details and evidence. 
+List of Inquiries Page 
+Shows newly submitted inquiries for review. Allows sorting and filtering. 
+Generate Report Page 
+Generates statistical and downloadable inquiry reports. Offers formats like 
+PDF, Excel, and visual graphs. 
+Assigned Inquiries Page Lists inquiries assigned to the agency. Allows status filtering and quick 
+access to details. 
+Inquiry Details Page 
+Shows complete inquiry information for agencies. Includes evidence files 
+and action buttons for acceptance/rejection. 
+
+---PAGE 20---
+ 
+ 
+15 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+3.2.2.2 Controller Package  
+ 
+Class Name 
+Description 
+InquiryAssignmentControll
+er 
+Manages the assignment of inquiries to agencies with bulk assignment 
+capabilities and assignment tracking. 
+AdminController 
+Handles admin operations including inquiry review, assignment 
+management, and report generation. 
+UserController 
+Manages public user operations including inquiry submission, viewing, 
+authentication, and profile management. 
+AgencyController 
+Controls agency operations including dashboard, inquiry management, 
+authentication, and status updates. 
+InquiryController 
+Manages inquiry operations including submission, tracking, status updates, 
+and user inquiry management. 
+ 
+  
+ 
+   3.2.2.3 Model Package  
+        
+Class Name 
+Description 
+Inquiry 
+Represents inquiries with submission details, evidence files, status tracking, 
+and user relationships. 
+PublicUser 
+Represents public users who submit inquiries with authentication and profile 
+management capabilities. 
+Agency 
+Represents agencies that process inquiries with authentication and inquiry 
+management functionality. 
+Administrator 
+Represents administrators who manage the system with inquiry assignment 
+and reporting capabilities. 
+AssignedInquiry 
+Represents the assignment relationship between inquiries and agencies with 
+tracking information. 
+
+---PAGE 21---
+ 
+ 
+16 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+3.2.3. Module 3: Inquiry Assignment 
+ 
+ 
+Figure 3.2.3 Component Module 3: Inquiry Assignment (to Agencies) 
+ 
+3.2.3.1 View Package  
+  
+Class Name 
+Description 
+List of Inquiry Page 
+Displays user's submitted inquiries with assignment status and agency 
+information. Shows which agencies are handling each inquiry with 
+assignment dates
+View Submitted Inquiries 
+Page 
+Shows all submitted inquiries for admin review with search and filter 
+functionality for assignment management. 
+Assign Inquiry to Page 
+Provides bulk assignment interface for assigning multiple inquiries to 
+agencies with agency selection dropdown. 
+Assign Inquiry Section 
+Page 
+Comprehensive assignment dashboard with icon-based navigation between 
+assignment workflows and statistics. 
+Add Assignment Notes & 
+Instructions Page 
+Interface for adding detailed assignment notes, priority levels, and 
+instructions when assigning inquiries to agencies. 
+Generate Assigned Inquiry 
+Reports Page 
+Creates comprehensive reports on inquiry assignments with filtering options 
+and export capabilities in PDF/Excel formats. 
+Display And Approved 
+Page 
+Agency interface showing assigned inquiries with management capabilities 
+including status updates, acceptance, and rejection functionality. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 22---
+ 
+ 
+17 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3.2.3.2 Controller Package  
+ 
+Class Name 
+Description 
+InquiryAssignmentControll
+er 
+Manages the assignment of inquiries to agencies with bulk assignment 
+capabilities and assignment tracking. 
+AdminController 
+Handles admin operations for Module 3 including inquiry review, 
+assignment management, and assignment report generation. 
+UserController 
+Manages public user operations for viewing assigned agencies and tracking 
+inquiry assignment status. 
+AgencyController 
+Controls agency operations for managing assigned inquiries, processing 
+assignments, and status updates. 
+InquiryController 
+Manages inquiry operations specific to assignment functionality including 
+tracking and assignment status updates. 
+ 
+ 
+ 
+ 
+ 
+ 
+    3.2.3.3 Model Package  
+        
+Class Name 
+Description 
+PublicUsers 
+Represents public users who can view their inquiry assignment status and 
+track which agencies are handling their submissions. 
+Administrator 
+Represents administrators who manage inquiry assignments with 
+comprehensive assignment tracking and reporting capabilities. 
+AssignedInquiry 
+Represents the assignment relationship between inquiries and agencies with 
+detailed assignment tracking information. 
+Agency 
+Represents agencies who receive assigned inquiries and process them with 
+acceptance, rejection, and status update capabilities. 
+Inquiry 
+Represents inquiries with assignment functionality, tracking assignment 
+status, assigned agencies, and processing progress. 
+
+---PAGE 23---
+ 
+ 
+18 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+3.2.4. Module 4: Inquiry Progress Tracking 
+ 
+ 
+ 
+Figure 3.2.4 Component Module 4 Inquiry Progress Tracking 
+3.2.4.1 View Package  
+ 
+Class Name 
+Description 
+LandingPage 
+Entry point for users (public, admin, agency) into the inquiry 
+system. 
+ViewInquiryStatusPage 
+Allows public users to check the progress of their submitted 
+inquiries. 
+InquiryDashboardPage 
+Displays a summary of inquiries submitted by the user. 
+FilterInquiryPage 
+Enables filtering and sorting of inquiry data. 
+MonitorAgencyProgressPage 
+Allows admins to track the progress of agency-handled 
+inquiries
+ViewNotesPage 
+Lets admins view notes attached to specific inquiries. 
+
+---PAGE 24---
+ 
+ 
+19 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+GenerateAgencyReportPage 
+Enables admins to compile agency-specific performance 
+reports. 
+ReportDashboardPage 
+Overview of all system reports for admin use. 
+ExportReportPage 
+Lets admins export reports for external use or archiving. 
+ViewAssignedInquiriesPage 
+Allows agency staff to see their assigned inquiries. 
+UpdateInquiryStatusPage 
+Enables agencies to update inquiry progress and resolution. 
+AddDetailsPage 
+Lets agencies provide additional info on an inquiry. 
+RequestClarificationPage 
+Used by agencies to ask for further details from the inquirer. 
+InquiryCommunicationLogPage Displays communication exchanges related to the inquiry. 
+ 
+ 
+3.2.4.1 Controller Package  
+ 
+Class Name 
+Description 
+StatusesController 
+Manages inquiry status updates and related logic. 
+ReportController 
+Handles report generation, dashboard data, and export functionality. 
+AssignedInquiryController Controls agency interactions with assigned inquiries. 
+ 
+    3.2.4.1 Model Package  
+        
+Class Name 
+Description 
+Inquiry 
+Represents inquiry records with details like status, notes, and timestamps. 
+Administrator 
+Represents admin users with permissions for monitoring and reporting. 
+Agency 
+Stores data about agencies handling inquiries, such as name and contact info. 
+PublicUser 
+Represents regular users who submit inquiries and track their status. 
+
+---PAGE 25---
+ 
+20 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+   3.3 Package Relationship 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 3.3 Model-View-Controller (MVC) Package Relationship for AuthenticityHub System 
+(https://drive.google.com/file/d/1LtfHdCvSyjPQpEcim_KqDon8IRKOlk78/view?usp=sharing) 
+ 
+ 
+
+---PAGE 26---
+ 
+21 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4. 
+DETAIL DESIGN 
+4.1 Module 1: Manage User [SDD-REQ-100] 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 27---
+ 
+ 
+22 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.1 PublicUsers [SDD-REQ-101] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents public user entities in the system 
+and manages user-related data, authentication, and profile 
+information. 
+ 
+ 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+UserID 
+integer 
+UserName 
+string 
+UserEmail 
+string 
+UserPassword 
+string 
+UserPhoneNum 
+string 
+UserProfilePicture 
+string 
+created_at 
+timestamp 
+updated_at 
+timestamp 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+updateProfile(array $data) 
+To update user profile information 
+updatePassword($newPass
+word) 
+To update user password 
+validateCurrentPassword($
+currentPassword) 
+To validate current password 
+getAuthPassword() 
+To get password for authentication 
+getEmailForPasswordReset
+() 
+To get email for password reset 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Algorithm 
+1. For Profile Update (updateProfile method): 
+a. Validate updated information format and requirements 
+b. Check for duplicate email conflicts in public_users table 
+c. Begin database transaction 
+d. Update user record with new information 
+e. Commit transaction and return success status 
+2. For Password Update (updatePassword method): 
+a. Hash new password using bcrypt encryption 
+b. Update password field in database 
+c. Save updated record 
+d. Return success confirmation 
+3. For Password Validation (validateCurrentPassword method): 
+a. Retrieve current password hash from database 
+b. Compare provided password with stored hash 
+c. Return boolean validation result 
+ 
+
+---PAGE 28---
+ 
+ 
+23 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.2 Agency [SDD-REQ-102] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents agency entities in the system and 
+manages agency-related data and information. 
+ 
+ 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+integer 
+AgencyName 
+string 
+AgencyUserName 
+string 
+AgencyEmail 
+string 
+AgencyPhoneNum 
+string 
+AgencyPassword 
+string 
+AgencyProfilePicture 
+string 
+first_login 
+boolean 
+password_changed_at 
+timestamp 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+updateProfile(array $data) 
+To update agency profile information 
+updatePassword($newPassword) 
+To update agency password 
+validateCurrentPassword($curre
+ntPassword) 
+To validate current password 
+checkPassword($password) 
+To check password for login 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Algorithm 
+1. For Profile Update (updateProfile method): 
+a. Validate updated information format and requirements 
+b. Check for duplicate username/email conflicts in agencies table 
+c. Begin database transaction 
+d. Update agency record with new information 
+e. Commit transaction and return success status 
+2. For Password Update (updatePassword method): 
+a. Hash new password using bcrypt encryption 
+b. Update password field in database 
+c. Update password_changed_at timestamp 
+d. Save updated record 
+3. For Password Check (checkPassword method): 
+a. Retrieve current password hash from database 
+b. Compare provided password with stored hash using Hash::check 
+c. Return boolean result 
+ 
+ 
+ 
+
+---PAGE 29---
+ 
+ 
+24 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.3 Administrator [SDD-REQ-103] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents administrator entities with elevated 
+privileges for system management operations. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+integer 
+AdminName 
+string 
+AdminEmail 
+string 
+AdminPassw
+string 
+AdminRole 
+string 
+AdminPhone
+string 
+AdminAddre
+string 
+AdminUserN
+string 
+created_at 
+timestamp 
+updated_at 
+timestamp 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+checkPassword($pass
+word) 
+To check admin password for authentication 
+updateProfile(array 
+$data) 
+To update admin profile information 
+updatePassword($new
+Password) 
+To update admin password 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1. For Password Check (checkPassword method): 
+a. Retrieve current password hash from database 
+b. Compare provided password with stored hash using Hash::check 
+c. Return boolean authentication result 
+2. For Profile Update (updateProfile method): 
+a. Validate updated information format and requirements 
+b. Begin database transaction 
+c. Update admin record with new information 
+d. Commit transaction and return success status 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 30---
+ 
+ 
+25 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.4 UserController [SDD-REQ-104] 
+ 
+Class Type 
+Controller class 
+Responsibility 
+A controller that handles user-related operations including 
+registration, profile management, and authentication for public 
+users. 
+ 
+ 
+ 
+ 
+ 
+ 
+Attributes Name 
+Attributes Type 
+user->UserName 
+string 
+user->UserEmail 
+string 
+user->UserPassword 
+string 
+user->UserID 
+integer 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+showRegistrationForm() 
+To display user registration form 
+register(Request $request) 
+To handle user registration process 
+showLoginForm() 
+To display login form 
+login(Request $request) 
+To handle user authentication 
+updateProfile(Request $request) 
+To update user profile information 
+verifyPassword(Request 
+$request) 
+To verify current password 
+updatePassword(Request 
+$request) 
+To update user password 
+logout(Request $request) 
+To handle user logout 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Algorithm 
+1. For User Registration (register method): 
+a. Validate registration form data format and requirements 
+b. Check for existing email in database 
+c. Hash password using Laravel's bcrypt encryption 
+d. Create user record with validated data 
+e. Redirect to login with success message 
+2. For User Login (login method): 
+a. Validate login credentials format 
+b. Attempt admin login first through AdminController 
+c. Try agency login with proper password checking 
+d. Finally attempt public user login 
+e. Authenticate and redirect based on user type 
+3. For Profile Update (updateProfile method): 
+a. Validate updated information format and requirements 
+b. Check for duplicate email conflicts excluding current user 
+c. Handle profile picture upload if provided 
+d. Update user record with new validated information 
+e. Return success message 
+ 
+ 
+
+---PAGE 31---
+ 
+ 
+26 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.5 AdminController [SDD-REQ-105] 
+ 
+Class Type 
+ Controller class 
+Responsibility 
+A controller that handles administrative operations including user 
+management, agency management, and system oversight 
+functions. 
+ 
+ 
+ 
+   Attributes 
+Attributes Name 
+Attributes Type 
+admin->AdminName 
+string 
+admin->AdminEmail 
+string 
+admin->AdminRole 
+string 
+admin->AdminID 
+integer 
+ 
+ 
+ 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+showHome() 
+To display admin dashboard 
+showUsers(Request $request) 
+To display user management page 
+editUser($id) 
+To show user edit form 
+updateUser(Request $request, 
+$id) 
+To update user information 
+editAgency($id) 
+To show agency edit form 
+updateAgency(Request $request, 
+$id) 
+To update agency information 
+showAgencyRegistrationForm() 
+To show agency registration form 
+storeAgency(Request $request) 
+To register new agency 
+deleteUser($id) 
+To delete user account 
+deleteAgency($id) 
+To delete agency account 
+showReports() 
+To show reports page 
+generateReports(Request 
+$request) 
+To generate system reports 
+
+---PAGE 32---
+ 
+ 
+27 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Algorithm 
+1. For User Management (showUsers method): 
+a. Retrieve user list with pagination parameters 
+b. Apply search filters for name, email 
+c. Return paginated user results to view 
+2. For Agency Registration (storeAgency method): 
+a. Validate agency data format and requirements 
+b. Check for duplicate agency codes/usernames 
+c. Create agency record with validated data 
+d. Generate temporary password 
+e. Send credentials via email 
+3. For User Update (updateUser method): 
+a. Validate updated user information format 
+b. Check for duplicate email conflicts 
+c. Update user record with new information 
+d. Return success status 
+
+---PAGE 33---
+ 
+ 
+28 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.6 AgencyController [SDD-REQ-106] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents agency entities in the system and 
+manages agency-related data and information. 
+ 
+ 
+ 
+    Attributes 
+Attributes Name 
+Attributes Type 
+agency->AgencyName 
+string 
+agency->AgencyUserName 
+string 
+agency->AgencyEmail 
+string 
+agency->AgencyID 
+integer 
+ 
+ 
+ 
+Methods 
+Method Name 
+Description 
+showProfile() 
+To display agency profile page 
+updateProfile(Request $request) 
+To update agency profile information 
+showSecurity() 
+To display password management page 
+verifyPassword(Request $request) 
+To verify current password 
+updatePassword(Request $request) 
+To update agency password 
+showHome() 
+To display agency dashboard 
+Algorithm 
+1. For Profile Update (updateProfile method): 
+a. Validate updated agency information format 
+b. Check for username/email conflicts with other agencies 
+c. Handle profile picture upload if provided 
+d. Update agency record with validated information 
+e. Return success response 
+2. For Password Update (updatePassword method): 
+a. Validate new password meets requirements 
+b. Hash new password using bcrypt 
+c. Update password in database through model 
+d. Clear password verification session 
+e. Return success confirmation 
+
+---PAGE 34---
+ 
+ 
+29 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.7 RegisterPage [SDD-REQ-107] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A user registration interface that provides functionality for new 
+public users to create accounts by providing their personal 
+information and credentials. 
+ 
+ 
+ 
+    Attributes 
+Attributes Name 
+Attributes Type 
+UserName 
+string 
+UserEmail 
+string 
+UserPassword 
+string 
+UserPassword_confirmation 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with 
+methods 
+Algorithm 
+1. For Registration Form Display: 
+a. Render HTML form with UserName, UserEmail, UserPassword, 
+UserPassword_confirmation fields 
+b. Include @csrf token for security 
+c. Apply input-smooth CSS classes for animations 
+d. Use @error directives for validation error display 
+e. Include JavaScript for form animations and help modal 
+
+---PAGE 35---
+ 
+ 
+30 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.8 ManageProfilePage (PublicUser) [SDD-REQ-108] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A profile management interface that enables logged-in public 
+users to view, update, and manage their personal profile 
+information including name, email, matric number, and profile 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+UserName 
+string 
+UserEmail 
+string 
+UserPhoneNum 
+string 
+UserProfilePicture 
+file 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with 
+methods 
+Algorithm 
+1. For Profile Display: 
+a. Authenticate user session via Auth::user() 
+b. Populate form fields with Auth::user() data 
+c. Display current profile picture or default avatar 
+d. Include file upload with preview functionality via JavaScript 
+e. Handle form submission with loading animations 
+
+---PAGE 36---
+ 
+ 
+31 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.9 EditPasswordPage (PublicUser) [SDD-REQ-109] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A password change interface that allows authenticated public 
+users to securely update their account password by providing 
+current and new password credentials. 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+current_password 
+string 
+new_password 
+string 
+new_password_confirmation 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with 
+methods 
+Algorithm 
+1. For Password Change Process: 
+a. Check session('password_verified') to determine display state 
+b. Show verification form if not verified 
+c. Show update form if verified 
+d. Include form animations and session management 
+
+---PAGE 37---
+ 
+ 
+32 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.10 RegisterNewAgencyPage [SDD-REQ-110] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin-only interface that allows administrators to register and 
+add new agencies to the system with relevant agency details and 
+information. 
+ 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyName 
+string 
+AgencyEmail 
+string 
+AgencyUserName 
+string 
+AgencyPassword 
+string 
+AgencyPassword_confirmation 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with 
+methods 
+Algorithm 
+1. For Agency Registration Form: 
+a. Verify admin authentication via middleware 
+b. Render form with agency registration fields 
+c. Include @csrf token for security 
+d. Handle form validation errors with @error directives 
+
+---PAGE 38---
+ 
+ 
+33 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.11 ViewUsersProfilePage [SDD-REQ-111] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin dashboard interface that displays profile information of 
+all registered users and agencies, providing administrators with a 
+comprehensive overview of system users. 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+users 
+collection 
+agencies 
+collection 
+search 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade 
+Template) 
+This is a view file, not a class with methods 
+Algorithm 
+1. For Users List Display: 
+a. Display paginated users and agencies data in tables 
+b. Include search form for filtering results 
+c. Provide edit and delete links for each record 
+d. Show pagination controls 
+
+---PAGE 39---
+ 
+ 
+34 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.12 editAgencyPage [SDD-REQ-112] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin interface that allows administrators to modify and 
+update existing agency information and details in the system. 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyName 
+string 
+AgencyEmail 
+string 
+AgencyUserName 
+string 
+AgencyPhoneNum 
+string 
+ 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with 
+methods 
+Algorithm 
+1. For Agency Edit Form: 
+a. Retrieve agency data and populate form fields 
+b. Include @csrf token and @method('PUT') 
+c. Handle validation errors and success messages 
+d. Provide save and cancel options 
+
+---PAGE 40---
+ 
+ 
+35 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.13 editUserPage [SDD-REQ-113] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin interface that enables administrators to edit and update 
+public user account information and profile details. 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+UserName 
+string 
+UserEmail 
+string 
+UserPhoneNum 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with methods 
+Algorithm 
+1. For User Edit Form: 
+a. Retrieve user data and populate form fields 
+b. Include @csrf token and @method('PUT') 
+c. Handle validation errors and success messages 
+d. Provide save and cancel options 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 41---
+ 
+ 
+36 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.14 LoginPage [SDD-REQ-114] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A login interface that provides authentication functionality for all 
+user types (public users, MCMC staff, and agency staff) to access 
+the system using their credentials. 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+login 
+string 
+password 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with methods 
+Algorithm 
+1. For Login Form Display: 
+a. Render login form with email/username and password fields 
+b. Include forgot password link to route('password.recovery') 
+c. Include @csrf token for security 
+d. Handle authentication errors display 
+
+---PAGE 42---
+ 
+ 
+37 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.15 RecoveryPasswordPage [SDD-REQ-115] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A password recovery interface that allows users to reset their 
+forgotten passwords by providing their email address or username 
+for password reset instructions. 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+email 
+string 
+phone 
+string 
+password 
+string 
+password_confirmation 
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with methods 
+Algorithm 
+1. For Recovery Form Display: 
+a. Display different forms based on recovery type 
+b. Include agency phone and password setup form 
+c. Include email recovery form 
+d. Handle form validation and submissions 
+ 
+ 
+ 
+ 
+
+---PAGE 43---
+ 
+ 
+38 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.1.16 ManageProfilePage (Agency) [SDD-REQ-116] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A profile management interface that enables logged-in agency 
+staff to view, update, and manage their agency profile information 
+including agency name, contact details, and profile picture. 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyName 
+string 
+AgencyEmail 
+string 
+AgencyPhoneNum 
+string 
+AgencyUserName 
+string 
+AgencyProfilePicture 
+file 
+ 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with 
+methods 
+Algorithm 
+1. For Agency Profile Display: 
+a. Authenticate agency session via Auth::user() 
+b. Populate form fields with current agency data 
+c. Include file upload capability for profile picture 
+d. Handle form submission with validation 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 44---
+ 
+ 
+39 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+ 
+4.1.17 EditPasswordPage (Agency) [SDD-REQ-117] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+ A password change interface that allows authenticated agency 
+staff to securely update their account password, with special 
+handling for first-time login password changes from temporary 
+ 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+current_password 
+string 
+new_password 
+string 
+new_password_confirm
+string 
+Methods 
+Method Name 
+Description 
+None (Blade Template) 
+This is a view file, not a class with methods 
+Algorithm 
+1. For Agency Profile Display: 
+a. Authenticate agency session via Auth::user() 
+b. Populate form fields with current agency data 
+c. Include file upload capability for profile picture 
+d. Handle form submission with validation 
+
+---PAGE 45---
+ 
+ 
+40 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+  
+ 
+4.2 Module 2: Manage Inquiry Form Submission [SDD-REQ-200] 
+ 
+ 
+ 
+4.2.1 submitInquiryFormView [SDD-REQ-201] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A view interface that displays the main inquiry submission form with input fields 
+for inquiry details and file attachments. 
+Attributes 
+Attributes Name 
+Attributes Type 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+file 
+validationErrors 
+array 
+old_values 
+array 
+
+---PAGE 46---
+ 
+ 
+41 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Methods 
+Method Name 
+Description 
+route('submit.inquiry') To handle form submission for inquiry creation 
+old('InquiryTitle') 
+To retrieve old input value for inquiry title 
+old('InquiryDescription'
+)
+To retrieve old input value for description 
+old('InquiryNewsSourc
+e') 
+To retrieve old input value for news source 
+@error('field') 
+To display validation errors for specific fields 
+Algorithm 
+1. Display inquiry submission form: 
+a. Load form with fields: InquiryTitle, InquiryDescription, InquiryNewsSource, 
+b. Display file upload for InquiryEvidence,  
+c. Show validation errors if any exist,  
+d. Retain old input values using old() helper 
+2. Handle form interaction: 
+a. Validate required fields (title, description, source),  
+b. Check file upload constraints for evidence,  
+c. Display real-time validation feedback 
+3. On form submission: 
+a. Submit to route('submit.inquiry'),  
+b. Show loading state with spinner animation,  
+c. Handle success/error responses 
+ 
+ 
+4.2.2 listOfInquiriesView [SDD-REQ-202] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A view interface that displays a paginated list of user's submitted inquiries with 
+status tracking. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiries 
+collection 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryStatus 
+string 
+created_at 
+datetime 
+pagination 
+object 
+Methods 
+Method Name 
+Description 
+route('inquiries.index') To display inquiry list page 
+route('inquiry.details', 
+id) 
+To view specific inquiry details 
+formatDate() 
+To format submission dates 
+
+---PAGE 47---
+ 
+ 
+42 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Load user inquiries: 
+a. Fetch inquiries belonging to authenticated user,  
+b. Display InquiryID, InquiryTitle, InquiryStatus, created_at,  
+c. Apply pagination if needed 
+2. Display inquiry cards: 
+a. Show inquiry status with color-coded badges,  
+b. Display submission date in readable format,  
+c. Provide "View Details" links 
+3. Handle empty state: 
+a. Show message if no inquiries found,  
+b. Provide link to submit new inquiry 
+ 
+ 
+ 
+4.2.3 inquiryDetailsView [SDD-REQ-203] 
+ 
+Class Type 
+A view interface that displays detailed information of a specific inquiry including 
+all related data. 
+Responsibility 
+A view interface that displays a paginated list of user's submitted inquiries with 
+status tracking. 
+Attributes 
+Attributes Name 
+Attributes Type 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+string 
+InquiryStatus 
+string 
+created_at 
+datetime 
+AgencyName 
+string 
+Methods 
+Method Name 
+Description 
+asset('storage/' . 
+evidence) 
+To generate download links for evidence files 
+route('inquiries.index') To navigate back to inquiry list 
+
+---PAGE 48---
+ 
+ 
+43 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Load inquiry details: 
+a. Fetch inquiry by InquiryID,  
+b. Verify user ownership of inquiry,  
+c. Load related agency information if assigned 
+2. Display comprehensive information: 
+a. Show all inquiry fields with proper formatting, 
+b. Display evidence file with download link,  
+c. Show current status and assignment details 
+3. Handle file downloads: 
+a. Generate secure links to evidence files,  
+b. Open files in new tab for viewing 
+ 
+ 
+ 
+ 
+4.2.4 InquiryAssignmentController [SDD-REQ-204] 
+ 
+Class Type 
+Control class 
+ 
+Responsibility 
+A controller class that manages the assignment of inquiries to appropriate 
+agencies based on admin decisions. 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+integer 
+InquiryID 
+integer 
+assignment_date 
+datetime 
+AdminID 
+integer 
+Methods 
+Method Name 
+Description 
+assignInquiry() 
+To assign inquiry to selected agency 
+updateInquiryStatus() To update inquiry status after assignment 
+Algorithm 
+1. Process assignment request: 
+a. Validate inquiry and agency IDs,  
+b. Check if inquiry is pending assignment,  
+c. Verify agency availability 
+2. Execute assignment: 
+a. Update inquiry record with AgencyID,  
+b. Set assignment_date to current timestamp,  
+c. Change InquiryStatus to "Under Investigation" 
+3. Create assignment record: 
+a. Log assignment in database,  
+b. Send notification to agency 
+ 
+ 
+4.2.5 AdminController [SDD-REQ-205] 
+ 
+Class Type 
+Control class 
+
+---PAGE 49---
+ 
+ 
+44 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Responsibility 
+A controller class that handles administrative functions for inquiry management 
+and system oversight. 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+integer 
+AdminName 
+string 
+inquiry_details 
+object 
+available_agencies 
+collection 
+Methods 
+Method Name 
+Description 
+route('admin.inquiry.de
+tails', id)
+To view detailed inquiry information 
+route('admin.assign.inq
+uiry')
+To access assignment interface 
+route('admin.inquiries') To view all inquiries 
+Algorithm 
+1. Administrative overview: 
+a. Display pending inquiries requiring assignment,  
+b. Show inquiry statistics and metrics,  
+c. Provide quick assignment actions 
+2. Inquiry review process: 
+a. Load inquiry with all details,  
+b. Display evidence files and descriptions,  
+c. Provide assignment and status update options 
+3. Assignment management: 
+a. List available agencies for assignment,  
+b. Process assignment requests,  
+c. Update inquiry status and tracking 
+ 
+ 
+4.2.6 Inquiry [SDD-REQ-206] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+An entity class representing inquiry records with complete information including 
+content, status, and tracking data. 
+Attributes 
+Attributes Name 
+Attributes Type 
+user() 
+To get related user who submitted inquiry 
+agency() 
+To get assigned agency 
+admin() 
+To get assigned administrator 
+user() 
+To get related user who submitted inquiry 
+agency() 
+To get assigned agency 
+admin() 
+To get assigned administrator 
+user() 
+To get related user who submitted inquiry 
+agency() 
+To get assigned agency 
+
+---PAGE 50---
+ 
+ 
+45 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+admin() 
+To get assigned administrator 
+user() 
+To get related user who submitted inquiry 
+agency() 
+To get assigned agency 
+admin() 
+To get assigned administrator 
+user() 
+To get related user who submitted inquiry 
+Methods 
+Method Name 
+Description 
+user() 
+To get related user who submitted inquiry 
+agency() 
+To get assigned agency 
+admin() 
+To get assigned administrator 
+Algorithm 
+1. Inquiry creation: 
+a. Generate unique InquiryID,  
+b. Set InquiryStatus to "Pending",  
+c. Store InquiryTitle, InquiryDescription, InquiryNewsSource,  
+d. Handle InquiryEvidence file upload 
+2. Status management:  
+a. Track status changes: Pending → Under Investigation → Verified/Rejected,  
+b. Update timestamps for each status change,  
+c. Maintain audit trail 
+3. Assignment tracking: 
+a. Record AgencyID when assigned,  
+b. Set assignment_date timestamp,  
+c. Link to AdminID who made assignment 
+ 
+ 
+ 
+ 
+4.2.7 PublicUser [SDD-REQ-207] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+An entity class representing public users who submit inquiries with contact 
+information. 
+Attributes 
+Attributes Name 
+Attributes Type 
+UserID 
+integer 
+UserName 
+string 
+UserEmail 
+string 
+UserPhoneNum 
+string 
+password 
+string 
+created_at 
+datetime 
+Methods 
+Method Name 
+Description 
+
+---PAGE 51---
+ 
+ 
+46 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+inquiries() 
+To get all inquiries submitted by user 
+hasVerifiedEmail() 
+To check email verification status 
+Algorithm 
+1. User registration: 
+a. Validate UserEmail uniqueness,  
+b. Hash password securely,  
+c. Generate UserID 
+2. Inquiry submission: 
+a. Authenticate user session,  
+b. Associate inquiry with UserID,  
+c. Track submission history 
+ 
+ 
+4.2.8 Agency [SDD-REQ-208] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+An entity class representing government agencies that handle specific inquiry 
+types.
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+integer 
+AgencyName 
+string 
+AgencyUserName 
+string 
+AgencyEmail 
+string 
+AgencyPhoneNum 
+string 
+password 
+string 
+created_at 
+datetime 
+Methods 
+Method Name 
+Description 
+assignedInquiries() 
+To get inquiries assigned to agency 
+route('agency.view.disp
+lay.inquiry') 
+To access agency inquiry management 
+Algorithm 
+1. Agency setup: 
+a. Register with unique AgencyUserName,  
+b. Set AgencyName and contact details, 
+c. Configure investigation capabilities 
+2. Inquiry processing: 
+a. Receive assigned inquiries, 
+b. Update InquiryStatus during investigation,  
+c. Provide verification results 
+ 
+ 
+4.2.9 Administrator [SDD-REQ-209] 
+ 
+
+---PAGE 52---
+ 
+ 
+47 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Class Type 
+Entity class 
+Responsibility 
+An entity class representing system administrators with full privileges for inquiry 
+management. 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+integer 
+AdminName 
+string 
+AdminEmail 
+string 
+password 
+string 
+created_at 
+datetime 
+Methods 
+Method Name 
+Description 
+assignedInquiries() 
+To get inquiries managed by admin 
+route('admin.home') 
+To access admin dashboard 
+Algorithm 
+1. Administrative oversight: 
+a. Monitor all inquiry submissions,  
+b. Assign inquiries to appropriate agencies,  
+c. Track investigation progress 
+2. System management: 
+a. Manage agency registrations,  
+b. Generate system reports,  
+c. Handle escalated cases 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.2.10 AssignedInquiry [SDD-REQ-210] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+An entity class representing the assignment relationship between inquiries, 
+agencies, and administrators. 
+Attributes 
+Attributes Name 
+Attributes Type 
+assignmentId 
+integer 
+InquiryID 
+integer 
+AgencyID 
+integer 
+AdminID 
+integer 
+assignment_date 
+datetime 
+status 
+string 
+
+---PAGE 53---
+ 
+ 
+48 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Methods 
+Method Name 
+Description 
+inquiry() 
+To get related inquiry 
+agency() 
+To get assigned agency 
+admin() 
+To get assigning administrator 
+Algorithm 
+1. Create assignment: 
+a. Link InquiryID with AgencyID,  
+b. Record AdminID who made assignment,  
+c. Set assignment_date timestamp 
+2. Track assignment status: 
+a. Monitor investigation progress,  
+b. Update status as inquiry progresses,  
+c. Maintain assignment history 
+ 
+ 
+4.2.11 InquiryController [SDD-REQ-211] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that handles core inquiry operations including creation, 
+modification, status updates, and inquiry lifecycle management. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiryValidationRules array 
+statusWorkflow 
+object 
+inquiryTypes 
+array 
+Methods 
+Method Name 
+Description 
+createInquiry() 
+To create new inquiry records 
+updateInquiryStatus() To update inquiry processing status 
+validateInquiryData() To validate inquiry information 
+
+---PAGE 54---
+ 
+ 
+49 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Create new inquiry: 
+a. Validate submitted inquiry data,  
+b. Generate unique inquiry ID,  
+c. Set initial status and timestamps,  
+d. Store in database 
+2. Status management: 
+a. Validate status transition rules,  
+b. Update inquiry status,  
+c. Log status change history,  
+d. Trigger notifications 
+3. Data validation: 
+a. Check required fields,  
+b. Validate data formats,  
+c. Ensure business rule compliance 
+4. Lifecycle management: 
+a. Track inquiry from creation to closure,  
+b. Manage automated workflows,  
+c. Handle inquiry archival 
+ 
+ 
+4.2.12 reviewInquiryPageView [SDD-REQ-212] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface that displays individual inquiry details for review and 
+status management. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry 
+object 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+string 
+InquiryStatus 
+string 
+created_at 
+datetime 
+user 
+object 
+Methods 
+Method Name 
+Description 
+route('admin.inquiry.de
+tails', id)
+To display inquiry review details 
+asset('storage/' . 
+evidence)
+To display evidence files 
+route('admin.inquiries') To return to inquiry list 
+
+---PAGE 55---
+ 
+ 
+50 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Load inquiry for review: 
+a. Fetch complete inquiry details by InquiryID,  
+b. Load related user information,  
+c. Display evidence files with download capability,  
+d. Show current status and submission date 
+2. Display review interface: 
+a. Show all inquiry fields in detail,  
+b. Display evidence files and attachments,  
+c. Show user contact information 
+3. Admin review capabilities: 
+ 
+a. View complete inquiry information,  
+b. Review evidence and documentation,  
+c. Navigate back to inquiry list 
+ 
+ 
+ 
+4.2.13 listOfInquiriesPageView [SDD-REQ-213] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface that displays a searchable list of all submitted inquiries 
+with review functionality. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiries 
+collection 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryNewsSource 
+string 
+InquiryStatus 
+string 
+created_at 
+datetime 
+search 
+string 
+status 
+string 
+Methods 
+Method Name 
+Description 
+route('admin.inquiries') To display inquiry list 
+route('admin.inquiry.de
+tails', id)
+To review specific inquiry 
+request('search') 
+To handle search functionality 
+request('status') 
+To filter by status 
+
+---PAGE 56---
+ 
+ 
+51 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Display inquiry list: 
+a. Load all submitted inquiries,  
+b. Apply search filters on title, source, or ID,  
+c. Filter by inquiry status if selected,  
+d. Sort by submission date 
+2. Search and filter functionality: 
+a. Search across inquiry fields,  
+b. Filter by status options,  
+c. Clear filters option 
+3. Review navigation: 
+a. Display "Review" button for each inquiry,  
+b. Show status badges,  
+c. Navigate to detailed review page 
+ 
+ 
+4.2.14 generateReportPageView [SDD-REQ-214] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface for generating reports on submitted inquiries with 
+various filtering and export options. 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_type 
+string 
+date_from 
+date 
+date_to 
+date 
+status 
+string 
+format 
+string 
+totalInquiries 
+integer 
+statusCounts 
+array 
+inquiries 
+collection 
+Methods 
+Method Name 
+Description 
+route('admin.reports') 
+To display reports page 
+route('admin.generate.i
+nquiry.reports') 
+To generate reports 
+generateInquiryReports
+() 
+To process report creation 
+
+---PAGE 57---
+ 
+ 
+52 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Report configuration: 
+a. Set date range for inquiry filtering,  
+b. Select report type (Summary, Detailed, Statistics),  
+c. Choose export format (PDF, Excel), d. Apply status filters 
+2. Data collection and analysis: 
+a. Filter inquiries by date range,  
+b. Count inquiries by status,  
+c. Calculate submission statistics,  
+d. Generate trends and patterns 
+3. Report generation: 
+a. Compile inquiry data based on filters,  
+b. Generate charts and statistics, 
+c. Export in selected format,  
+d. Provide downloadable report file 
+ 
+ 
+4.2.15 assignedInquiriesPageView [SDD-REQ-215] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An agency view interface that displays inquiries assigned to the agency with 
+management capabilities including status updates and rejection functionality. 
+Attributes 
+Attributes Name 
+Attributes Type 
+agency 
+object 
+inquiries 
+collection 
+statusCounts 
+array 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+string 
+InquiryStatus 
+string 
+InquiryPriority 
+string 
+assignment_date 
+datetime 
+user 
+object 
+Methods 
+Method Name 
+Description 
+route('agency.view.disp
+lay.inquiry')
+To display assigned inquiries page 
+showInquiryDetails(inq
+uiryId)
+To show detailed inquiry modal 
+rejectInquiry(inquiryId) To reject an inquiry 
+filterInquiries() 
+To filter inquiries by status/priority 
+
+---PAGE 58---
+ 
+ 
+53 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+clearFilters() 
+To clear all applied filters 
+Algorithm 
+1. Load assigned inquiries: 
+a. Fetch inquiries where AgencyID matches current agency 
+b. Order by priority: Urgent, High, Normal, then by assignment_date desc 
+c. Load with user, agency, and admin relationships 
+d. Calculate status counts for dashboard 
+2. Display inquiry management interface: 
+a. Show summary cards with total, under_investigation, verified_true, 
+identified_fake counts 
+b. Display filter controls for status and priority 
+c. Show inquiry cards with InquiryID, InquiryTitle, status badges, priority levels 
+d. Include action buttons: "Show Full Details", "Reject Inquiry" 
+3. Handle inquiry interactions: 
+a. Show detailed modal with complete inquiry information 
+b. Display evidence files with download links using asset('storage/') 
+c. Process rejection with AJAX to update InquiryStatus 
+d. Apply real-time filtering by status and priority 
+4. Status and priority management: 
+a. Display status badges: Pending, Under Investigation, Verified as True, 
+Identified as Fake 
+b. Show priority badges: Urgent, High, Normal 
+c. Filter by status: All, Pending, Under Investigation, etc. 
+d. Filter by priority: All Priorities, Urgent, High, Normal 
+ 
+ 
+4.2.16 inquiryDetailsPageView [SDD-REQ-216] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An agency view interface that displays complete details of a specific inquiry 
+assigned to the agency with full information and action capabilities. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry 
+object 
+agency 
+object 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+string 
+InquiryStatus 
+string 
+InquiryPriority 
+string 
+assignment_date 
+datetime 
+created_at 
+datetime 
+user 
+object 
+
+---PAGE 59---
+ 
+ 
+54 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+evidenceFiles 
+array 
+Methods 
+Method Name 
+Description 
+route('agency.inquiry.d
+etails', id)
+To display specific inquiry details 
+asset('storage/' . 
+evidence)
+To generate evidence file URLs 
+route('agency.view.disp
+lay.inquiry')
+To return to inquiry list 
+formatDate() 
+To format dates for display 
+Algorithm 
+1. Load complete inquiry details: 
+a. Fetch inquiry by InquiryID where AgencyID matches current agency 
+b. Load with user, agency, and admin relationships 
+c. Verify inquiry belongs to current agency 
+d. Handle not found or unauthorized access 
+2. Display comprehensive information: 
+a. Show inquiry details: ID, Title, Description, NewsSource, Status, Priority 
+b. Display assignment information: assignment_date, agency details 
+c. Show submitter information: UserName, UserEmail, UserPhoneNum 
+d. Format dates using created_at and assignment_date 
+3. Handle evidence files: 
+a. Parse InquiryEvidence (JSON string or single file) 
+b. Display evidence items with file icons 
+c. Generate download links using asset('storage/' . file) 
+d. Open files in new tab for viewing 
+4. AJAX compatibility: 
+a. Handle AJAX requests for modal display 
+b. Return JSON response with inquiry and agency data 
+c. Support both full page and modal view modes 
+d. Provide seamless user experience 
+ 
+ 
+ 
+ 
+ 
+ 
+4.2.17 UserController [  SDD-REQ-217] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that manages public user operations including inquiry 
+submission, viewing, authentication, and profile management. 
+Attributes 
+Attributes Name 
+Attributes Type 
+userSession 
+object 
+loginInput 
+string 
+password 
+string 
+validationRules 
+array 
+phone_verification_age
+ncy id
+integer 
+
+---PAGE 60---
+ 
+ 
+55 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+agency_id 
+integer 
+previous_url 
+string 
+Methods 
+Method Name 
+Description 
+showRegistrationForm(
+)
+To display user registration form 
+showLoginForm() 
+To display login form 
+register() 
+To handle user registration 
+login() 
+To handle authentication for users, agencies, and admins 
+attemptAdminLogin() To attempt admin authentication 
+updateAgencyPhoneAn
+dPassword()
+To update agency phone and password during setup 
+verifyPassword() 
+To verify current password for changes 
+logout() 
+To handle user logou 
+Algorithm 
+1. User registration process: 
+a. Validate UserName, UserEmail, UserPassword with confirmation 
+b. Check email uniqueness in public_users table 
+c. Hash password using Hash::make() 
+d. Create new PublicUser record 
+e. Redirect to login with success message 
+2. Multi-user authentication (login): 
+a. Validate login input (email or username) and password 
+b. Try admin login first using attemptAdminLogin() 
+c. Try agency login with email/username detection 
+d. Check agency password using checkPassword() method 
+e. Handle agency phone verification if needed 
+f. Try public user login as fallback 
+g. Store appropriate session data and redirect 
+3. Agency phone and password setup: 
+a. Validate phone and password with confirmation 
+b. Apply password regex for complexity 
+c. Get agency from phone_verification_agency_id session 
+d. Hash password and update AgencyPhoneNum, AgencyPassword 
+e. Clear verification session and log agency in 
+4. Session and security management: 
+a. Store previous_url for back button functionality 
+b. Mark login_successful in session 
+c. Handle session invalidation on logout 
+d. Clear sensitive session data appropriately 
+ 
+ 
+4.2.18 AgencyController [SDD-REQ-218] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that manages agency operations including dashboard, inquiry 
+management, authentication, and status updates. 
+Attributes 
+Attributes Name 
+Attributes Type 
+
+---PAGE 61---
+ 
+ 
+56 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+agency_id 
+integer 
+agency_name 
+string 
+statusCounts 
+array 
+inquiries 
+collection 
+AgencyID 
+integer 
+InquiryStatus 
+string 
+phone_verification_age
+ncy id
+integer 
+Methods 
+Method Name 
+Description 
+showHome() 
+To display agency dashboard with statistics 
+attemptLogin() 
+To handle agency authentication 
+updateAgencyPhoneAn
+dPassword()
+To update phone and password during setup 
+showViewAndDisplayI
+nquiry()
+To display assigned inquiries 
+showInquiryDetails() 
+To show specific inquiry details (AJAX compatible) 
+rejectInquiry() 
+To reject an inquiry with reason 
+acceptInquiry() 
+To accept an inquiry with comments 
+
+---PAGE 62---
+ 
+ 
+57 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Agency dashboard display: 
+a. Verify agency_id exists in session 
+b. Fetch agency record from database 
+c. Calculate statusCounts: total, under_investigation, verified_true, 
+identified_fake 
+d. Return agency home view with statistics 
+2. Agency authentication: 
+a. Find agency by login input (email or username) 
+b. Verify password using checkPassword() method 
+c. Check if AgencyPhoneNum is empty 
+d. Handle phone verification redirect if needed 
+e. Store agency_id and agency_name in session 
+3. Inquiry management: 
+a. Load inquiries where AgencyID matches current agency 
+b. Order by priority: Urgent, High, Normal, then by assignment_date 
+c. Include user, agency, admin relationships 
+d. Calculate status counts for dashboard 
+4. Inquiry details handling: 
+a. Verify inquiry belongs to current agency 
+b. Load complete inquiry with relationships 
+c. Handle AJAX requests with JSON response 
+d. Return view for regular requests 
+5. Inquiry status updates: 
+a. Validate inquiry ownership by agency 
+b. For rejection: validate reason and comments 
+c. Update InquiryStatus and StatusComments 
+d. Set ProcessedAt timestamp 
+e. Return JSON response for AJAX calls 
+6. Phone and password setup: 
+a. Validate phone format and password complexity 
+b. Hash password using Hash::make() 
+c. Update AgencyPhoneNum and AgencyPassword 
+d. Clear phone_verification_agency_id session 
+e. Log agency in with success message 
+ 
+ 
+
+---PAGE 63---
+ 
+ 
+58 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+     4.2 Module 3: Inquiry Assignment [SDD-REQ-300] 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.1  listOfInquiryView [SDD-REQ-301] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+A public user view interface that displays a list of the user's submitted inquiries 
+with their current assignment status and agency information. 
+Attributes 
+Attributes Name 
+Attributes Type 
+userInquiries 
+collection 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryStatus 
+string 
+created_at 
+datetime 
+AgencyID 
+integer 
+AgencyName 
+string 
+assignment_date 
+datetime 
+user 
+object 
+agency 
+object 
+
+---PAGE 64---
+ 
+ 
+59 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Methods 
+Method Name 
+Description 
+route('inquiries.index') To display user's inquiry list 
+route('inquiry.details', 
+id)
+To view specific inquiry details 
+asset('storage/' . 
+evidence)
+To display evidence files 
+Auth::user() 
+To get authenticated user information 
+formatDate() 
+To format submission and assignment dates 
+Algorithm 
+1. Load user's submitted inquiries: 
+a. Fetch inquiries where UserID matches authenticated user 
+b. Load with agency relationship to show assignment details 
+c. Order by created_at desc to show newest first 
+d. Include inquiry status and assignment information 
+2. Display inquiry list interface: 
+a. Show table with columns: Inquiry ID, Title, Submission Date, Status, 
+Assigned Agency, Action 
+b. Display status badges with color coding: Pending (yellow), Under 
+Investigation (blue), etc. 
+c. Show assigned agency name or "Not Assigned" if AgencyID is null 
+d. Provide "View Details" action button for each inquiry 
+3. Handle assignment status display: 
+a. Check if inquiry has been assigned to agency (AgencyID not null) 
+b. Display agency name if assigned, otherwise show "Not Assigned" 
+c. Show assignment date if available 
+d. Update status badges based on current inquiry status 
+4. User navigation and interaction: 
+a. Provide navigation back to home page 
+b. Show success/error messages from session 
+c. Handle empty state when no inquiries exist 
+d. Enable responsive design for mobile devices 
+ 
+ 
+4.3.2 viewSubmittedInquiriesView [SDD-REQ-302] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface that displays all submitted inquiries with search and 
+filter functionality for assignment management. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiries 
+collection 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquirySource 
+string 
+InquiryStatus 
+string 
+InquirySendDate 
+datetime 
+search 
+string 
+status 
+string 
+
+---PAGE 65---
+ 
+ 
+60 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+agencies 
+collection 
+Methods 
+Method Name 
+Description 
+route('admin.inquiries') To display submitted inquiries list 
+route('admin.inquiry.de
+tails', id)
+To view specific inquiry details 
+request('search') 
+To handle search functionality 
+request('status') 
+To filter by status 
+Algorithm 
+1. Load submitted inquiries: 
+a. Fetch all inquiries with user relationships 
+b. Apply search filters on InquiryTitle, InquirySource, InquiryID 
+c. Apply status filter if provided 
+d. Sort by InquirySendDate desc with Pending first 
+2. Display inquiry management interface: 
+a. Show table with ID, Title, Source, Status, Date, Action columns 
+b. Display search and filter controls 
+c. Show "Review" button for each inquiry 
+d. Display status badges with color coding 
+3. Handle assignment preparation: 
+a. Identify unassigned inquiries (AgencyID is null) 
+b. Show assignment status for each inquiry 
+c. Provide navigation to assignment interface 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.3 assignInquiryToPageView [SDD-REQ-303] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface for assigning inquiries to agencies with bulk 
+assignment capabilities and agency selection. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiries 
+collection 
+agencies 
+collection 
+inquiry_ids 
+array 
+agency_id 
+integer 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryStatus 
+string 
+AgencyID 
+integer 
+
+---PAGE 66---
+ 
+ 
+61 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+AgencyName 
+string 
+selectedCount 
+integer 
+Methods 
+Method Name 
+Description 
+route('admin.assign.inq
+uiry')
+To display assignment page 
+route('admin.assign.inq
+uiries')
+To process bulk assignments 
+showPage(pageId) 
+To navigate between assignment views 
+updateSelectedCount() To track selected inquiries 
+Algorithm 
+1. Display assignment interface: 
+a. Load all inquiries with agency and user relationships 
+b. Load all available agencies for assignment 
+c. Show checkbox selection for multiple inquiries 
+d. Display agency dropdown for assignment 
+2. Handle bulk assignment: 
+a. Validate inquiry_ids array and agency_id 
+b. Update selected inquiries with AgencyID 
+c. Set assignment_date to current timestamp 
+d. Redirect with success message 
+3. Assignment management: 
+a. Show current assignment status for each inquiry 
+b. Display "Select All" functionality with counter 
+c. Provide agency selection dropdown 
+d. Handle assignment validation and processing 
+ 
+ 
+4.3.4 addAssignmentNotesAndInstructionsView [SDD-REQ-304] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface for adding detailed assignment notes and instructions 
+when assigning inquiries to agencies. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_ids 
+array 
+agency_id 
+integer 
+assignment_notes 
+text 
+priority_level 
+string 
+expected_completion 
+date 
+special_instructions 
+text 
+selectedInquiries 
+collection 
+targetAgency 
+object 
+Methods 
+Method Name 
+Description 
+route('admin.assign.inq
+uiries.with.notes')
+To process assignment with notes 
+
+---PAGE 67---
+ 
+ 
+62 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+validateAssignmentFor
+m()
+To validate assignment data 
+showAssignmentPrevie
+w() 
+To preview assignment details 
+Algorithm 
+1. Display assignment notes interface: 
+a. Show selected inquiries for assignment 
+b. Display target agency information 
+c. Provide textarea for detailed assignment notes 
+d. Show priority level selection (Normal, High, Urgent) 
+2. Handle assignment with notes: 
+a. Validate assignment_notes and priority_level 
+b. Set expected_completion date if provided 
+c. Update inquiries with AgencyID and assignment details 
+d. Store assignment_notes and priority_level 
+3. Assignment tracking: 
+a. Set assignment_date to current timestamp 
+b. Update inquiry status to "Under Investigation" 
+c. Store special instructions for agency reference 
+d. Send assignment notifications to agencies 
+ 
+ 
+4.3.5 generateAssignedInquiryReportsView [SDD-REQ-305] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface for generating comprehensive reports on inquiry 
+assignments with various filtering and export options. 
+Attributes 
+Attributes Name 
+Attributes Type 
+agencies 
+collection 
+report_type 
+string 
+date_from 
+date 
+date_to 
+date 
+agency_id 
+integer 
+status 
+string 
+format 
+string 
+include_charts 
+string 
+assignedInquiries 
+collection 
+assignmentStats 
+array 
+Methods 
+Method Name 
+Description 
+route('admin.reports') 
+To display assignment reports page 
+route('admin.generate.a
+ssignment.reports')
+To generate assignment reports 
+generateAssignmentRe
+ports() 
+To process report creation 
+
+---PAGE 68---
+ 
+ 
+63 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Assignment report configuration: 
+a. Set date range for assignment filtering 
+b. Select report type (Summary, Detailed, Statistics) 
+c. Choose target agency or all agencies 
+d. Apply status filters for assigned inquiries 
+2. Data collection and analysis: 
+a. Filter assigned inquiries by date range and agency 
+b. Calculate assignment statistics per agency 
+c. Count inquiries by status: Pending, Under Investigation, etc. 
+d. Generate assignment performance metrics 
+3. Report generation: 
+a. Compile assignment data with agency details 
+b. Calculate assignment completion rates 
+c. Generate charts for assignment distribution 
+d. Export in PDF or Excel format with assignment timelines 
+4. Assignment analytics: 
+a. Track assignment patterns and trends 
+b. Monitor agency workload distribution 
+c. Calculate average investigation times 
+d. Identify bottlenecks in assignment process 
+ 
+ 
+ 
+4.3.6 displayAndApprovedView [SDD-REQ-306] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An agency view interface that displays all inquiries assigned to the agency with 
+management capabilities including status updates, rejection, and approval 
+f
+i
+li
+Attributes 
+Attributes Name 
+Attributes Type 
+agency 
+object 
+inquiries 
+collection 
+statusCounts 
+array 
+InquiryID 
+integer 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+string 
+InquiryStatus 
+string 
+InquiryPriority 
+string 
+assignment_date 
+datetime 
+user 
+object 
+filterStatus 
+string 
+
+---PAGE 69---
+ 
+ 
+64 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+filterPriority 
+string 
+Methods 
+Method Name 
+Description 
+route('agency.view.disp
+lay.inquiry')
+To display assigned inquiries page 
+showInquiryDetails(inq
+uiryId)
+To show detailed inquiry modal 
+rejectInquiry(inquiryId) To reject an inquiry with reason 
+acceptInquiry(inquiryId
+)
+To approve an inquiry with comments 
+filterInquiries() 
+To filter inquiries by status/priority 
+clearFilters() 
+To clear all applied filters 
+asset('storage/' . 
+evidence)
+To generate evidence file URLs 
+Algorithm 
+1. Load assigned inquiries: 
+a. Fetch inquiries where AgencyID matches current agency 
+b. Load with user, agency, and admin relationships 
+c. Order by priority: Urgent, High, Normal, then by assignment_date desc 
+d. Calculate status counts for dashboard display 
+2. Display inquiry management interface: 
+a. Show summary cards with total, under_investigation, verified_true, 
+identified_fake counts 
+b. Display filter controls for status: All, Pending, Under Investigation, Verified 
+as True, Identified as Fake 
+c. Display filter controls for priority: All Priorities, Urgent, High, Normal 
+d. Show inquiry cards with InquiryID, InquiryTitle, status badges, priority levels 
+3. Handle inquiry interactions: 
+a. Show detailed modal with complete inquiry information using AJAX 
+b. Display evidence files with download links using asset('storage/') 
+c. Show user contact information and submission details 
+d. Provide action buttons: "Show Full Details", "Reject Inquiry", "Accept 
+Inquiry" 
+4. Status and priority management: 
+a. Display status badges with color coding: Pending (yellow), Under 
+Investigation (blue), Verified as True (green), Identified as Fake (red) 
+b. Show priority badges with appropriate styling: Urgent (red), High (orange), 
+Normal (gray) 
+c. Apply real-time filtering by status and priority using JavaScript 
+d. Update inquiry counts dynamically based on applied filters 
+5. Inquiry processing actions: 
+a. Handle acceptance with required comments validation 
+b. Process rejection with reason and comments requirements 
+c. Update InquiryStatus and StatusComments in database 
+d. Set ProcessedAt timestamp for tracking 
+e. Return JSON responses for AJAX compatibility 
+6. Evidence file handling: 
+a. Parse InquiryEvidence (JSON string or single file path) 
+b. Display evidence items with appropriate file type icons 
+c. Generate secure download links using asset('storage/' . file) 
+d. Open files in new tab for viewing without affecting current page 
+ 
+ 
+ 
+
+---PAGE 70---
+ 
+ 
+65 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+4.3.7 InquiryAssignmentController [SDD-REQ-307] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that manages the assignment of inquiries to agencies with bulk 
+assignment capabilities and assignment tracking. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_ids 
+array 
+agency_id 
+integer 
+assignment_notes 
+text 
+priority_level 
+string 
+inquiries 
+collection 
+agencies 
+collection 
+assignmentData 
+array 
+Methods 
+Method Name 
+Description 
+showAssignInquiry() 
+To display inquiry assignment interface 
+assignInquiries() 
+To process bulk inquiry assignments 
+assignInquiriesWithNot
+es()
+To assign inquiries with detailed notes 
+validateAssignmentDat
+a() 
+To validate assignment parameters 
+Algorithm 
+1. Display assignment interface: 
+a. Load all inquiries with agency and user relationships 
+b. Load all available agencies for assignment 
+c. Show checkboxes for bulk selection 
+d. Display agency dropdown and assignment controls 
+2. Process bulk assignments: 
+a. Validate inquiry_ids array and agency_id 
+b. Check that selected inquiries are not already assigned 
+c. Update selected inquiries with AgencyID 
+d. Set assignment_date to current timestamp 
+e. Redirect with success message 
+3. Handle assignment with notes: 
+a. Validate assignment_notes and priority_level 
+b. Set expected_completion date if provided 
+c. Update inquiries with AgencyID and assignment details 
+d. Store assignment_notes and priority_level in database 
+e. Send assignment notifications to agencies 
+ 
+ 
+4.3.8  AdminController [SDD-REQ-308] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that manages admin operations for Module 3 including inquiry 
+review, assignment management, and report generation. 
+
+---PAGE 71---
+ 
+ 
+66 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+admin_id 
+integer 
+admin_name 
+string 
+inquiries 
+collection 
+agencies 
+collection 
+search 
+string 
+status 
+string 
+reportData 
+array 
+Methods 
+Method Name 
+Description 
+showInquiries() 
+To display all submitted inquiries for review 
+showInquiryDetails() 
+To show detailed inquiry information 
+showAssignInquiry() 
+To display assignment page 
+generateAssignmentRe
+ports() 
+To create assignment reports 
+Algorithm 
+1. Load inquiries for review: 
+a. Fetch all inquiries with user relationships 
+b. Apply search filters on InquiryTitle, InquirySource, InquiryID 
+c. Apply status filter if provided 
+d. Sort by InquirySendDate desc with Pending first 
+2. Display assignment management: 
+a. Load inquiries with agency and user relationships 
+b. Show current assignment status 
+c. Provide assignment controls and agency selection 
+3. Generate assignment reports: 
+a. Filter assigned inquiries by date range and agency 
+b. Calculate assignment statistics per agency 
+c. Generate assignment performance metrics 
+d. Export in PDF or Excel format with assignment timelines 
+ 
+ 
+4.3.9 UserController [SDD-REQ-309] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that handles public user operations for Module 3 including 
+viewing assigned agencies and tracking inquiry assignments. 
+Attributes 
+Attributes Name 
+Attributes Type 
+userSession 
+object 
+userInquiries 
+collection 
+InquiryID 
+integer 
+AgencyID 
+integer 
+
+---PAGE 72---
+ 
+ 
+67 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+assignmentStatus 
+string 
+previous_url 
+string 
+Methods 
+Method Name 
+Description 
+viewAssignedAgencies
+()
+To show user's inquiries with assigned agencies 
+showInquiryAssignmen
+tStatus()
+To display assignment tracking 
+index() 
+To display user's inquiry list with assignments 
+Algorithm 
+1. Display assigned agencies: 
+a. Fetch inquiries where UserID matches authenticated user 
+b. Load with agency relationship to show assignment details 
+c. Order by InquirySendDate desc 
+d. Show assignment status and agency information 
+2. Track assignment status: 
+a. Check if inquiry has been assigned to agency (AgencyID not null) 
+b. Display agency name if assigned, otherwise show "Not Assigned" 
+c. Show assignment date and current investigation status 
+d. Provide estimated completion timeline 
+ 
+ 
+4.3.10 AgencyController [SDD-REQ-310] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that manages agency operations for Module 3 including 
+viewing assigned inquiries, processing assignments, and status updates. 
+Attributes 
+Attributes Name 
+Attributes Type 
+agency_id 
+integer 
+agency_name 
+string 
+assignedInquiries 
+collection 
+statusCounts 
+array 
+InquiryStatus 
+string 
+priority_level 
+string 
+Methods 
+Method Name 
+Description 
+showViewAndDisplayI
+nquiry()
+To display assigned inquiries dashboard 
+showInquiryDetails() 
+To show specific inquiry details 
+acceptInquiry() 
+To accept an assigned inquiry 
+rejectInquiry() 
+To reject an assigned inquiry 
+
+---PAGE 73---
+ 
+ 
+68 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Display assigned inquiries: 
+a. Fetch inquiries where AgencyID matches current agency 
+b. Load with user, agency, and admin relationships 
+c. Order by priority: Urgent, High, Normal, then by assignment_date 
+d. Calculate status counts for dashboard 
+2. Handle inquiry processing: 
+a. Verify inquiry belongs to current agency 
+b. For acceptance: validate comments and update status 
+c. For rejection: validate reason and comments 
+d. Update InquiryStatus and StatusComments 
+e. Set ProcessedAt timestamp 
+3. Assignment status management: 
+a. Display inquiries with priority levels 
+b. Show status badges and investigation progress 
+c. Handle AJAX requests for real-time updates 
+ 
+ 
+4.3.11 InquiryController [SDD-REQ-311] 
+ 
+Class Type 
+Control class 
+Responsibility 
+A controller class that manages inquiry operations specific to Module 3 
+assignment functionality including inquiry tracking and assignment status 
+updates
+Attributes 
+Attributes Name 
+Attributes Type 
+InquiryID 
+integer 
+AgencyID 
+integer 
+assignment_date 
+datetime 
+assignmentHistory 
+array 
+userInquiries 
+collection 
+inquiry 
+object 
+Methods 
+Method Name 
+Description 
+index() 
+To display user inquiries with assignment info 
+show() 
+To display specific inquiry details 
+updateAssignmentStatu
+s()
+To update inquiry assignment status 
+trackAssignmentProgre
+ss()
+To track assignment progress 
+
+---PAGE 74---
+ 
+ 
+69 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Display inquiry list with assignments: 
+a. Ensure user is authenticated 
+b. Get user's inquiries with agency relationships 
+c. Order by InquirySendDate desc 
+d. Show assignment status and progress 
+2. Track assignment progress: 
+a. Load inquiry with assignment history 
+b. Check current assignment status 
+c. Calculate investigation timeline 
+d. Show progress indicators 
+3. Handle assignment updates: 
+a. Update assignment_date when inquiry is assigned 
+b. Track status changes throughout investigation 
+c. Maintain assignment history log 
+d. Send notifications on status updates 
+ 
+ 
+4.3.12 PublicUsers [SDD-REQ-312] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents public users who submit inquiries and can view 
+their assignment status to agencies. 
+Attributes 
+Attributes Name 
+Attributes Type 
+UserID 
+integer (Primary Key) 
+UserName 
+string 
+UserEmail 
+string 
+UserPassword 
+string 
+UserPhoneNum 
+string 
+UserProfilePicture 
+string 
+created_at 
+datetime 
+updated_at 
+datetime 
+Methods 
+Method Name 
+Description 
+inquiries() 
+To get all inquiries submitted by the user 
+assignedInquiries() 
+To get inquiries with assigned agencies 
+getAuthPassword() 
+To get password for authentication 
+createUser() 
+To create a new public user 
+updateProfile() 
+To update user profile information 
+
+---PAGE 75---
+ 
+ 
+70 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Inquiry assignment tracking: 
+a. Retrieve user's submitted inquiries with agency relationships 
+b. Check assignment status for each inquiry 
+c. Display agency information if assigned 
+d. Show "Not Assigned" status for unassigned inquiries 
+2. User authentication for Module 3: 
+a. Validate user credentials during login 
+b. Maintain session for assignment viewing 
+c. Ensure secure access to assignment status 
+3. Assignment status visibility: 
+a. Show only user's own inquiry assignments 
+b. Display agency names and assignment dates 
+c. Track investigation progress 
+ 
+ 
+4.3.13 Administrator [SDD-REQ-313] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents administrators who manage inquiry assignments to 
+agencies with comprehensive assignment tracking and reporting capabilities. 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+integer (Primary Key) 
+AdminName 
+string 
+AdminEmail 
+string 
+AdminUserName 
+string 
+AdminPassword 
+string 
+AdminRole 
+string 
+AdminPhoneNum 
+string 
+AdminAddress 
+string 
+AdminProfilePicture 
+string 
+created_at 
+datetime 
+updated_at 
+datetime 
+Methods 
+Method Name 
+Description 
+assignedInquiries() 
+To get all inquiries assigned by this admin 
+bulkAssignInquiries() To assign multiple inquiries to agencies 
+generateAssignmentRe
+ports()
+To create assignment reports 
+checkPassword() 
+To verify admin password 
+findByLogin() 
+To find admin by username or email 
+
+---PAGE 76---
+ 
+ 
+71 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Bulk inquiry assignment: 
+a. Validate inquiry_ids array and target agency 
+b. Check that inquiries are not already assigned 
+c. Update inquiries with AgencyID and assignment_date 
+d. Store assignment notes and priority levels 
+e. Send notifications to assigned agencies 
+2. Assignment tracking and management: 
+a. Monitor assignment distribution across agencies 
+b. Track assignment completion rates 
+c. Generate performance metrics for agencies 
+d. Maintain assignment history and audit trail 
+3. Assignment report generation: 
+a. Filter assignments by date range and agency 
+b. Calculate assignment statistics and trends 
+c. Generate comprehensive assignment reports 
+d. Export reports in PDF and Excel formats 
+ 
+ 
+4.3.14 AssignedInquiry [SDD-REQ-314] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents the assignment relationship between inquiries and 
+agencies with detailed assignment tracking information. 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+integer (Foreign Key) 
+AgencyID 
+integer (Foreign Key) 
+InquiryID 
+integer (Foreign Key) 
+AssignedDate 
+date 
+AdminNote 
+string 
+assignment_notes 
+text 
+priority_level 
+string 
+expected_completion 
+date 
+Methods 
+Method Name 
+Description 
+inquiry() 
+To get the assigned inquiry details 
+agency() 
+To get the assigned agency information 
+administrator() 
+To get the admin who made the assignment 
+createAssignment() 
+To create new assignment record 
+updateAssignmentStatu
+s() 
+To update assignment progress 
+
+---PAGE 77---
+ 
+ 
+72 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Assignment record creation: 
+a. Validate AdminID, AgencyID, and InquiryID 
+b. Set AssignedDate to current date 
+c. Store AdminNote and assignment details 
+d. Set priority_level (Normal, High, Urgent) 
+e. Calculate expected_completion date 
+2. Assignment relationship management: 
+a. Link inquiries to agencies through assignment 
+b. Track admin who made the assignment 
+c. Maintain assignment history and changes 
+d. Handle assignment transfers between agencies 
+3. Assignment status tracking: 
+a. Monitor assignment progress and completion 
+b. Track time from assignment to resolution 
+c. Generate assignment performance metrics 
+d. Alert on overdue assignments 
+ 
+ 
+4.3.15 Agency  [SDD-REQ-315] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents agencies who receive assigned inquiries and 
+process them with acceptance, rejection, and status update capabilities. 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+integer (Primary Key) 
+AgencyName 
+string 
+AgencyUserName 
+string 
+AgencyEmail 
+string 
+AgencyPassword 
+string 
+AgencyPhoneNum 
+string 
+AgencyType 
+string 
+created_at 
+datetime 
+updated_at 
+datetime 
+Methods 
+Method Name 
+Description 
+assignedInquiries() 
+To get all inquiries assigned to this agency 
+acceptInquiry() 
+To accept an assigned inquiry 
+rejectInquiry() 
+To reject an assigned inquiry 
+updateInquiryStatus() To update inquiry investigation status 
+checkPassword() 
+To verify agency password 
+findByLogin() 
+To find agency by username or email 
+
+---PAGE 78---
+ 
+ 
+73 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Assigned inquiry management: 
+a. Retrieve inquiries where AgencyID matches current agency 
+b. Order by priority: Urgent, High, Normal, then by assignment_date 
+c. Calculate status counts for dashboard display 
+d. Filter inquiries by status and priority 
+2. Inquiry processing workflow: 
+a. Accept inquiry: validate comments and update status 
+b. Reject inquiry: require reason and detailed comments 
+c. Update InquiryStatus and StatusComments 
+d. Set ProcessedAt timestamp for tracking 
+e. Send status notifications to users and admins 
+3. Agency authentication and security: 
+a. Verify agency credentials during login 
+b. Ensure access only to assigned inquiries 
+c. Maintain secure session management 
+d. Handle password updates and security settings 
+ 
+ 
+4.3.16 Inquiry  [SDD-REQ-316] 
+ 
+Class Type 
+Entity class 
+Responsibility 
+A model class that represents inquiries with assignment functionality, tracking 
+their assignment status, assigned agencies, and processing progress. 
+Attributes 
+Attributes Name 
+Attributes Type 
+InquiryID 
+integer (Primary Key) 
+InquiryTitle 
+string 
+InquiryDescription 
+text 
+InquiryNewsSource 
+string 
+InquiryEvidence 
+string 
+InquiryStatus 
+string 
+InquiryPriority 
+string 
+VerificationDescription text 
+InquirySendDate 
+datetime 
+AgencyID 
+integer (Foreign Key) 
+assignment_date 
+datetime 
+AdminID 
+integer (Foreign Key) 
+UserID 
+integer (Foreign Key) 
+StatusComments 
+text 
+ProcessedAt 
+datetime 
+Methods 
+Method Name 
+Description 
+agency() 
+To get the assigned agency information 
+
+---PAGE 79---
+ 
+ 
+74 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+user() 
+To get the user who submitted the inquiry 
+admin() 
+To get the admin who assigned the inquiry 
+assignedInquiry() 
+To get assignment details 
+updateAssignmentStatu
+s()
+To update assignment and processing status 
+isAssigned() 
+To check if inquiry is assigned to an agency 
+Algorithm 
+1. Assignment status management: 
+a. Check if AgencyID is not null to determine assignment 
+b. Track assignment_date for timeline calculation 
+c. Show "Not Assigned" or agency name in user views 
+d. Update assignment status when agencies process inquiries 
+2. Inquiry processing workflow: 
+a. Track inquiry from submission to assignment 
+b. Monitor agency processing: acceptance, rejection, investigation 
+c. Update InquiryStatus based on agency actions 
+d. Store StatusComments from agency processing 
+e. Set ProcessedAt timestamp when completed 
+3. Assignment relationships: 
+a. Link to assigned agency through AgencyID 
+b. Track admin who made the assignment through AdminID 
+c. Maintain user relationship through UserID 
+d. Support assignment history and transfers 
+4. Priority and status tracking: 
+a. Handle InquiryPriority levels: Normal, High, Urgent 
+b. Track status progression: Pending → Under Investigation → 
+Verified/Rejected 
+c. Calculate investigation timelines and performance metrics 
+d. Generate assignment and processing reports 
+ 
+ 
+ 
+ 
+4.3.17 assignInquirySectionView [SDD-REQ-317] 
+ 
+Class Type 
+Boundary class 
+Responsibility 
+An admin view interface that provides a comprehensive inquiry assignment 
+dashboard with multiple assignment workflows, statistics, and bulk management 
+capabilities. 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiries 
+collection 
+agencies 
+collection 
+inquiry_ids 
+array 
+agency_id 
+integer 
+assignment_notes 
+text 
+priority_level 
+string 
+expected_completion 
+date 
+
+---PAGE 80---
+ 
+ 
+75 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+selectedCount 
+integer 
+statsData 
+object 
+search 
+string 
+status 
+string 
+Methods 
+Method Name 
+Description 
+route('admin.assign.inq
+uiry')
+To display assign inquiry section 
+route('admin.assign.inq
+uiries')
+To process bulk assignments 
+route('admin.assign.inq
+uiries.with.notes')
+To assign with detailed notes 
+showPage(pageId) 
+To navigate between assignment workflows 
+updateSelectedCount() To track selected inquiries 
+validateAssignmentFor
+m() 
+To validate assignment data 
+
+---PAGE 81---
+ 
+ 
+76 | P a g e  
+ 
+(SDD AH 2025 Version 1) 
+ 
+Algorithm 
+1. Display assignment section dashboard: 
+a. Show icon-based navigation with 4 main options: 
+- Assign Inquiry: Basic bulk assignment functionality 
+- View Submitted: Review all submitted inquiries 
+- Assignment Notes: Assign with detailed instructions 
+- Generate Reports: Create assignment reports 
+b. Load statistics: Total, Unassigned, Pending Review, Available Agencies 
+c. Provide seamless navigation between workflows 
+2. Bulk assignment workflow: 
+a. Display inquiries table with checkbox selection 
+b. Show "Select All" functionality with live counter 
+c. Provide agency dropdown for assignment target 
+d. Process bulk assignments: validate inquiry_ids and agency_id 
+e. Update selected inquiries with AgencyID and assignment_date 
+3. Assignment with notes workflow: 
+a. Extended assignment form with detailed instructions 
+b. Collect assignment_notes (required text area) 
+c. Set priority_level options: Normal, High, Urgent 
+d. Optional expected_completion date selection 
+e. Validate and store comprehensive assignment data 
+4. View submitted inquiries workflow: 
+a. Display all inquiries with current assignment status 
+b. Show assigned agency or "Not Assigned" status 
+c. Filter by status, agency, and search functionality 
+d. Provide "Review" action buttons for detailed view 
+5. Interactive features: 
+a. Real-time selected count updates using JavaScript 
+b. Dynamic page switching with showPage() function 
+c. Form validation before submission 
+d. Success/error message display 
+6. Filter and search capabilities: 
+a. Search by InquiryTitle, InquirySource, or InquiryID 
+b. Filter by status: Pending, Under Investigation, Verified as True, Identified as 
+Fake, Rejected 
+c. Filter by agency: All Agencies, Unassigned, specific agencies 
+d. Clear filters functionality 
+7. Assignment tracking and management: 
+a. Display assignment history and notes 
+b. Show priority levels with color-coded badges 
+c. Track assignment completion dates 
+d. Monitor agency workload distribution 
+ 
+
+---PAGE 82---
+ 
+ 
+77 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+4.2 Module 4: Inquiry Progress Tracking [SDD-REQ-400] 
+ 
+ 
+ 
+ 
+4.3.1 View Inquiry Status Page [SDD-REQ-401] 
+ 
+Class Type 
+View 
+Responsibility 
+Display detailed status and progress information for a specific inquiry 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+inquiry_status 
+String 
+progress_percentage 
+Float 
+status_history 
+Array 
+last_updated 
+DateTime 
+Methods 
+Method Name 
+Description 
+show($id) 
+Display specific inquiry details and status 
+(InquiryController)
+getInquiryProgress($in
+quiryId) 
+Get comprehensive progress data 
+(ProgressTrackingController) 
+Algorithm 
+Status tracking algorithm with progress calculation and timeline visualization 
+ 
+ 
+4.3.2 Inquiry Dashboard Page [SDD-REQ-402] 
+ 
+Class Type 
+View 
+Responsibility 
+Provide overview dashboard of all inquiries with status summaries 
+Attributes 
+Attributes Name 
+Attributes Type 
+user_type 
+String 
+status_counts 
+Array 
+recent_inquiries 
+Array 
+dashboard_stats 
+Object 
+Methods 
+Algorithm 
+Method Name 
+Description 
+index() 
+Display inquiry dashboard with filtering 
+(InquiryController)
+getProgressDashboard(
+)
+Get dashboard for different user types 
+(ProgressTrackingController)
+getDashboardStats() 
+Get dashboard statistics (ReportController) 
+
+---PAGE 83---
+ 
+ 
+78 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Filter Inquiry Page [SDD-REQ-403] 
+ 
+Class Type 
+View 
+Responsibility 
+Allow users to filter and search inquiries by various criteria 
+Attributes 
+Attributes Name 
+Attributes Type 
+filter_criteria 
+Array 
+search_term 
+String 
+date_range 
+Object 
+status_filter 
+String 
+Methods 
+Method Name 
+Description 
+filter(Request $request) Filter inquiries by various criteria (InquiryController) 
+index(Request 
+$request) 
+Display filtered inquiry list (InquiryController) 
+Algorithm 
+Advanced filtering algorithm with multiple criteria support and search 
+optimization 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 84---
+ 
+ 
+79 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+4.3.2 Notification Page [SDD-REQ-404] 
+ 
+Class Type 
+View 
+Responsibility 
+Display notifications to users based on their type and permissions 
+Attributes 
+Attributes Name 
+Attributes Type 
+user_type 
+String 
+notifications 
+Array 
+unread_count 
+Integer 
+notification_filters 
+Object 
+Methods 
+Method Name 
+Description 
+publicNotifications() 
+Display notifications for public users 
+(NotificationController)
+adminNotifications() 
+Display notifications for admin (NotificationController) 
+filter(Request $request) Filter notifications by criteria (NotificationController) 
+markAsRead($notificat
+ionId) 
+Mark notification as read (NotificationController) 
+Algorithm 
+Multi-user notification algorithm with real-time updates and filtering 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Monitor Agency Progress Page [SDD-REQ-405] 
+ 
+Class Type 
+View 
+Responsibility 
+Monitor progress and performance of agencies 
+Attributes 
+Attributes Name 
+Attributes Type 
+agency_id 
+Integer 
+performance_metrics 
+Object 
+workload_data 
+Array 
+progress_charts 
+Object 
+Methods 
+Method Name 
+Description 
+showHome() 
+Show agency home dashboard (AgencyController) 
+getAgencyPerformance
+()
+Get agency performance metrics 
+(ProgressTrackingController)
+getWorkloadDistributio
+n() 
+Get workload distribution (ProgressTrackingController) 
+Algorithm 
+Agency performance tracking algorithm with workload analysis and KPI 
+calculations 
+
+---PAGE 85---
+ 
+ 
+80 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 View Agency Notes Page [SDD-REQ-406] 
+ 
+Class Type 
+View 
+Responsibility 
+Display investigation notes created by agencies 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+agency_notes 
+Array 
+attachments 
+Array 
+note_history 
+Array 
+Methods 
+Method Name 
+Description 
+show($inquiryId) 
+Display investigation notes for admin 
+(InvestigationNoteController) 
+agencyView($inquiryId
+) 
+Display notes for agency view 
+(InvestigationNoteController) 
+getNotesForInquiry($in
+quiryId) 
+API endpoint for getting notes 
+(InvestigationNoteController) 
+Algorithm 
+Note management algorithm with version control and access permissions 
+ 
+ 
+4.3.2 Generate Agency Report Page [SDD-REQ-407] 
+ 
+Class Type 
+View 
+Responsibility 
+Generate comprehensive reports for agency performance 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_type 
+String 
+date_range 
+Object 
+agency_filter 
+Integer 
+export_format 
+String 
+Methods 
+Method Name 
+Description 
+generateAgencyReport(
+Request $request)
+Generate agency performance reports (ReportController) 
+exportToPDF(Request 
+$request)
+Export reports to PDF (ReportController) 
+exportToExcel(Request 
+$request)
+Export reports to Excel (ReportController) 
+
+---PAGE 86---
+ 
+ 
+81 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Algorithm 
+Report generation algorithm with multiple formats and customizable parameters 
+ 
+ 
+4.3.2 Report Dashboard Page [SDD-REQ-408] 
+ 
+Class Type 
+View 
+Responsibility 
+Main dashboard for all reporting features and analytics 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_categories 
+Array 
+visual_statistics 
+Object 
+trend_data 
+Array 
+dashboard_widgets 
+Array 
+Methods 
+Method Name 
+Description 
+index() 
+Display reports dashboard (ReportController) 
+getVisualStatistics() 
+Get data for charts and graphs (ReportController) 
+generateTrendAnalysis
+()
+Generate monthly trend analysis (ReportController) 
+Algorithm 
+Analytics dashboard algorithm with real-time data visualization and trend 
+analysis 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 View Assigned Inquiries Page [SDD-REQ-409] 
+ 
+Class Type 
+View 
+Responsibility 
+Display inquiries assigned to current user 
+Attributes 
+Attributes Name 
+Attributes Type 
+user_id 
+Integer 
+assigned_inquiries 
+Array 
+inquiry_status 
+String 
+assignment_date 
+DateTime 
+Methods 
+Method Name 
+Description 
+showViewAndDisplayI
+nquiry()
+Show agency view and display inquiry page 
+(AgencyController)
+index(Request 
+$request)
+Display filtered inquiry list (InquiryController) 
+
+---PAGE 87---
+ 
+ 
+82 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Algorithm 
+Assignment tracking algorithm with user-specific filtering and status monitoring 
+ 
+ 
+4.3.2 Update Inquiry Details Page [SDD-REQ-410] 
+ 
+Class Type 
+View 
+Responsibility 
+Allow users to update inquiry information and status 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+editable_fields 
+Array 
+status_options 
+Array 
+update_permissions 
+Object 
+Methods 
+Method Name 
+Description 
+edit($id) 
+Show form for editing inquiry (InquiryController) 
+update(Request 
+$request, $id)
+Update existing inquiry (InquiryController) 
+updateStatus(Request 
+$request, $id)
+Update inquiry status (InquiryController) 
+Algorithm 
+Update validation algorithm with permission checks and data integrity 
+maintenance
+ 
+ 
+4.3.2 Add Investigation Notes Page [SDD-REQ-411] 
+ 
+Class Type 
+View 
+Responsibility 
+Interface for adding investigation notes and attachments 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+note_content 
+Text 
+attachments 
+FileArray 
+officer_details 
+Object 
+Methods 
+Method Name 
+Description 
+create($inquiryId) 
+Show form for creating investigation note 
+(InvestigationNoteController)
+store(Request $request, 
+$inquiryId)
+Store new investigation note 
+(InvestigationNoteController)
+edit($noteId) 
+Show form to edit investigation note 
+(InvestigationNoteController)
+Algorithm 
+Note creation algorithm with file handling and notification triggers 
+ 
+ 
+ 
+ 
+
+---PAGE 88---
+ 
+ 
+83 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Request Clarification Page [SDD-REQ-412] 
+ 
+Class Type 
+View 
+Responsibility 
+Allow agencies to request clarification from admin 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+clarification_request 
+Text 
+request_urgency 
+String 
+contact_details 
+Object 
+Methods 
+Method Name 
+Description 
+requestClarification(Re
+quest $request)
+Request clarification from admin 
+(NotificationController)
+requestReassignment(Request $request) 
+Request inquiry reassignment (NotificationController) 
+Algorithm 
+Communication algorithm with priority handling and automatic routing 
+ 
+ 
+4.3.2 InquiryController [SDD-REQ-413] 
+ 
+Class Type 
+Controller 
+Responsibility 
+Handle all inquiry-related operations and business logic 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_model 
+Object 
+validation_rules 
+Array 
+authorization_rules 
+Array 
+Methods 
+Method Name 
+Description 
+store(Request $request) Store new inquiry 
+index(Request 
+$request)
+Display inquiry list with filtering 
+show($id) 
+Display specific inquiry details 
+create() 
+Show form for creating new inquiry 
+edit($id) 
+Show form for editing inquiry 
+
+---PAGE 89---
+ 
+ 
+84 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+update(Request 
+$request, $id)
+Update existing inquiry 
+destroy($id) 
+Delete inquiry 
+updateStatus(Request 
+$request, $id)
+Update inquiry status 
+filter(Request $request) Filter inquiries by various criteria 
+Algorithm 
+CRUD operations algorithm with status management and authorization checks 
+ 
+ 
+4.3.2 ReportController [SDD-REQ-414] 
+ 
+Class Type 
+Controller 
+Responsibility 
+Generate reports and handle analytics operations 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_generators 
+Array 
+export_formats 
+Array 
+analytics_data 
+Object 
+Methods 
+Method Name 
+Description 
+index() 
+Display reports dashboard 
+generateAgencyReport(
+Request $request)
+Generate agency performance reports 
+exportToPDF(Request 
+$request)
+Export reports to PDF 
+exportToExcel(Request 
+$request)
+Export reports to Excel 
+getVisualStatistics(Req
+uest $request)
+Get data for charts and graphs 
+generateStatusReport(R
+equest $request)
+Generate comprehensive status reports 
+generateTrendAnalysis
+(Request $request)
+Generate monthly trend analysis 
+getDashboardStats() 
+Get dashboard statistics 
+Algorithm 
+Report generation algorithm with multiple formats and statistical analysis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 NotificationController [SDD-REQ-415] 
+ 
+Class Type 
+Controller 
+Responsibility 
+Manage all notification operations and communications 
+
+---PAGE 90---
+ 
+ 
+85 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+notification_types 
+Array 
+recipient_rules 
+Object 
+delivery_methods 
+Array 
+Methods 
+Method Name 
+Description 
+publicNotifications() 
+Display notifications for public users 
+adminNotifications() 
+Display notifications for admin 
+sendStatusUpdateToPu
+blic(Request $request)
+Send status updates to public users 
+notifyInquiryComplete
+d(Request $request)
+Notify admin of inquiry completion 
+requestReassignment(R
+equest $request)
+Request inquiry reassignment 
+requestClarification(Re
+quest $request)
+Request clarification from admin 
+getUnreadCount() 
+Get unread notification count 
+markAsRead($notificat
+ionId)
+Mark notification as read 
+filter(Request $request) Filter notifications by criteria 
+Algorithm 
+Multi-user notification algorithm with delivery optimization and read tracking 
+ 
+ 
+4.3.2 Inquiry (Model) [SDD-REQ-416] 
+ 
+Class Type 
+Model 
+Responsibility 
+Core inquiry data management and relationships 
+Attributes 
+Attributes Name 
+Attributes Type 
+InquiryID 
+Integer (Primary Key) 
+InquiryTitle 
+String 
+InquiryStatus 
+String 
+UserID 
+Integer (Foreign Key) 
+AgencyID 
+Integer (Foreign Key) 
+InquirySendDate 
+DateTime 
+Methods 
+Method Name 
+Description 
+user() 
+Relationship to PublicUser model 
+agency() 
+Relationship to Agency model 
+statusHistory() 
+Relationship to StatusHistory model 
+investigationNotes() 
+Relationship to InvestigationNote model 
+
+---PAGE 91---
+ 
+ 
+86 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Algorithm 
+Data integrity algorithm with relationship management and status validation 
+ 
+ 
+ 
+4.3.2 Administrator (Model) [SDD-REQ-417] 
+ 
+Class Type 
+Model 
+Responsibility 
+Administrator data management and authentication 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+Integer (Primary Key) 
+AdminName 
+String 
+AdminEmail 
+String (Unique) 
+AdminPassword 
+String (Hashed) 
+Methods 
+Method Name 
+Description 
+findByLogin($loginInp
+ut)
+Find admin by login credentials 
+checkPassword($passw
+ord)
+Verify admin password 
+Algorithm 
+Authentication algorithm with secure password handling and session 
+management
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Agency (Model) [SDD-REQ-418] 
+ 
+Class Type 
+Model 
+Responsibility 
+Agency data management and inquiry assignments 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+Integer (Primary Key) 
+AgencyName 
+String 
+AgencyUserName 
+String (Unique) 
+AgencyEmail 
+String (Unique) 
+AgencyPassword 
+String (Hashed) 
+Methods 
+Method Name 
+Description 
+inquiries() 
+Relationship to Inquiry model 
+
+---PAGE 92---
+ 
+ 
+87 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+investigationNotes() 
+Relationship to InvestigationNote model 
+findByLogin($loginInp
+ut)
+Find agency by login credentials 
+checkPassword($passw
+ord)
+Verify agency password 
+Algorithm 
+Agency management algorithm with workload tracking and performance metrics 
+ 
+ 
+4.3.2 PublicUser (Model) [SDD-REQ-419] 
+ 
+Class Type 
+Model 
+Responsibility 
+Public user data management and inquiry submissions 
+Attributes 
+Attributes Name 
+Attributes Type 
+Attributes Name 
+Attributes Type 
+UserID 
+Integer (Primary Key) 
+UserName 
+String 
+UserEmail 
+String (Unique) 
+UserPhoneNum 
+String 
+UserPassword 
+String (Hashed) 
+Methods 
+Method Name 
+Description 
+inquiries() 
+Relationship to Inquiry model 
+notifications() 
+Relationship to Notification model 
+Algorithm 
+User management algorithm with inquiry tracking and notification preferences 
+ 
+ 
+
+---PAGE 93---
+ 
+88 | P a g e                                   (SDD AH 2025 Version 1) 
+1. REQUIREMENT TRACEABILITY 
+5.1 Module 1: Manage User [SRS-REQ-100] 
+ 
+ 
+ 
+ 
+Requirement 
+ID 
+Description 
+Design ID 
+SRS-REQ-101 
+Public users must register to access the system. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-107 
+SRS-REQ-102 
+Registration requires a valid email address and a 
+secure password. 
+SDD-REQ-101, SDD-REQ-107 
+SRS-REQ-103 
+Users must verify their email before gaining full 
+access. 
+SDD-REQ-101, SDD-REQ-104 
+SRS-REQ-104 
+Registered users must log in using their email and 
+password. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-114 
+SRS-REQ-105 
+The system must support password recovery via 
+email. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-109, SDD-REQ-115 
+SRS-REQ-106 
+Users can view and edit their personal profile. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-108 
+SRS-REQ-107 
+Editable fields include name, contact details, and 
+profile picture. 
+SDD-REQ-101, SDD-REQ-108 
+SRS-REQ-108 
+Users can update their password and security 
+settings. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-109 
+SRS-REQ-109 
+MCMC staff must log in to access the system. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-114 
+SRS-REQ-110 
+Login requires a valid staff username and 
+password. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-114 
+SRS-REQ-111 
+The system must support password recovery via 
+email for MCMC staff. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-115 
+SRS-REQ-112 
+MCMC staff are responsible for registering 
+agencies involved in the system. 
+SDD-REQ-102, SDD-REQ-105, 
+SDD-REQ-110 
+SRS-REQ-113 
+Each registered agency will be assigned a unique 
+username and password. 
+SDD-REQ-102, SDD-REQ-105, 
+SDD-REQ-110 
+SRS-REQ-114 
+Login credentials for agencies will be sent via 
+email upon registration. 
+SDD-REQ-102, SDD-REQ-105, 
+SDD-REQ-110 
+SRS-REQ-115 
+MCMC staff can view all registered user data 
+within the system. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-111 
+SRS-REQ-116 
+Access includes user profiles, registration details, 
+and activity logs. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-111 
+SRS-REQ-117 
+MCMC staff can generate reports on the number 
+of registered users. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-111 
+SRS-REQ-118 
+Reports can be filtered by date, user type, and 
+agency. 
+SDD-REQ-103SDD-REQ-105SDD-
+REQ-111 
+
+---PAGE 94---
+ 
+89 | P a g e                                   (SDD AH 2025 Version 1) 
+SRS-REQ-119 
+The system must provide both summary and 
+detailed reports in downloadable formats (e.g., 
+PDF, Excel). 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-111 
+SRS-REQ-120 
+Agency staff can log in using the username and 
+temporary password provided via email by 
+MCMC. 
+SDD-REQ-102, SDD-REQ-106, 
+SDD-REQ-114 
+SRS-REQ-121 
+Upon first login, agency staff must change their 
+password to a new secure password. 
+SDD-REQ-102, SDD-REQ-106, 
+SDD-REQ-114, SDD-REQ-117 
+SRS-REQ-122 
+The system must enforce strong password 
+requirements. 
+SDD-REQ-101, SDD-REQ-102, 
+SDD-REQ-103, SDD-REQ-115, 
+SDD-REQ-117 
+SRS-REQ-123 
+Agency staff can update and manage their profile 
+information. 
+SDD-REQ-102, SDD-REQ-106, 
+SDD-REQ-112, SDD-REQ-116 
+SRS-REQ-124 
+Editable fields include agency name, contact 
+details, and profile picture. 
+SDD-REQ-102, SDD-REQ-116 
+SRS-REQ-125 
+Agency staff can also update their password and 
+security settings. 
+SDD-REQ-102, SDD-REQ-106, 
+SDD-REQ-117 
+ 
+
+---PAGE 95---
+ 
+90 | P a g e                                   (SDD AH 2025 Version 1) 
+5.2 Module 2: Manage Inquiry Form Submission [SRS-REQ-200] 
+ 
+ 
+ 
+ 
+Requirement 
+ID 
+Description 
+Design ID 
+SRS-REQ-201 
+Public users can submit inquiries to verify the authenticity of news. 
+SDD-REQ-201, SDD-
+REQ-211, SDD-REQ-217 
+SRS-REQ-202 
+Each inquiry must include supporting evidence (e.g., documents, images, or 
+links). 
+SDD-REQ-201, SDD-
+REQ-206, SDD-REQ-211 
+SRS-REQ-203 
+Users must provide detailed information regarding the news in question. 
+SDD-REQ-201, SDD-
+REQ-206, SDD-REQ-211 
+SRS-REQ-204 
+Users can view a list of their previously submitted inquiries. 
+SDD-REQ-202, SDD-
+REQ-206, SDD-REQ-217 
+SRS-REQ-205 
+Each inquiry record includes submission details and status updates. 
+SDD-REQ-202, SDD-
+REQ-203, SDD-REQ-206 
+SRS-REQ-206 
+Users can view all inquiries submitted by other individuals. 
+SDD-REQ-202, SDD-
+REQ-206, SDD-REQ-217 
+SRS-REQ-207 
+The system must ensure that sensitive personal information is not disclosed. 
+SDD-REQ-202, SDD-
+REQ-206, SDD-REQ-207 
+SRS-REQ-208 
+Inquiries should be presented in a structured format with search and filter 
+options. 
+SDD-REQ-202, SDD-
+REQ-213, SDD-REQ-215 
+SRS-REQ-209 
+MCMC staff can access a list of newly submitted inquiries from public users. 
+SDD-REQ-212, SDD-
+REQ-213, SDD-REQ-205 
+SRS-REQ-210 
+Each inquiry includes the submitted details, supporting evidence, and user 
+information. 
+SDD-REQ-212, SDD-
+REQ-213, SDD-REQ-206 
+SRS-REQ-211 
+MCMC staff must review and filter inquiries before forwarding them to the 
+relevant agency. 
+SDD-REQ-212, SDD-
+REQ-204, SDD-REQ-205 
+SRS-REQ-212 
+They will assess whether the inquiry is a genuine request or a non-serious 
+submission. 
+SDD-REQ-212, SDD-
+REQ-205, SDD-REQ-206 
+SRS-REQ-213 
+Non-serious inquiries can be flagged or discarded with an appropriate status 
+update. 
+SDD-REQ-212, SDD-
+REQ-205, SDD-REQ-206 
+SRS-REQ-214 
+MCMC staff can view a record of all previously filtered inquiries. 
+SDD-REQ-213, SDD-
+REQ-205, SDD-REQ-206 
+SRS-REQ-215 
+The system should allow filtering and searching of past inquiries by date, 
+status, and agency. 
+SDD-REQ-213, SDD-
+REQ-205, SDD-REQ-210 
+SRS-REQ-216 
+A secure audit log should be maintained for tracking actions taken on each 
+inquiry. 
+SDD-REQ-206, SDD-
+REQ-210, SDD-REQ-205 
+SRS-REQ-217 
+MCMC staff can generate reports on the total number of inquiries received 
+from public users. 
+SDD-REQ-214, SDD-
+REQ-205, SDD-REQ-206 
+SRS-REQ-218 
+Reports can be filtered and categorised based on various criteria, including 
+monthly or yearly inquiry statistics. 
+SDD-REQ-214, SDD-
+REQ-205, SDD-REQ-206 
+SRS-REQ-219 
+Reports should be available in multiple formats, such as PDF and Excel. 
+SDD-REQ-214, SDD-
+REQ-205 
+SRS-REQ-220 
+The system should provide graphical representations (e.g., charts and graphs) 
+for easy data analysis. 
+SDD-REQ-214, SDD-
+REQ-205 
+SRS-REQ-221 
+Reports must be exportable and downloadable for further review. 
+SDD-REQ-214, SDD-
+REQ-205 
+SRS-REQ-222 
+Agencies can only access and record of all past inquiries assigned to them. 
+SDD-REQ-215, SDD-
+REQ-208, SDD-REQ-218 
+SRS-REQ-223 
+The system should allow filtering and searching based on inquiry status (e.g., 
+under investigation, verified as true, identified as fake, rejected). 
+SDD-REQ-215, SDD-
+REQ-216, SDD-REQ-218 
+SRS-REQ-224 
+The system should allow filtering and searching based on date range (e.g., by 
+month or year). 
+SDD-REQ-215, SDD-
+REQ-216, SDD-REQ-218 
+SRS-REQ-225 
+The system should allow filtering and searching based on inquiry category or 
+subject matter. 
+SDD-REQ-215, SDD-
+REQ-216, SDD-REQ-206 
+
+---PAGE 96---
+ 
+91 | P a g e                                   (SDD AH 2025 Version 1) 
+SRS-REQ-226 
+Agencies should be able to review the full history of each inquiry, including 
+status changes, previous updates, and any communications with MCMC. 
+SDD-REQ-216, SDD-
+REQ-206, SDD-REQ-210 
+ 
+ 
+
+---PAGE 97---
+ 
+92 | P a g e                                   (SDD AH 2025 Version 1) 
+5.3 Module 3: Inquiry Assignment [SRS-REQ-300] 
+ 
+ 
+Requirement 
+ID 
+Description 
+Design ID 
+SRS-REQ-301 
+Users can see which agency their inquiry has been forwarded to 
+for verification. 
+SDD-REQ-301, SDD-REQ-309, 
+SDD-REQ-316 
+SRS-REQ-302 
+The system should display the agency name and the date the 
+inquiry was assigned. 
+SDD-REQ-301, SDD-REQ-312, 
+SDD-REQ-316 
+SRS-REQ-303 
+MCMC staff will review public user inquiries and assign them to 
+the relevant agency for verification. 
+SDD-REQ-302, SDD-REQ-303, 
+SDD-REQ-307, SDD-REQ-308 
+SRS-REQ-304 
+The system should provide a list of registered agencies for easy 
+selection. 
+SDD-REQ-303, SDD-REQ-317, 
+SDD-REQ-315 
+SRS-REQ-305 
+Staff can add comments or notes before forwarding the inquiry to 
+the agency. 
+SDD-REQ-304, SDD-REQ-307, 
+SDD-REQ-314 
+SRS-REQ-306 
+MCMC staff can generate reports on the number of inquiries 
+assigned to each agency. 
+SDD-REQ-305, SDD-REQ-308, 
+SDD-REQ-313 
+SRS-REQ-307 
+Reports can be filtered by date range (e.g., by month, year) and 
+agency name. 
+SDD-REQ-305, SDD-REQ-308, 
+SDD-REQ-313 
+SRS-REQ-308 
+The system should provide visual analytics (e.g., charts, graphs) to 
+identify trends in inquiry distribution. 
+SDD-REQ-305, SDD-REQ-308 
+SRS-REQ-309 
+Reports should be available for download in formats such as PDF 
+and Excel. 
+SDD-REQ-305, SDD-REQ-308 
+SRS-REQ-310 
+Agencies will receive inquiries assigned by MCMC for 
+verification. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-315 
+SRS-REQ-311 
+Each inquiry will include relevant details, supporting evidence, 
+and submission history. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-316 
+SRS-REQ-312 
+Agencies must review the inquiry to determine if it falls within 
+their jurisdiction. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-315 
+SRS-REQ-313 
+If the inquiry is within their scope, they will proceed with the 
+verification process. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-315 
+SRS-REQ-314 
+If the inquiry is outside their jurisdiction, they must notify MCMC 
+and reject the assignment. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-315 
+SRS-REQ-315 
+Agencies can reject an inquiry by providing a reason and notifying 
+MCMC. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-315 
+SRS-REQ-316 
+The system should allow agencies to add comments explaining 
+why the inquiry does not fall under their authority. 
+SDD-REQ-306, SDD-REQ-310, 
+SDD-REQ-316 
+SRS-REQ-317 
+MCMC will then reassign the inquiry to a more appropriate 
+agency or take further action. 
+SDD-REQ-307, SDD-REQ-308, 
+SDD-REQ-313, SDD-REQ-314 
+ 
+ 
+
+---PAGE 98---
+ 
+93 | P a g e                                   (SDD AH 2025 Version 1) 
+5.4 Module 4: Inquiry Progress Tracking [SRS-REQ-400] 
+ 
+ 
+ 
+ 
+Requirement ID 
+Description 
+Design ID 
+SRS-REQ-401 
+Public users can track the status of their submitted 
+inquiries in real-time. 
+SDD-REQ-401, SDD-REQ-402, SDD-REQ-405 
+SRS-REQ-402 
+The system should display whether an inquiry is 
+Under Investigation, Verified as True, Identified as 
+Fake, or Rejected. 
+SDD-REQ-401, SDD-REQ-402 
+SRS-REQ-403 
+Users will receive notifications when there is a 
+status update on their inquiry. 
+SDD-REQ-404, SDD-REQ-415 
+SRS-REQ-404 
+The system should provide a detailed history log 
+of status changes, including timestamps and 
+agency actions. 
+SDD-REQ-401, SDD-REQ-413 
+SRS-REQ-405 
+A dedicated section in the user dashboard should 
+display all inquiries with their current statuses. 
+SDD-REQ-402, SDD-REQ-405 
+SRS-REQ-406 
+The system should allow users to filter and search 
+their past inquiries. 
+SDD-REQ-403, SDD-REQ-413 
+SRS-REQ-407 
+MCMC staff can track the progress of inquiries 
+assigned to agencies. 
+SDD-REQ-405, SDD-REQ-413 
+SRS-REQ-408 
+The system should display real-time updates on 
+each inquiry's status, including Under 
+Investigation, Verified as True, Identified as Fake, 
+or Rejected. 
+SDD-REQ-401, SDD-REQ-402, SDD-REQ-405 
+SRS-REQ-409 
+Agencies can provide progress notes and updates 
+on their investigation. 
+SDD-REQ-406, SDD-REQ-411, SDD-REQ-413 
+SRS-REQ-410 
+MCMC staff can generate reports on agency 
+performance, including number of inquiries 
+assigned to each agency, number resolved, and 
+average time taken to resolve an inquiry. 
+SDD-REQ-407, SDD-REQ-408, SDD-REQ-414 
+SRS-REQ-411 
+Reports should be filterable by date range, agency, 
+and inquiry category. 
+SDD-REQ-407, SDD-REQ-408, SDD-REQ-414 
+SRS-REQ-412 
+The system should provide visual analytics such as 
+charts and graphs to highlight trends and 
+performance metrics. 
+SDD-REQ-408, SDD-REQ-414 
+SRS-REQ-413 
+Reports should be available in multiple formats, 
+including PDF and Excel. 
+SDD-REQ-407, SDD-REQ-408, SDD-REQ-414 
+SRS-REQ-414 
+Agencies must update the status of each inquiry 
+assigned by MCMC. 
+SDD-REQ-409, SDD-REQ-410, SDD-REQ-413 
+SRS-REQ-415 
+The system should allow agencies to set the 
+following statuses: Under Investigation, Verified 
+as True, Identified as Fake, or Rejected. 
+SDD-REQ-409, SDD-REQ-410, SDD-REQ-413 
+SRS-REQ-416 
+Agencies can add investigation notes, supporting 
+documents, and explanations for their conclusions. 
+SDD-REQ-411, SDD-REQ-413, SDD-REQ-418 
+SRS-REQ-417 
+Each status update should include a timestamp and 
+the name of the reviewing officer. 
+SDD-REQ-410, SDD-REQ-411, SDD-REQ-413 
+SRS-REQ-418 
+Agencies can notify MCMC when an inquiry is 
+completed or if further clarification is needed. 
+SDD-REQ-412, SDD-REQ-415, SDD-REQ-418 
+SRS-REQ-419 
+The system should allow agencies to request 
+reassignment if an inquiry does not fall under their 
+authority. 
+SDD-REQ-412, SDD-REQ-415, SDD-REQ-418 
+ 
+

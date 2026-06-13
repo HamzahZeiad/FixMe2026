@@ -602,8 +602,8 @@
                             </div>
                             <div>
                                 <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937;">
-                                    {{ $statusCounts['under_investigation'] ?? 0 }}</div>
-                                <div style="color: #6b7280; font-size: 0.875rem;">Under Review</div>
+                                    {{ $statusCounts['in_progress'] ?? 0 }}</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">In Progress</div>
                             </div>
                         </div>
                     </div>
@@ -617,8 +617,8 @@
                             </div>
                             <div>
                                 <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937;">
-                                    {{ $statusCounts['verified_true'] ?? 0 }}</div>
-                                <div style="color: #6b7280; font-size: 0.875rem;">Verified</div>
+                                    {{ $statusCounts['resolved'] ?? 0 }}</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">Resolved</div>
                             </div>
                         </div>
                     </div>
@@ -632,8 +632,8 @@
                             </div>
                             <div>
                                 <div style="font-size: 1.5rem; font-weight: 700; color: #1f2937;">
-                                    {{ $statusCounts['identified_fake'] ?? 0 }}</div>
-                                <div style="color: #6b7280; font-size: 0.875rem;">Rejected</div>
+                                    {{ $statusCounts['rejected'] ?? 0 }}</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">Rejected/Closed</div>
                             </div>
                         </div>
                     </div>
@@ -653,10 +653,12 @@
                             <label class="form-label">Filter by Status</label>
                             <select id="statusFilter" class="form-input">
                                 <option value="">All Statuses</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Under Investigation">Under Investigation</option>
-                                <option value="Verified as True">Verified as True</option>
-                                <option value="Identified as Fake">Identified as Fake</option>
+                                <option value="Assigned">Assigned</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Pending Clarification">Pending Clarification</option>
+                                <option value="Resolved">Resolved</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Rejected">Rejected</option>
                             </select>
                         </div>
                         <div>
@@ -748,11 +750,21 @@
                                         Show Full Details
                                     </button>
 
-                                    @if ($inquiry->InquiryStatus === 'Pending' || $inquiry->InquiryStatus === 'Under Investigation')
+                                    @if ($inquiry->InquiryStatus !== 'Rejected' && $inquiry->InquiryStatus !== 'Resolved' && $inquiry->InquiryStatus !== 'Closed')
+                                        <button onclick="updateStatus({{ $inquiry->InquiryID }}, '{{ $inquiry->InquiryStatus }}')"
+                                            class="btn btn-success">
+                                            <i class="fas fa-edit"></i>
+                                            Update Progress
+                                        </button>
+                                        <button onclick="addNote({{ $inquiry->InquiryID }}, '{{ $inquiry->InquiryStatus }}')"
+                                            class="btn" style="background:linear-gradient(145deg,#6366f1,#4f46e5);color:white;">
+                                            <i class="fas fa-comment-alt"></i>
+                                            Add Note / Request Clarification
+                                        </button>
                                         <button onclick="rejectInquiry({{ $inquiry->InquiryID }})"
                                             class="btn btn-danger">
                                             <i class="fas fa-times"></i>
-                                            Reject Inquiry
+                                            Reject
                                         </button>
                                     @endif
                                 </div>
@@ -827,6 +839,82 @@
                         <button onclick="submitReject()" class="btn btn-danger">
                             <i class="fas fa-times"></i>
                             Reject Inquiry
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Status Modal -->
+            <div id="updateStatusModal" class="modal hidden">
+                <div class="modal-content" style="width: 520px;">
+                    <div class="modal-header" style="display:flex;align-items:center;gap:0.75rem;">
+                        <div style="width:2.5rem;height:2.5rem;background:linear-gradient(145deg,#10b981,#059669);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;color:white;">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937;">Update Inquiry Progress</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: #6b7280; margin-bottom: 1.25rem;">
+                            Update the investigation progress for this inquiry. The submitting user will be able to track the status change.
+                        </p>
+                        <input type="hidden" id="updateInquiryId">
+                        <div class="form-group">
+                            <label class="form-label">New Status <span style="color: #ef4444;">*</span></label>
+                            <select id="updateStatus" class="form-input" required style="border-radius:8px;padding:10px 12px;">
+                                <option value="">— Select new status —</option>
+                                <option value="In Progress">🔍 In Progress</option>
+                                <option value="Pending Clarification">❓ Pending Clarification</option>
+                                <option value="Resolved">✅ Resolved</option>
+                                <option value="Closed">🔒 Closed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Investigation Notes <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
+                            <textarea id="updateNotes" rows="4" class="form-textarea"
+                                placeholder="Add your investigation findings, notes, or verification details..."
+                                style="border-radius:8px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closeModal('updateStatusModal')" class="btn btn-secondary">Cancel</button>
+                        <button onclick="submitUpdateStatus()" class="btn btn-success">
+                            <i class="fas fa-save"></i>
+                            Save Progress
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Note / Request Clarification Modal (SDD: AddDetailsPage / RequestClarificationPage) -->
+            <div id="addNoteModal" class="modal hidden">
+                <div class="modal-content" style="width: 520px;">
+                    <div class="modal-header" style="display:flex;align-items:center;gap:0.75rem;">
+                        <div style="width:2.5rem;height:2.5rem;background:linear-gradient(145deg,#6366f1,#4f46e5);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;color:white;">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <h2 style="font-size: 1.25rem; font-weight: 600; color: #1f2937;">Add Note / Request Clarification</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color: #6b7280; margin-bottom: 1.25rem;">Add investigation details or request more information from the submitter. This will appear in the inquiry timeline.</p>
+                        <input type="hidden" id="noteInquiryId">
+                        <div class="form-group">
+                            <label class="form-label">Note Type <span style="color:#ef4444;">*</span></label>
+                            <select id="noteType" class="form-input" style="border-radius:8px;padding:10px 12px;">
+                                <option value="general">📝 General Note / Investigation Finding</option>
+                                <option value="details">📎 Additional Details</option>
+                                <option value="clarification">❓ Request Clarification from User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message <span style="color:#ef4444;">*</span></label>
+                            <textarea id="noteText" rows="5" class="form-textarea" placeholder="Enter your notes, findings, or clarification questions here..." style="border-radius:8px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closeModal('addNoteModal')" class="btn btn-secondary">Cancel</button>
+                        <button onclick="submitNote()" style="background:linear-gradient(145deg,#6366f1,#4f46e5);color:white;" class="btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Note
                         </button>
                     </div>
                 </div>
@@ -981,6 +1069,67 @@
 
                     document.getElementById('detailsContent').innerHTML = detailsHtml;
                     showModal('detailsModal');
+                }
+
+                // Update Progress
+                function updateStatus(inquiryId, currentStatus) {
+                    document.getElementById('updateInquiryId').value = inquiryId;
+                    document.getElementById('updateNotes').value = '';
+                    const sel = document.getElementById('updateStatus');
+                    if (currentStatus === 'Assigned') {
+                        sel.value = 'In Progress';
+                    } else {
+                        sel.value = '';
+                    }
+                    showModal('updateStatusModal');
+                }
+
+                function submitUpdateStatus() {
+                    const inquiryId = document.getElementById('updateInquiryId').value;
+                    const status    = document.getElementById('updateStatus').value;
+                    const notes     = document.getElementById('updateNotes').value;
+
+                    if (!status) { alert('Please select a new status.'); return; }
+
+                    fetch(`/agency/inquiry/${inquiryId}/update-status`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
+                        body: JSON.stringify({ status, notes })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) { closeModal('updateStatusModal'); alert(data.message); location.reload(); }
+                        else { alert('Error: ' + (data.message || 'Failed to update status')); }
+                    })
+                    .catch(() => alert('An error occurred while updating the status'));
+                }
+
+                // Add Note / Request Clarification
+                function addNote(inquiryId, currentStatus) {
+                    document.getElementById('noteInquiryId').value = inquiryId;
+                    document.getElementById('noteText').value = '';
+                    document.getElementById('noteType').value = 'general';
+                    showModal('addNoteModal');
+                }
+
+                function submitNote() {
+                    const inquiryId = document.getElementById('noteInquiryId').value;
+                    const noteType  = document.getElementById('noteType').value;
+                    const notes     = document.getElementById('noteText').value.trim();
+
+                    if (!notes) { alert('Please enter a note before submitting.'); return; }
+
+                    fetch(`/agency/inquiry/${inquiryId}/notes`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
+                        body: JSON.stringify({ notes, note_type: noteType })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) { closeModal('addNoteModal'); alert(data.message); location.reload(); }
+                        else { alert('Error: ' + (data.message || 'Failed to add note')); }
+                    })
+                    .catch(() => alert('An error occurred while submitting the note'));
                 }
 
                 // Reject Inquiry

@@ -1,0 +1,16 @@
+﻿3.2.4 section at: 5191
+3.2.4. Module 4: Inquiry Progress Tracking ............................................................................................... 18 
+3.2.4.1 View Package.....................................
+
+Module 4 design section at: 112627
+Module 4: Inquiry Progress Tracking [SDD-REQ-400] 
+ 
+ 
+ 
+ 
+4.3.1 View Inquiry Status Page [SDD-REQ-401] 
+ 
+Class Type 
+View 
+Responsibility 
+Display detailed status and progress information for a spec

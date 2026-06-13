@@ -24,7 +24,7 @@ class ReferenceSeeder extends Seeder
             'AgencyPhoneNum' => '123456789',
             'AgencyType' => 'Type',
             'AgencyUserName' => 'username',
-            'AgencyPassword' => 'password',
+            'AgencyPassword' => bcrypt('password'),
             'AgencyProfilePicture' => null,
             'created_at' => now(),
             'updated_at' => now(),

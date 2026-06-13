@@ -59,4 +59,40 @@ class Inquiry extends Model
     {
         return $this->belongsTo(Admin::class, 'AdminID', 'AdminID');
     }
+
+    /**
+     * Get the full status change history for this inquiry (Module 4 timeline)
+     */
+    public function statusLogs()
+    {
+        return $this->hasMany(InquiryStatusLog::class, 'InquiryID', 'InquiryID')
+                    ->orderBy('created_at', 'asc');
+    }
+
+    /**
+     * Centralised helper: change status, write a log entry, and persist.
+     * Use this everywhere instead of directly setting InquiryStatus.
+     */
+    public function changeStatus(
+        string $newStatus,
+        string $actorType,
+        int    $actorId,
+        string $actorName,
+        ?string $notes = null
+    ): void {
+        $previous = $this->InquiryStatus;
+        $this->InquiryStatus = $newStatus;
+        $this->ProcessedAt   = now();
+        $this->save();
+
+        InquiryStatusLog::create([
+            'InquiryID'       => $this->InquiryID,
+            'status'          => $newStatus,
+            'previous_status' => $previous,
+            'notes'           => $notes,
+            'actor_type'      => $actorType,
+            'actor_id'        => $actorId,
+            'actor_name'      => $actorName,
+        ]);
+    }
 }

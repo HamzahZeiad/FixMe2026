@@ -47,10 +47,11 @@ class InquiryController extends Controller
 
         try {
             $request->validate([
-                'InquiryTitle' => 'required|string|max:50',
-                'InquirySource' => 'required|string|max:100',
+                'InquiryTitle'       => 'required|string|max:50',
+                'InquirySource'      => 'required|string|max:100',
                 'InquiryDescription' => 'required|string|max:255',
-                'InquiryEvidence' => 'required|file|mimes:pdf,png,jpg,jpeg|max:2048',
+                'InquiryEvidence'    => 'required|file|mimes:pdf,png,jpg,jpeg|max:2048',
+                'priority'           => 'nullable|in:low,medium,high,normal',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error('Validation failed', ['errors' => $e->errors()]);
@@ -67,14 +68,15 @@ class InquiryController extends Controller
 
         try {
             Inquiry::create([
-                'InquiryTitle' => $request->InquiryTitle,
-                'InquirySource' => $request->InquirySource,
-                'InquiryDescription' => $request->InquiryDescription,
-                'InquiryEvidence' => $evidencePath,
-                'InquiryStatus' => 'Pending', // Set default status
+                'InquiryTitle'            => $request->InquiryTitle,
+                'InquirySource'           => $request->InquirySource,
+                'InquiryDescription'      => $request->InquiryDescription,
+                'InquiryEvidence'         => $evidencePath,
+                'InquiryStatus'           => 'Submitted',
+                'InquiryPriority'         => ucfirst(strtolower($request->input('priority', 'normal'))),
                 'VerificationDescription' => $request->VerificationDescription ?? null,
-                'InquirySendDate' => now(),
-                'UserID' => Auth::id() ?? null,
+                'InquirySendDate'         => now(),
+                'UserID'                  => Auth::id() ?? null,
             ]);
 
             Log::info('Inquiry created successfully');

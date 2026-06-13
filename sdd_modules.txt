@@ -1,0 +1,173 @@
+﻿First mention of Module 4 at index: 5198
+Module 4: Inquiry Progress Tracking ............................................................................................... 18 
+3.2.4.1 View Package............................................
+
+First Report mention at: 21559
+Position 3374: Module 1: Manage User ..........................................................
+Position 3988: Module 2: Manage Inquiry Form Submission .......................................
+Position 4588: Module 3: Inquiry Assignment ...................................................
+Position 5198: Module 4: Inquiry Progress Tracking ............................................
+Position 6117: Module 1: Manage User [SDD-REQ-100] ............................................
+Position 8789: Module 2: Manage Inquiry Form Submission [SDD-REQ-200] .........................
+Position 8915: Module 3: Inquiry Assignment [SDD-REQ-300] .....................................
+Position 9052: Module 4: Inquiry Progress Tracking [SDD-REQ-400] ..............................
+Position 9326: Module 1: Manage User [SRS-REQ-100] ............................................
+Position 9467: Module 2: Manage Inquiry Form Submission [SRS-REQ-200] .........................
+Position 9594: Module 3: Inquiry Assignment [SRS-REQ-300] .....................................
+Position 9732: Module 4: Inquiry Progress Tracking [SRS-REQ-400] ..............................
+Position 9991: Module 1: Manage Users 
+11  
+Figure 3.2.2 Component Module 2: Manage Inquiry For
+Position 10043: Module 2: Manage Inquiry Form Submission  
+13  
+Figure 3.2.3 Component Module 3:
+Position 10114: Module 3: Inquiry Assignment 
+15  
+Figure 3.2.4 Component Module 4: Inquiry Prog
+Position 10172: Module 4: Inquiry Progress Tracking 
+17  
+Figure 3.3 Package Relationship  
+19  
+Position 29312: Module 1: Manage User  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+Position 29417: Module 1: Manage Use
+
+---PAGE 17---
+ 
+ 
+ 
+12 | P a g e  
+ 
+(SDD AH 2025 Version 
+Position 32578: Module 2: Manage Inquiry Form Submission 
+ 
+ 
+Figure 3.2.2 Component Module 2: M
+Position 32647: Module 2: Manage Inquiry Form Submission 
+ 
+ 
+ 
+3.2.2.1 View Package  
+ 
+Class N
+Position 35170: Module 3: Inquiry Assignment 
+ 
+ 
+Figure 3.2.3 Component Module 3: Inquiry Assig
+Position 35227: Module 3: Inquiry Assignment (to Agencies) 
+ 
+3.2.3.1 View Package  
+  
+Class Na
+Position 36750: Module 3 including inquiry review, 
+assignment management, and assignment report
+Position 38057: Module 4: Inquiry Progress Tracking 
+ 
+ 
+ 
+Figure 3.2.4 Component Module 4 Inqui
+Position 38123: Module 4 Inquiry Progress Tracking 
+3.2.4.1 View Package  
+ 
+Class Name 
+Descrip
+Position 40530: Module 1: Manage User [SDD-REQ-100] 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 27---
+ 
+ 
+22 | P a g e
+Position 58781: Module 2: Manage Inquiry Form Submission [SDD-REQ-200] 
+ 
+ 
+ 
+4.2.1 submitInquir
+Position 82868: Module 3: Inquiry Assignment [SDD-REQ-300] 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.1  listOfInquiryView
+Position 95798: Module 3 including inquiry 
+review, assignment management, and report generation
+Position 97198: Module 3 including 
+viewing assigned agencies and tracking inquiry assignments. 
+Position 98406: Module 3 including 
+viewing assigned inquiries, processing assignments, and stat
+Position 99849: Module 3 
+assignment functionality including inquiry tracking and assignment sta
+Position 102117: Module 3: 
+a. Validate user credentials during login 
+b. Maintain session for as
+Position 112627: Module 4: Inquiry Progress Tracking [SDD-REQ-400] 
+ 
+ 
+ 
+ 
+4.3.1 View Inquiry St
+Position 126475: Module 1: Manage User [SRS-REQ-100] 
+ 
+ 
+ 
+ 
+Requirement 
+ID 
+Description 
+Desig
+Position 129767: Module 2: Manage Inquiry Form Submission [SRS-REQ-200] 
+ 
+ 
+ 
+ 
+Requirement 
+ID 
+Position 133695: Module 3: Inquiry Assignment [SRS-REQ-300] 
+ 
+ 
+Requirement 
+ID 
+Description 
+De
+Position 136276: Module 4: Inquiry Progress Tracking [SRS-REQ-400] 
+ 
+ 
+ 
+ 
+Requirement ID 
+Descr

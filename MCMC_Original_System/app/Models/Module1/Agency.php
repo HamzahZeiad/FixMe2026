@@ -158,4 +158,12 @@ class Agency extends Model implements Authenticatable
             ->orWhere('AgencyUserName', 'like', "%{$searchTerm}%")
             ->get();
     }
+
+    /**
+     * Inquiries assigned to this agency (Module 4 relationship).
+     */
+    public function inquiries()
+    {
+        return $this->hasMany(\App\Models\Inquiry::class, 'AgencyID', 'AgencyID');
+    }
 }

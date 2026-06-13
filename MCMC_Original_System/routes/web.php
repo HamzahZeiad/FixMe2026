@@ -7,6 +7,10 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\Module1\UserController as Module1UserController;
 use App\Http\Controllers\Module1\AdminController as Module1AdminController;
 use App\Http\Controllers\Module1\AgencyController as Module1AgencyController;
+use App\Http\Controllers\Module4\InquiryProgressController as Module4InquiryProgressController;
+use App\Http\Controllers\Module4\ReportController as Module4ReportController;
+use App\Http\Controllers\Module4\AgencyProgressController as Module4AgencyProgressController;
+use App\Http\Controllers\Module4\StatusesController as Module4StatusesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\InquiryController;
@@ -82,12 +86,12 @@ Route::post('/inquiries', [InquiryController::class, 'store'])
     ->middleware(['web', 'auth'])
     ->name('inquiries.store');
 
-// Inquiry list and details routes
-Route::get('/inquiries', [InquiryController::class, 'index'])
+// Module 4 — Inquiry Progress: public user status tracking
+Route::get('/inquiries', [Module4InquiryProgressController::class, 'index'])
     ->middleware(['web', 'auth'])
     ->name('inquiries.index');
 
-Route::get('/inquiries/{id}', [InquiryController::class, 'show'])
+Route::get('/inquiries/{id}', [Module4InquiryProgressController::class, 'show'])
     ->middleware(['web', 'auth'])
     ->name('inquiries.show');
 
@@ -124,13 +128,16 @@ Route::middleware('admin.auth')->prefix('admin')->group(function () {
     Route::post('/assign-inquiry', [Module1AdminController::class, 'assignInquiries'])->name('admin.assign.inquiries');
     Route::post('/assign-inquiry-with-notes', [Module1AdminController::class, 'assignInquiriesWithNotes'])->name('admin.assign.inquiries.with.notes');
 
-    // Admin: generate reports
-    Route::get('/reports', [Module1AdminController::class, 'showReports'])->name('admin.reports');
-    Route::post('/reports', [Module1AdminController::class, 'generateReports'])->name('admin.reports.generate');
+    // Admin: generate reports — Module 4
+    Route::get('/reports', [Module4ReportController::class, 'showReports'])->name('admin.reports');
+    Route::post('/reports', [Module4ReportController::class, 'generateReports'])->name('admin.reports.generate');
+
+    // Admin: monitor agency progress — Module 4 (SDD MonitorAgencyProgressPage)
+    Route::get('/monitor', [Module4StatusesController::class, 'monitorAgencyProgress'])->name('admin.monitor');
 });
 
-// Agency routes
-Route::get('/agency/home', [Module1AgencyController::class, 'showHome'])->name('agency.home');
+// Agency routes — Module 4 (agency home/progress) + Module 1 (profile)
+Route::get('/agency/home', [Module4AgencyProgressController::class, 'showHome'])->name('agency.home');
 Route::get('/agency/profile', [Module1AgencyController::class, 'showProfile'])->name('agency.profile');
 
 // Agency profile updates
@@ -151,11 +158,11 @@ Route::post('/agency/phone/update', [Module1UserController::class, 'updateAgency
 // Agency assigned inquiries route
 Route::get('/agency/assigned-inquiries', [Module1AgencyController::class, 'showAssignedInquiries'])->name('agency.assigned.inquiries');
 
-// Agency view and display inquiry main page
-Route::get('/agency/view-display-inquiry', [AgencyReviewAndNotificationController::class, 'showViewAndDisplayInquiry'])->name('agency.view.display.inquiry');
-
-// Agency inquiry details route
-Route::get('/agency/inquiry/{id}', [AgencyReviewAndNotificationController::class, 'showInquiryDetails'])->name('agency.inquiry.details');
-
-// Agency inquiry reject route
-Route::post('/agency/inquiry/{id}/reject', [AgencyReviewAndNotificationController::class, 'rejectInquiry'])->name('agency.inquiry.reject');
+// Module 4 — Agency assigned inquiry views and progress
+Route::get('/agency/view-display-inquiry', [Module4AgencyProgressController::class, 'showViewAndDisplayInquiry'])->name('agency.view.display.inquiry');
+Route::get('/agency/inquiry/{id}', [Module4AgencyProgressController::class, 'showInquiryDetails'])->name('agency.inquiry.details');
+Route::post('/agency/inquiry/{id}/reject', [Module4AgencyProgressController::class, 'rejectInquiry'])->name('agency.inquiry.reject');
+Route::post('/agency/inquiry/{id}/update-status', [Module4StatusesController::class, 'agencyUpdateStatus'])->name('agency.inquiry.update.status');
+Route::post('/agency/inquiry/{id}/notes', [Module4StatusesController::class, 'addStatusNote'])->name('agency.inquiry.add.note');
+Route::get('/inquiry/{id}/history', [Module4StatusesController::class, 'statusHistory'])->name('inquiry.history');
+Route::post('/admin/inquiry/{id}/status', [Module4StatusesController::class, 'adminUpdateStatus'])->name('admin.inquiry.status.update');

@@ -1,0 +1,835 @@
+﻿Module 4: Inquiry Progress Tracking [SDD-REQ-400] 
+ 
+ 
+ 
+ 
+4.3.1 View Inquiry Status Page [SDD-REQ-401] 
+ 
+Class Type 
+View 
+Responsibility 
+Display detailed status and progress information for a specific inquiry 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+inquiry_status 
+String 
+progress_percentage 
+Float 
+status_history 
+Array 
+last_updated 
+DateTime 
+Methods 
+Method Name 
+Description 
+show($id) 
+Display specific inquiry details and status 
+(InquiryController)
+getInquiryProgress($in
+quiryId) 
+Get comprehensive progress data 
+(ProgressTrackingController) 
+Algorithm 
+Status tracking algorithm with progress calculation and timeline visualization 
+ 
+ 
+4.3.2 Inquiry Dashboard Page [SDD-REQ-402] 
+ 
+Class Type 
+View 
+Responsibility 
+Provide overview dashboard of all inquiries with status summaries 
+Attributes 
+Attributes Name 
+Attributes Type 
+user_type 
+String 
+status_counts 
+Array 
+recent_inquiries 
+Array 
+dashboard_stats 
+Object 
+Methods 
+Algorithm 
+Method Name 
+Description 
+index() 
+Display inquiry dashboard with filtering 
+(InquiryController)
+getProgressDashboard(
+)
+Get dashboard for different user types 
+(ProgressTrackingController)
+getDashboardStats() 
+Get dashboard statistics (ReportController) 
+
+---PAGE 83---
+ 
+ 
+78 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Filter Inquiry Page [SDD-REQ-403] 
+ 
+Class Type 
+View 
+Responsibility 
+Allow users to filter and search inquiries by various criteria 
+Attributes 
+Attributes Name 
+Attributes Type 
+filter_criteria 
+Array 
+search_term 
+String 
+date_range 
+Object 
+status_filter 
+String 
+Methods 
+Method Name 
+Description 
+filter(Request $request) Filter inquiries by various criteria (InquiryController) 
+index(Request 
+$request) 
+Display filtered inquiry list (InquiryController) 
+Algorithm 
+Advanced filtering algorithm with multiple criteria support and search 
+optimization 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+---PAGE 84---
+ 
+ 
+79 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+4.3.2 Notification Page [SDD-REQ-404] 
+ 
+Class Type 
+View 
+Responsibility 
+Display notifications to users based on their type and permissions 
+Attributes 
+Attributes Name 
+Attributes Type 
+user_type 
+String 
+notifications 
+Array 
+unread_count 
+Integer 
+notification_filters 
+Object 
+Methods 
+Method Name 
+Description 
+publicNotifications() 
+Display notifications for public users 
+(NotificationController)
+adminNotifications() 
+Display notifications for admin (NotificationController) 
+filter(Request $request) Filter notifications by criteria (NotificationController) 
+markAsRead($notificat
+ionId) 
+Mark notification as read (NotificationController) 
+Algorithm 
+Multi-user notification algorithm with real-time updates and filtering 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Monitor Agency Progress Page [SDD-REQ-405] 
+ 
+Class Type 
+View 
+Responsibility 
+Monitor progress and performance of agencies 
+Attributes 
+Attributes Name 
+Attributes Type 
+agency_id 
+Integer 
+performance_metrics 
+Object 
+workload_data 
+Array 
+progress_charts 
+Object 
+Methods 
+Method Name 
+Description 
+showHome() 
+Show agency home dashboard (AgencyController) 
+getAgencyPerformance
+()
+Get agency performance metrics 
+(ProgressTrackingController)
+getWorkloadDistributio
+n() 
+Get workload distribution (ProgressTrackingController) 
+Algorithm 
+Agency performance tracking algorithm with workload analysis and KPI 
+calculations 
+
+---PAGE 85---
+ 
+ 
+80 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 View Agency Notes Page [SDD-REQ-406] 
+ 
+Class Type 
+View 
+Responsibility 
+Display investigation notes created by agencies 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+agency_notes 
+Array 
+attachments 
+Array 
+note_history 
+Array 
+Methods 
+Method Name 
+Description 
+show($inquiryId) 
+Display investigation notes for admin 
+(InvestigationNoteController) 
+agencyView($inquiryId
+) 
+Display notes for agency view 
+(InvestigationNoteController) 
+getNotesForInquiry($in
+quiryId) 
+API endpoint for getting notes 
+(InvestigationNoteController) 
+Algorithm 
+Note management algorithm with version control and access permissions 
+ 
+ 
+4.3.2 Generate Agency Report Page [SDD-REQ-407] 
+ 
+Class Type 
+View 
+Responsibility 
+Generate comprehensive reports for agency performance 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_type 
+String 
+date_range 
+Object 
+agency_filter 
+Integer 
+export_format 
+String 
+Methods 
+Method Name 
+Description 
+generateAgencyReport(
+Request $request)
+Generate agency performance reports (ReportController) 
+exportToPDF(Request 
+$request)
+Export reports to PDF (ReportController) 
+exportToExcel(Request 
+$request)
+Export reports to Excel (ReportController) 
+
+---PAGE 86---
+ 
+ 
+81 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Algorithm 
+Report generation algorithm with multiple formats and customizable parameters 
+ 
+ 
+4.3.2 Report Dashboard Page [SDD-REQ-408] 
+ 
+Class Type 
+View 
+Responsibility 
+Main dashboard for all reporting features and analytics 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_categories 
+Array 
+visual_statistics 
+Object 
+trend_data 
+Array 
+dashboard_widgets 
+Array 
+Methods 
+Method Name 
+Description 
+index() 
+Display reports dashboard (ReportController) 
+getVisualStatistics() 
+Get data for charts and graphs (ReportController) 
+generateTrendAnalysis
+()
+Generate monthly trend analysis (ReportController) 
+Algorithm 
+Analytics dashboard algorithm with real-time data visualization and trend 
+analysis 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 View Assigned Inquiries Page [SDD-REQ-409] 
+ 
+Class Type 
+View 
+Responsibility 
+Display inquiries assigned to current user 
+Attributes 
+Attributes Name 
+Attributes Type 
+user_id 
+Integer 
+assigned_inquiries 
+Array 
+inquiry_status 
+String 
+assignment_date 
+DateTime 
+Methods 
+Method Name 
+Description 
+showViewAndDisplayI
+nquiry()
+Show agency view and display inquiry page 
+(AgencyController)
+index(Request 
+$request)
+Display filtered inquiry list (InquiryController) 
+
+---PAGE 87---
+ 
+ 
+82 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Algorithm 
+Assignment tracking algorithm with user-specific filtering and status monitoring 
+ 
+ 
+4.3.2 Update Inquiry Details Page [SDD-REQ-410] 
+ 
+Class Type 
+View 
+Responsibility 
+Allow users to update inquiry information and status 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+editable_fields 
+Array 
+status_options 
+Array 
+update_permissions 
+Object 
+Methods 
+Method Name 
+Description 
+edit($id) 
+Show form for editing inquiry (InquiryController) 
+update(Request 
+$request, $id)
+Update existing inquiry (InquiryController) 
+updateStatus(Request 
+$request, $id)
+Update inquiry status (InquiryController) 
+Algorithm 
+Update validation algorithm with permission checks and data integrity 
+maintenance
+ 
+ 
+4.3.2 Add Investigation Notes Page [SDD-REQ-411] 
+ 
+Class Type 
+View 
+Responsibility 
+Interface for adding investigation notes and attachments 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+note_content 
+Text 
+attachments 
+FileArray 
+officer_details 
+Object 
+Methods 
+Method Name 
+Description 
+create($inquiryId) 
+Show form for creating investigation note 
+(InvestigationNoteController)
+store(Request $request, 
+$inquiryId)
+Store new investigation note 
+(InvestigationNoteController)
+edit($noteId) 
+Show form to edit investigation note 
+(InvestigationNoteController)
+Algorithm 
+Note creation algorithm with file handling and notification triggers 
+ 
+ 
+ 
+ 
+
+---PAGE 88---
+ 
+ 
+83 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Request Clarification Page [SDD-REQ-412] 
+ 
+Class Type 
+View 
+Responsibility 
+Allow agencies to request clarification from admin 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_id 
+Integer 
+clarification_request 
+Text 
+request_urgency 
+String 
+contact_details 
+Object 
+Methods 
+Method Name 
+Description 
+requestClarification(Re
+quest $request)
+Request clarification from admin 
+(NotificationController)
+requestReassignment(Request $request) 
+Request inquiry reassignment (NotificationController) 
+Algorithm 
+Communication algorithm with priority handling and automatic routing 
+ 
+ 
+4.3.2 InquiryController [SDD-REQ-413] 
+ 
+Class Type 
+Controller 
+Responsibility 
+Handle all inquiry-related operations and business logic 
+Attributes 
+Attributes Name 
+Attributes Type 
+inquiry_model 
+Object 
+validation_rules 
+Array 
+authorization_rules 
+Array 
+Methods 
+Method Name 
+Description 
+store(Request $request) Store new inquiry 
+index(Request 
+$request)
+Display inquiry list with filtering 
+show($id) 
+Display specific inquiry details 
+create() 
+Show form for creating new inquiry 
+edit($id) 
+Show form for editing inquiry 
+
+---PAGE 89---
+ 
+ 
+84 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+update(Request 
+$request, $id)
+Update existing inquiry 
+destroy($id) 
+Delete inquiry 
+updateStatus(Request 
+$request, $id)
+Update inquiry status 
+filter(Request $request) Filter inquiries by various criteria 
+Algorithm 
+CRUD operations algorithm with status management and authorization checks 
+ 
+ 
+4.3.2 ReportController [SDD-REQ-414] 
+ 
+Class Type 
+Controller 
+Responsibility 
+Generate reports and handle analytics operations 
+Attributes 
+Attributes Name 
+Attributes Type 
+report_generators 
+Array 
+export_formats 
+Array 
+analytics_data 
+Object 
+Methods 
+Method Name 
+Description 
+index() 
+Display reports dashboard 
+generateAgencyReport(
+Request $request)
+Generate agency performance reports 
+exportToPDF(Request 
+$request)
+Export reports to PDF 
+exportToExcel(Request 
+$request)
+Export reports to Excel 
+getVisualStatistics(Req
+uest $request)
+Get data for charts and graphs 
+generateStatusReport(R
+equest $request)
+Generate comprehensive status reports 
+generateTrendAnalysis
+(Request $request)
+Generate monthly trend analysis 
+getDashboardStats() 
+Get dashboard statistics 
+Algorithm 
+Report generation algorithm with multiple formats and statistical analysis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 NotificationController [SDD-REQ-415] 
+ 
+Class Type 
+Controller 
+Responsibility 
+Manage all notification operations and communications 
+
+---PAGE 90---
+ 
+ 
+85 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Attributes 
+Attributes Name 
+Attributes Type 
+notification_types 
+Array 
+recipient_rules 
+Object 
+delivery_methods 
+Array 
+Methods 
+Method Name 
+Description 
+publicNotifications() 
+Display notifications for public users 
+adminNotifications() 
+Display notifications for admin 
+sendStatusUpdateToPu
+blic(Request $request)
+Send status updates to public users 
+notifyInquiryComplete
+d(Request $request)
+Notify admin of inquiry completion 
+requestReassignment(R
+equest $request)
+Request inquiry reassignment 
+requestClarification(Re
+quest $request)
+Request clarification from admin 
+getUnreadCount() 
+Get unread notification count 
+markAsRead($notificat
+ionId)
+Mark notification as read 
+filter(Request $request) Filter notifications by criteria 
+Algorithm 
+Multi-user notification algorithm with delivery optimization and read tracking 
+ 
+ 
+4.3.2 Inquiry (Model) [SDD-REQ-416] 
+ 
+Class Type 
+Model 
+Responsibility 
+Core inquiry data management and relationships 
+Attributes 
+Attributes Name 
+Attributes Type 
+InquiryID 
+Integer (Primary Key) 
+InquiryTitle 
+String 
+InquiryStatus 
+String 
+UserID 
+Integer (Foreign Key) 
+AgencyID 
+Integer (Foreign Key) 
+InquirySendDate 
+DateTime 
+Methods 
+Method Name 
+Description 
+user() 
+Relationship to PublicUser model 
+agency() 
+Relationship to Agency model 
+statusHistory() 
+Relationship to StatusHistory model 
+investigationNotes() 
+Relationship to InvestigationNote model 
+
+---PAGE 91---
+ 
+ 
+86 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+Algorithm 
+Data integrity algorithm with relationship management and status validation 
+ 
+ 
+ 
+4.3.2 Administrator (Model) [SDD-REQ-417] 
+ 
+Class Type 
+Model 
+Responsibility 
+Administrator data management and authentication 
+Attributes 
+Attributes Name 
+Attributes Type 
+AdminID 
+Integer (Primary Key) 
+AdminName 
+String 
+AdminEmail 
+String (Unique) 
+AdminPassword 
+String (Hashed) 
+Methods 
+Method Name 
+Description 
+findByLogin($loginInp
+ut)
+Find admin by login credentials 
+checkPassword($passw
+ord)
+Verify admin password 
+Algorithm 
+Authentication algorithm with secure password handling and session 
+management
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.3.2 Agency (Model) [SDD-REQ-418] 
+ 
+Class Type 
+Model 
+Responsibility 
+Agency data management and inquiry assignments 
+Attributes 
+Attributes Name 
+Attributes Type 
+AgencyID 
+Integer (Primary Key) 
+AgencyName 
+String 
+AgencyUserName 
+String (Unique) 
+AgencyEmail 
+String (Unique) 
+AgencyPassword 
+String (Hashed) 
+Methods 
+Method Name 
+Description 
+inquiries() 
+Relationship to Inquiry model 
+
+---PAGE 92---
+ 
+ 
+87 | P a g e                                   (SDD AH 2025 Version 1) 
+ 
+investigationNotes() 
+Relationship to InvestigationNote model 
+findByLogin($loginInp
+ut)
+Find agency by login credentials 
+checkPassword($passw
+ord)
+Verify agency password 
+Algorithm 
+Agency management algorithm with workload tracking and performance metrics 
+ 
+ 
+4.3.2 PublicUser (Model) [SDD-REQ-419] 
+ 
+Class Type 
+Model 
+Responsibility 
+Public user data management and inquiry submissions 
+Attributes 
+Attributes Name 
+Attributes Type 
+Attributes Name 
+Attributes Type 
+UserID 
+Integer (Primary Key) 
+UserName 
+String 
+UserEmail 
+String (Unique) 
+UserPhoneNum 
+String 
+UserPassword 
+String (Hashed) 
+Methods 
+Method Name 
+Description 
+inquiries() 
+Relationship to Inquiry model 
+notifications() 
+Relationship to Notification model 
+Algorithm 
+User management algorithm with inquiry tracking and notification preferences 
+ 
+ 
+
+---PAGE 93---
+ 
+88 | P a g e                                   (SDD AH 2025 Version 1) 
+1. REQUIREMENT TRACEABILITY 
+5.1 Module 1: Manage User [SRS-REQ-100] 
+ 
+ 
+ 
+ 
+Requirement 
+ID 
+Description 
+Design ID 
+SRS-REQ-101 
+Public users must register to access the system. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-107 
+SRS-REQ-102 
+Registration requires a valid email address and a 
+secure password. 
+SDD-REQ-101, SDD-REQ-107 
+SRS-REQ-103 
+Users must verify their email before gaining full 
+access. 
+SDD-REQ-101, SDD-REQ-104 
+SRS-REQ-104 
+Registered users must log in using their email and 
+password. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-114 
+SRS-REQ-105 
+The system must support password recovery via 
+email. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-109, SDD-REQ-115 
+SRS-REQ-106 
+Users can view and edit their personal profile. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-108 
+SRS-REQ-107 
+Editable fields include name, contact details, and 
+profile picture. 
+SDD-REQ-101, SDD-REQ-108 
+SRS-REQ-108 
+Users can update their password and security 
+settings. 
+SDD-REQ-101, SDD-REQ-104, 
+SDD-REQ-109 
+SRS-REQ-109 
+MCMC staff must log in to access the system. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-REQ-114 
+SRS-REQ-110 
+Login requires a valid staff username and 
+password. 
+SDD-REQ-103, SDD-REQ-105, 
+SDD-R

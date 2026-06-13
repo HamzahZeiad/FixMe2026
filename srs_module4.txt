@@ -1,0 +1,407 @@
+﻿Manage Reports 
+ 
+ 
+  
+Figure 3.9 Manage Reports 
+ 
+ 
+ 
+3.4.1 Manage Reports Description   
+Table 3.7 Use Case Description for Use Case Name  
+Use Case ID  
+SRS-AH-UC700 
+Brief Description   This use case allows the administrator to generate a report 
+displaying the total number of new users (Public use or Agency)  
+on the system within a specified timeframe. 
+Actor  
+ Administrator 
+Pre-Conditions  
+- The administrator must be logged into the system. 
+- The system must have recorded user data. 
+Basic Flow  
+1. The administrator Choose "Reports" section . 
+2. The system displays report options. 
+3. The administrator click the ≪NEW USERS REPORT≫ 
+button. 
+5. The administrator will select the Date Range that he wanted 
+for the  report. 
+  
+                                                            53                            (SRS AH 2024 Version V.1) 
+ 
+6. The system retrieves users data for the specified timeframe. 
+7. The system generates a report displaying the total number of 
+new users registered. 
+8. The Admin can click eather Export or Print Option. 
+9. The system will display to admin eather exported or printed 
+report. 
+10. Use case ends. 
+Alternative Flow   Not applicable. 
+Exception Flow  
+ Not applicable. 
+Post-Conditions  
+The report is successfully generated and available for review or 
+download by the administrator. 
+Rules  
+ The report must be accurate and comply with data privacy policies. 
+Constraints  
+ Not applicable. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+                                                                         54                                        (SRS AH 2024 Version V.1) 
+ 
+3.4.2 Manage Report Sequence Diagram   
+  
+ 
+ 
+Figure 3.10 Basic Flow for Manage Report 
+  
+   
+Not applicable. 
+Figure -- Alternative Flow for Manage Report 
+  
+Not applicable. 
+  
+Figure -- Exception Flow for Use Manage Report 
+  
+                                                            55                            (SRS AH 2024 Version V.1) 
+ 
+ 
+Figure 3.11 Manage Report for Administrator (Main Page For Reports)  
+3.4.3 Manage Report User Interface  
+ 
+ 
+Figure 3.12 Manage Report for Administrator 
+ 
+ 
+ 
+  
+                                                                         56                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+Table 3.8 Manage Report - User Interface Description  
+User Interface Name  
+Description  
+Figure 3.11 
+ Manage Report for 
+Administrator (Main 
+Page For Reports)  
+ 
+When the administrator clicks the report, he will have 
+more than one option for the report, so he will choose for 
+my module ≪NEW USERS REPORT≫. 
+ 
+Figure 3.12 
+ Basic Manage Report 
+Interface 
+ Allows administrators to generate, view and make activity 
+reports and allow for Administrator to select time period, 
+for new user registrations. 
+  
+ 
+ 
+ 
+ 
+ 
+  
+                                                            57                            (SRS AH 2024 Version V.1) 
+ 
+4. EXTERNAL INTERFACE REQUIREMENTS   
+4.1 USER INTERFACES    
+      
+  
+Figure 4.1  Dialog Diagram for AuthenticityHub  
+ 
+  
+                                                                         58                                        (SRS AH 2024 Version V.1) 
+ 
+Figure 4.2  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+       
+ 
+   
+  
+                                                            59                            (SRS AH 2024 Version V.1) 
+ 
+Figure 4.3 Dialog Diagram for AuthenticityHub 
+        
+   
+  
+                                                                         60                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.4  Dialog Diagram for AuthenticityHub 
+  
+                                                            61                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.5  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+                                                                         62                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+ 
+Figure 4.6  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+  
+                                                            63                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 4.7  Dialog Diagram for AuthenticityHub 
+  
+                                                                         64                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.8  Dialog Diagram for AuthenticityHub 
+  
+                                                            65                            (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.9  Dialog Diagram for AuthenticityHub 
+ 
+  
+                                                                         66                                        (SRS AH 2024 Version V.1) 
+ 
+ 
+  
+Figure 4.10  Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+                                                            67                            (SRS AH 2024 Version V.1) 
+ 
+ 
+ 
+ 
+ 
+Figure 4.11  All Dialog Diagram for AuthenticityHub 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+                                                                         68                                        (SRS AH 2024 Version V.1) 
+ 
+4.2 HARDWARE INTERFACES  
+ 
+Not applicable. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+                                                            69                            (SRS AH 2024 Version V.1) 
+ 
+ 
+4.3 SOFTWARE INTERFACES  
+ 
+Not applicable. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+                                                                         70                                        (SRS AH 2024 Version V.1) 
+ 
+5. REQUIREMENT TRACEBILITY  
+Table 5.1 Requirement Tracebility for AuthinticityHub  
+Requirement ID  
+Description  
+Interface ID  
+[SRS-AH-REQ101] 
+The system validates user-submitted data to ensure 
+completeness, 
+correct 
+format 
+(e.g., 
+email, 
+password), and uniqueness (e.g., email or 
+username). If validation fails, it returns specific 
+error messages, allowing users to correct and 
+resubmit. Upon success, the system proceeds with 
+the requested action. 
+Refer Figure 1.7 
+[SRS-AH-REQ201] 
+The system must validate user login credentials, 
+including email and password, against stored 
+records. If credentials are incorrect, it returns an 
+error message (e.g., "Invalid email or password") 
+without revealing sensitive details. Users can retry 
+login or opt to reset their password. 
+Refer Figure (2.11, 2.12, 
+2.13) 
+[SRS-AH-REQ202] 
+The system must allow users to reset their 
+password by entering their registered email. 
+Upon validation, it sends a secure password 
+reset link or code to the user's email, enabling 
+them to create a new password and regain 
+access to their account. 
+Refer Figure (3.14, 3.15, 
+3.16) 
+  
+[SRS-AH-REQ301] 
+The system will check for the UserName 
+profile if it exists or not, so if it does not exist, 
+the error message will appear that says 
+UserName not found, and the admin can search 
+again by clicking the <<Search Again>> 
+button.  
+ 
+ 
+ 
+Refer Figure (3.8, 3.9) 
+[SRS-AH-REQ302] 
+The system must automatically log out users 
+under specific conditions, such as session 
+expiration, security policy violations, or 
+manual logout actions. Upon logout, the 
+system redirects users to the login page and 
+displays an appropriate notification (e.g., 
+"Your session has expired. Please log in 
+again."). This ensures security and prevents 
+unauthorized access. 
+ 
+ 
+Refer Figure (3.4, 3.5, 
+3.6, 3.7, 3.8) 
+ 
+ 
+71 
+ 
+ 
+6. ACRONYMS AND ABBREVIATION  
+Table 6.1 for ACRONYMS AND ABBREVIATION 
+Acronyms and Abbreviation 
+Meaning 
+ 
+SRS 
+Software Requirement Specification. 
+ 
+AH 
+AuthenticityHub. 
+ 
+ 
+REQ 
+ 
+Requirement. 
+ 
+ 
+ 
+UC 
+Use Case. 
+ 
+MCMC 
+Malaysian Communications and Multimedia 
+Commission. 
+ 
+UI 
+User Interface 
+ 
+ 
+
