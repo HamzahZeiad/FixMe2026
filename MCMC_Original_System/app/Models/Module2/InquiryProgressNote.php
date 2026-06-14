@@ -87,7 +87,7 @@ class InquiryProgressNote extends Model
      */
     public function scopeRequiresAction($query)
     {
-        return $query->where('requires_action', False);
+        return $query->where('requires_action', true);
     }
 
     /**
