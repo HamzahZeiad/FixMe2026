@@ -32,8 +32,8 @@ class InquiryAssignmentController extends Controller
         $stats = [
             'total_unassigned' => $unassignedInquiries->count(),
             'total_agencies' => $agencies->count(),
-            'pending_assignments' => Inquiry::where('status', 'assigned')->count(),
-            'completed_today' => Inquiry::where('status', 'completed')
+            'pending_assignments' => Inquiry::where('InquiryStatus', 'assigned')->count(),
+            'completed_today' => Inquiry::where('InquiryStatus', 'completed')
                 ->whereDate('updated_at', today())
                 ->count()
         ];
@@ -54,7 +54,7 @@ class InquiryAssignmentController extends Controller
             'inquiry_id' => 'required|exists:inquiries,id',
             'agency_id' => 'required|exists:agencies,id',
             'priority' => 'required|in:low,medium,high',
-            'due_date' => 'required|date',
+            'due_date' => 'required|date|after_or_equal:today',
             'notes' => 'nullable|string|max:1000'
         ]);
 
@@ -66,14 +66,15 @@ class InquiryAssignmentController extends Controller
 
             // Update inquiry with assignment details
             $inquiry->update([
-                'assigned_agency_id' => $request->agency_id,
-                'status' => 'assigned',
-                'priority' => $request->priority,
-                'due_date' => $request->due_date,
-                'assigned_at' => now(),
-                'assigned_by' => Auth::id(),
-                'assignment_notes' => $request->notes
-            ]);            // Log the assignment activity
+    'assigned_agency_id' => $request->agency_id,
+    'AgencyID' => $request->agency_id,
+    'InquiryStatus' => 'Under Investigation',
+    'priority' => $request->priority,
+    'due_date' => $request->due_date,
+    'assigned_at' => now(),
+    'assigned_by' => Auth::id(),
+    'assignment_notes' => $request->notes
+]);      // Log the assignment activity
             $inquiry->activities()->create([
                 'action' => 'Inquiry Assigned',
                 'description' => "Assigned to {$agency->name} by " . (Auth::user()->name ?? 'Unknown'),
@@ -124,10 +125,10 @@ class InquiryAssignmentController extends Controller
             foreach ($request->inquiry_ids as $inquiryId) {
                 $inquiry = Inquiry::find($inquiryId);
                 
-                if ($inquiry && $inquiry->status === 'assigned' && !$inquiry->assigned_agency_id) {
+                if ($inquiry && $inquiry->InquiryStatus === 'pending' && !$inquiry->assigned_agency_id) {
                     $inquiry->update([
                         'assigned_agency_id' => $request->agency_id,
-                        'status' => 'assigned',
+                        'InquiryStatus' => 'assigned',
                         'priority' => $request->priority,
                         'due_date' => $request->due_date,
                         'assigned_at' => now(),
@@ -182,7 +183,7 @@ class InquiryAssignmentController extends Controller
             // Update assignment
             $updateData = [
                 'assigned_agency_id' => $request->new_agency_id,
-                'status' => 'assigned',
+                'InquiryStatus' => 'assigned',
                 'assigned_at' => now(),
                 'assigned_by' => Auth::id(),
                 'reassignment_reason' => $request->reason
@@ -234,19 +235,19 @@ class InquiryAssignmentController extends Controller
         }
 
         $agencies = $query->withCount([
-            'assignedInquiries as active_inquiries_count' => function($q) {
-                $q->whereIn('status', ['assigned', 'in-progress']);
-            },
-            'assignedInquiries as completed_this_month_count' => function($q) {
-                $q->where('status', 'completed')
-                  ->whereMonth('assigned_at', now()->month)
-                  ->whereYear('assigned_at', now()->year);
-            },
-            'assignedInquiries as overdue_count' => function($q) {
-                $q->whereIn('status', ['assigned', 'in-progress'])
-                  ->where('due_date', '<', now());
-            }
-        ])->get();
+    'assignedInquiries as active_inquiries_count' => function($q) {
+        $q->whereIn('InquiryStatus', ['Pending', 'Under Investigation']);
+    },
+    'assignedInquiries as completed_this_month_count' => function($q) {
+        $q->whereIn('InquiryStatus', ['Verified as True', 'Identified as Fake', 'Rejected'])
+          ->whereMonth('updated_at', now()->month)
+          ->whereYear('updated_at', now()->year);
+    },
+    'assignedInquiries as overdue_count' => function($q) {
+        $q->whereIn('InquiryStatus', ['Pending', 'Under Investigation'])
+          ->where('due_date', '<', now());
+    }
+])->get();
 
         return response()->json([
             'success' => true,
@@ -296,7 +297,7 @@ class InquiryAssignmentController extends Controller
     {
         $totalAssigned = Inquiry::whereBetween('assigned_at', [$startDate, $endDate])->count();
         $completed = Inquiry::whereBetween('assigned_at', [$startDate, $endDate])
-            ->where('status', 'completed')
+            ->where('InquiryStatus', 'completed')
             ->count();
 
         return $totalAssigned > 0 ? round(($completed / $totalAssigned) * 100, 2) : 0;
