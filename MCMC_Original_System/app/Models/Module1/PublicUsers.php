@@ -151,7 +151,7 @@ class PublicUsers extends Authenticatable implements CanResetPassword
     public static function search($searchTerm)
     {
         return static::where('UserName', 'like', "%{$searchTerm}%")
-            ->where('UserEmail', 'like', "%{$searchTerm}%")
+            ->orwhere ('UserEmail', 'like', "%{$searchTerm}%")
             ->get();
     }
 

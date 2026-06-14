@@ -90,7 +90,7 @@ class AdminController extends BaseController
 
         $validated = $request->validate([
             'UserName' => 'required|string|max:50',
-            'UserEmail' => 'required|email|max:50|unique:public_users,UserEmail,' . $id . ',id',
+            'UserEmail' => 'required|email|max:50|unique:public_users,UserEmail,' . $id . ',UserID',
             'UserPhoneNum' => 'nullable|string|max:15',
         ]);
 

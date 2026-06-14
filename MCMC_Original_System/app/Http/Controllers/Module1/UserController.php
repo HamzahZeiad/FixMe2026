@@ -298,8 +298,8 @@ class UserController extends BaseController
     {
         $request->validate([
             'UserName' => 'required|string|max:50',
-            'UserEmail' => 'required|email',
-            'UserPassword' => 'required|min:1|confirmed',
+            'UserEmail' => 'required|email|unique:public_users,UserEmail',
+            'UserPassword' => 'required|min:8|confirmed',
         ]);
 
         Module1PublicUsers::create([
