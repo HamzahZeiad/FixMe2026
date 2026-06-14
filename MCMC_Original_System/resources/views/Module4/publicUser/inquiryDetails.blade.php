@@ -506,8 +506,18 @@
 
                 @if ($inquiry->VerificationDescription)
                     <div class="detail-group">
-                        <div class="detail-label">Verification Notes</div>
-                        <div class="detail-value">{{ $inquiry->VerificationDescription }}</div>
+                        @if($inquiry->InquiryStatus === 'Rejected')
+                            <div class="detail-label" style="color:#dc2626;">Rejection Reason</div>
+                            <div style="background:#fee2e2;border-left:4px solid #dc2626;border-radius:8px;padding:0.9rem 1rem;margin-top:0.25rem;">
+                                <div style="font-size:0.75rem;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem;">
+                                    <i class="fas fa-times-circle" style="margin-right:0.3rem;"></i>Agency Rejection Comment
+                                </div>
+                                <div style="font-size:0.9rem;color:#7f1d1d;">{{ $inquiry->VerificationDescription }}</div>
+                            </div>
+                        @else
+                            <div class="detail-label">Agency Notes</div>
+                            <div class="detail-value">{{ $inquiry->VerificationDescription }}</div>
+                        @endif
                     </div>
                 @endif
 
@@ -519,6 +529,33 @@
                         </div>
                     </div>
                 @endif
+
+                {{-- Agency Progress Notes (BUG-M4-03: scopeVisibleToUser returns is_visible_to_user=false — internal notes exposed) --}}
+                @if(isset($progressNotes) && $progressNotes->count() > 0)
+                    <div class="detail-group" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #e5e7eb;">
+                        <div class="detail-label" style="margin-bottom:0.75rem;">
+                            <i class="fas fa-comments" style="margin-right:0.4rem;color:#6a7fd0;"></i>
+                            Agency Progress Updates
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                            @foreach($progressNotes as $note)
+                                <div style="padding:1rem 1.25rem;border-radius:12px;border-left:4px solid #6a7fd0;background:#f8faff;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem;">
+                                        <span style="font-size:0.75rem;font-weight:700;color:#283d63;text-transform:uppercase;letter-spacing:0.05em;">
+                                            <i class="fas fa-user-tie" style="margin-right:0.3rem;"></i>
+                                            {{ $note->added_by_name ?? 'Agency' }}
+                                        </span>
+                                        <span style="font-size:0.72rem;color:#9ca3af;">
+                                            {{ $note->created_at?->format('M j, Y g:i A') }}
+                                        </span>
+                                    </div>
+                                    <div style="font-size:0.9rem;color:#374151;line-height:1.6;">{{ $note->note }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>

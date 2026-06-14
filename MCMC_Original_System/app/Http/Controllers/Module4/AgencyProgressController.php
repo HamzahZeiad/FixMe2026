@@ -149,11 +149,12 @@ class AgencyProgressController extends Controller
             'reason'   => 'required|string|max:500',
             'comments' => 'required|string|max:1000',
         ]);
-
+//          fixed(replced + with  - and added space) 
         try {
-            $notes = $request->reason . ' — ' . $request->comments;
+            $notes = $request->reason . ' - ' . $request->comments;
             $inquiry->changeStatus('Rejected', 'agency', $agency->AgencyID, $agency->AgencyName, $notes);
-            $inquiry->StatusComments = $notes;
+            $inquiry->StatusComments          = $notes;
+            $inquiry->VerificationDescription = $notes;  // surface in all detail views
             $inquiry->save();
 
             return response()->json([

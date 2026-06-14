@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use App\Models\Inquiry;
+use App\Models\Module2\InquiryProgressNote;
 use App\Http\Controllers\Controller;
 
 /**
@@ -65,7 +66,14 @@ class InquiryProgressController extends Controller
                     ->orWhereNull('UserID');
             })->findOrFail($id);
 
-        return view('Module4.publicUser.inquiryDetails', compact('inquiry'));
+        // BUG-M4-03: scopeVisibleToUser() is negated in the model (returns false instead of true)
+        // This fetches INTERNAL notes instead of public-facing ones
+        $progressNotes = InquiryProgressNote::where('inquiry_id', $id)
+            ->visibleToUser()
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return view('Module4.publicUser.inquiryDetails', compact('inquiry', 'progressNotes'));
     }
 
     /**

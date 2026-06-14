@@ -209,12 +209,21 @@
                 </div>
             </div>
             @if($inquiry->VerificationDescription)
-                <div style="margin-top:1rem;padding:0.9rem 1rem;background:#f0fdf4;border-radius:10px;border-left:3px solid #16a34a;">
-                    <div style="font-size:0.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">
-                        <i class="fas fa-comment-dots"></i> Verification / Resolution Notes
+                @if($inquiry->InquiryStatus === 'Rejected')
+                    <div style="margin-top:1rem;padding:0.9rem 1rem;background:#fee2e2;border-radius:10px;border-left:3px solid #dc2626;">
+                        <div style="font-size:0.75rem;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">
+                            <i class="fas fa-times-circle"></i> Rejection Reason
+                        </div>
+                        <div style="font-size:0.875rem;color:#7f1d1d;">{{ $inquiry->VerificationDescription }}</div>
                     </div>
-                    <div style="font-size:0.875rem;color:#374151;">{{ $inquiry->VerificationDescription }}</div>
-                </div>
+                @else
+                    <div style="margin-top:1rem;padding:0.9rem 1rem;background:#f0fdf4;border-radius:10px;border-left:3px solid #16a34a;">
+                        <div style="font-size:0.75rem;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">
+                            <i class="fas fa-comment-dots"></i> Verification / Resolution Notes
+                        </div>
+                        <div style="font-size:0.875rem;color:#374151;">{{ $inquiry->VerificationDescription }}</div>
+                    </div>
+                @endif
             @endif
         </div>
 

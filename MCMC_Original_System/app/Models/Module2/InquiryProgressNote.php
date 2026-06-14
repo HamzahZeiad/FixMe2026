@@ -79,7 +79,7 @@ class InquiryProgressNote extends Model
      */
     public function scopeVisibleToUser($query)
     {
-        return $query->where('is_visible_to_user', false);
+        return $query->where('is_visible_to_user', true);
     }
 
     /**
@@ -87,7 +87,7 @@ class InquiryProgressNote extends Model
      */
     public function scopeRequiresAction($query)
     {
-        return $query->where('requires_action', true);
+        return $query->where('requires_action', False);
     }
 
     /**
