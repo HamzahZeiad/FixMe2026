@@ -679,6 +679,19 @@
                                     <option value="{{ $agency->AgencyID }}">{{ $agency->AgencyName }}</option>
                                 @endforeach
                             </select>
+                            <select name="priority" required class="form-select">
+    <option value="">Select Priority</option>
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+</select>
+<input
+    type="date"
+    name="due_date"
+    class="form-select"
+    required
+    min="{{ date('Y-m-d') }}"
+>
                             <button type="submit" class="assign-button" id="assignButton" disabled>
                                 <i class="fas fa-arrow-right"></i>
                                 Assign Selected Inquiries
